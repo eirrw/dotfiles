@@ -10,7 +10,7 @@ endif
 " set the runtime path to include Vundle and initialize
 call plug#begin('~/.vim/bundle')
 " Manage vim-plug
-Plug 'junegunn/vim-plug'
+" Plug 'junegunn/vim-plug'
 
 " plugin on GitHub repo
 Plug 'tpope/vim-fugitive'
