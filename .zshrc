@@ -1,10 +1,11 @@
 #install antigen if not installed
-if [[ ! -f ./antigen.zsh ]]; then 
-    curl -L git.io/antigen > ./antigen.zsh
+if [[ ! -f $HOME/.dotfiles/antigen.zsh ]]; then 
+    curl -L git.io/antigen > $HOME/.dotfiles/antigen.zsh
 else
     :
 fi
 
+POWERLEVEL9K_INSTALLATION_PATH=$ANTIGEN_BUNDLES/bhilburn/powerlevel9k
 source $HOME/.dotfiles/antigen.zsh
 
 # Load the oh-my-zsh's library.
@@ -21,7 +22,9 @@ antigen bundle command-not-found
 antigen bundle zsh-users/zsh-syntax-highlighting
 
 # Load the theme.
-antigen theme https://github.com/kitian616/tq-zsh-theme tq
+antigen theme bhilburn/powerlevel9k powerlevel9k
 
 # Tell Antigen that you're done.
 antigen apply
+
+export PATH=$HOME/scripts:$PATH
