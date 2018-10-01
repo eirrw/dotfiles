@@ -1,3 +1,5 @@
+export TERM="xterm-256color"
+
 #install antigen if not installed
 if [[ ! -f $HOME/.dotfiles/antigen.zsh ]]; then 
     curl -L git.io/antigen > $HOME/.dotfiles/antigen.zsh
