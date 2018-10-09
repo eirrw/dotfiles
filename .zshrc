@@ -1,5 +1,3 @@
-export TERM="xterm-256color"
-
 #install antigen if not installed
 if [[ ! -f $HOME/.dotfiles/antigen.zsh ]]; then 
     curl -L git.io/antigen > $HOME/.dotfiles/antigen.zsh
@@ -18,6 +16,7 @@ antigen bundle git
 antigen bundle pip
 antigen bundle lein
 antigen bundle command-not-found
+antigen bundle tmux
 #antigen bundle vi-mode
 
 # Syntax highlighting bundle.
