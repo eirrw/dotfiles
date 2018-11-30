@@ -7,12 +7,9 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-" set the runtime path to include Vundle and initialize
+" Init VimPlug
 call plug#begin('~/.vim/bundle')
-" Manage vim-plug
-" Plug 'junegunn/vim-plug'
 
-" plugin on GitHub repo
 Plug 'tpope/vim-fugitive'
 
 Plug 'kien/ctrlp.vim'
@@ -20,8 +17,6 @@ Plug 'kien/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 
 Plug 'Raimondi/delimitMate'
-
-Plug 'mhinz/vim-startify'
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -32,21 +27,7 @@ Plug 'crusoexia/vim-monokai'
 
 Plug 'vim-scripts/L9'
 
-" Plugin 'Valloric/YouCompleteMe'
-
-" Git plugin not hosted on GitHub
-" Plugin 'git://git.wincent.com/command-t.git'
-
-" git repos on your local machine (i.e. when working on your own plugin)
-" Plugin 'file:///home/gmarik/path/to/plugin'
-
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-
-" Install L9 and avoid a Naming conflict if you've already installed a
-" different version somewhere else.
-"Plugin 'ascenator/L9', {'name': 'newL9'}
+Plug 'vim-syntastic/syntastic'
 
 " All of your Plugins must be added before the following line
 call plug#end()            " required
@@ -62,6 +43,9 @@ set mouse=a
 
 " show number lines
 set number
+
+" set GUI font
+set guifont=Hack\ 10
 
 " do not store global and local values in a session
 " set ssop-=options
@@ -81,6 +65,8 @@ set termguicolors
 colorscheme monokai
 
 let g:airline_powerline_fonts = 1
+
+let g:syntastic_shell = "/bin/bash"
 
 " ############################################
 " KEYMAPS
