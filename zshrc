@@ -33,6 +33,9 @@ POWERLEVEL9K_VI_COMMAND_MODE_STRING="N"
 # set keymaps
 bindkey -v
 
+# case insensitive completion
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+
 # syntax highlighting at end
 source ~/.dotfiles/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
 
