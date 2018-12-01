@@ -8,12 +8,12 @@
 #antigen bundle zsh-users/zsh-syntax-highlighting
 
 # plugins
-source ~/.dotfiles/powerlevel9k/powerlevel9k.zsh-theme
-source ~/.dotfiles/git-aliases/git-aliases.zsh
-source ~/.dotfiles/ls/ls.plugin.zsh
+source ~/.dotfiles/zsh/themes/powerlevel9k/powerlevel9k.zsh-theme
+source ~/.dotfiles/zsh/git-aliases/git-aliases.zsh
+source ~/.dotfiles/zsh/ls/ls.plugin.zsh
 
 # completions
-source ~/.dotfiles/completions/ssh/ssh.plugin.zsh
+source ~/.dotfiles/zsh/completions/ssh/ssh.plugin.zsh
 
 # set path
 export PATH=$HOME/scripts:$PATH
@@ -32,3 +32,7 @@ POWERLEVEL9K_VI_COMMAND_MODE_STRING="N"
 
 # set keymaps
 bindkey -v
+
+# syntax highlighting at end
+source ~/.dotfiles/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+
