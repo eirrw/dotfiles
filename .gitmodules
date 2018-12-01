@@ -2,14 +2,14 @@
 	path = dotbot
 	url = https://github.com/anishathalye/dotbot
 [submodule "git-aliases"]
-	path = git-aliases
+	path = zsh/git-aliases
 	url = https://github.com/mdumitru/git-aliases
 [submodule "powerlevel9k"]
 	path = powerlevel9k
 	url = https://github.com/bhilburn/powerlevel9k
 [submodule "ls"]
-	path = ls
+	path = zsh/ls
 	url = https://github.com/zpm-zsh/ls
 [submodule "completions/ssh"]
-	path = completions/ssh
+	path = zsh/completions/ssh
 	url = https://github.com/zpm-zsh/ssh
