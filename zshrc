@@ -11,6 +11,8 @@
 source ~/.dotfiles/zsh/themes/powerlevel9k/powerlevel9k.zsh-theme
 source ~/.dotfiles/zsh/git-aliases/git-aliases.zsh
 source ~/.dotfiles/zsh/ls/ls.plugin.zsh
+source ~/.dotfiles/zsh/zsh-tmux/tmux.plugin.zsh
+source ~/.dotfiles/zsh/omz-plugins/history.zsh
 
 # completions
 source ~/.dotfiles/zsh/completions/ssh/ssh.plugin.zsh
@@ -37,5 +39,6 @@ bindkey -v
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
 # syntax highlighting at end
+source ~/.dotfiles/zsh/history-search-multi-word/history-search-multi-word.plugin.zsh
 source ~/.dotfiles/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
 
