@@ -61,7 +61,7 @@ set expandtab
 
 " colorscheme
 syntax enable
-set termguicolors
+" set termguicolors
 colorscheme monokai
 
 let g:airline_powerline_fonts = 1
