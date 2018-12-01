@@ -7,9 +7,13 @@
 # Syntax highlighting bundle.
 #antigen bundle zsh-users/zsh-syntax-highlighting
 
+# plugins
 source ~/.dotfiles/powerlevel9k/powerlevel9k.zsh-theme
 source ~/.dotfiles/git-aliases/git-aliases.zsh
 source ~/.dotfiles/ls/ls.plugin.zsh
+
+# completions
+source ~/.dotfiles/completions/ssh/ssh.plugin.zsh
 
 # set path
 export PATH=$HOME/scripts:$PATH

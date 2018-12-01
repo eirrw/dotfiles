@@ -10,3 +10,6 @@
 [submodule "ls"]
 	path = ls
 	url = https://github.com/zpm-zsh/ls
+[submodule "completions/ssh"]
+	path = completions/ssh
+	url = https://github.com/zpm-zsh/ssh
