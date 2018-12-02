@@ -4,8 +4,9 @@
 #antigen bundle tmux
 #antigen bundle vi-mode
 
-# Syntax highlighting bundle.
-#antigen bundle zsh-users/zsh-syntax-highlighting
+# initialize completions
+autoload -Uz compinit
+compinit
 
 # plugins
 source ~/.dotfiles/zsh/themes/powerlevel9k/powerlevel9k.zsh-theme
