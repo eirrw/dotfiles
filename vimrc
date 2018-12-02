@@ -12,7 +12,9 @@ call plug#begin('~/.vim/bundle')
 
 Plug 'tpope/vim-fugitive'
 
-Plug 'kien/ctrlp.vim'
+Plug 'tpope/vim-obsession'
+
+Plug 'ctrlpvim/ctrlp.vim'
 
 Plug 'scrooloose/nerdtree'
 
@@ -28,6 +30,8 @@ Plug 'crusoexia/vim-monokai'
 Plug 'vim-scripts/L9'
 
 Plug 'vim-syntastic/syntastic'
+
+Plug 'christoomey/vim-tmux-navigator'
 
 " All of your Plugins must be added before the following line
 call plug#end()            " required
