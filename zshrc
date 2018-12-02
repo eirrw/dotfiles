@@ -14,6 +14,7 @@ source ~/.dotfiles/zsh/git-aliases/git-aliases.zsh
 source ~/.dotfiles/zsh/ls/ls.plugin.zsh
 source ~/.dotfiles/zsh/zsh-tmux/tmux.plugin.zsh
 source ~/.dotfiles/zsh/omz-plugins/history.zsh
+source ~/.dotfiles/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # completions
 source ~/.dotfiles/zsh/completions/ssh/ssh.plugin.zsh

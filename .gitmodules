@@ -25,3 +25,6 @@
 [submodule "zsh/history-search-multi-word"]
 	path = zsh/history-search-multi-word
 	url = https://github.com/zdharma/history-search-multi-word
+[submodule "zsh/zsh-autosuggestions"]
+	path = zsh/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions
