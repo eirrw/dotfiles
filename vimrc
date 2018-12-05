@@ -8,7 +8,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 " Init VimPlug
-call plug#begin('~/.vim/bundle')
+call plug#begin('~/.vim/plugins')
 
 Plug 'tpope/vim-fugitive'
 
