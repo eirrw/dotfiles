@@ -44,3 +44,5 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 source ~/.dotfiles/zsh/history-search-multi-word/history-search-multi-word.plugin.zsh
 source ~/.dotfiles/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
 
+# aliasing
+alias please='sudo $(fc -nl -1)'
