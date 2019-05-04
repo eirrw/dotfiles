@@ -33,6 +33,8 @@ Plug 'vim-syntastic/syntastic'
 
 Plug 'christoomey/vim-tmux-navigator'
 
+Plug 'will133/vim-dirdiff'
+
 " All of your Plugins must be added before the following line
 call plug#end()            " required
 

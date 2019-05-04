@@ -4,13 +4,20 @@
         
 - clean: ['~']
 
+- shell:
+    - [git submodule update --init --recursive, Installing submodules]
+    - > 
+        [ ! -f "custom.zsh" ] && 
+        echo 
+        "# source default zshrc
+        \nsource ~/.dotfiles/zshrc
+        \n\n# add custom custom commands below\n" 
+        > custom.zsh || true
+
 - link:
     ~/.dotfiles: ''
     ~/.tmux: tmux/
     ~/.tmux.conf: tmux.conf
     ~/.vimrc: 
-    ~/.zshrc: 
-
-- shell:
-    - [git submodule update --init --recursive, Installing submodules]
+    ~/.zshrc: custom.zsh
 

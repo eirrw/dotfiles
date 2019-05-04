@@ -1,12 +1,10 @@
-#antigen bundle pip
-#antigen bundle lein
-#antigen bundle command-not-found
-#antigen bundle tmux
-#antigen bundle vi-mode
-
 # initialize completions
 autoload -Uz compinit
 compinit
+
+# bash
+autoload bashcompinit
+bashcompinit
 
 # plugins
 source ~/.dotfiles/zsh/themes/powerlevel9k/powerlevel9k.zsh-theme
@@ -20,10 +18,10 @@ source ~/.dotfiles/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.dotfiles/zsh/completions/ssh/ssh.plugin.zsh
 
 # set path
-export PATH=$HOME/scripts:$PATH
+export PATH=$PATH:$HOME/scripts
 
 # powerline9k
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs virtualenv)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator background_jobs history time)
 
 DEFAULT_USER=$USER
@@ -46,3 +44,4 @@ source ~/.dotfiles/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zs
 
 # aliasing
 alias please='sudo $(fc -nl -1)'
+alias cp='rsync -ahP'
