@@ -10,9 +10,6 @@
 [submodule "completions/ssh"]
 	path = zsh/completions/ssh
 	url = https://github.com/zpm-zsh/ssh
-[submodule "zsh/themes/powerlevel9k"]
-	path = zsh/themes/powerlevel9k
-	url = https://github.com/bhilburn/powerlevel9k
 [submodule "zsh/zsh-syntax-highlighting"]
 	path = zsh/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting
@@ -28,3 +25,6 @@
 [submodule "zsh/zsh-autosuggestions"]
 	path = zsh/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions
+[submodule "zsh/themes/powerlevel10k"]
+	path = zsh/themes/powerlevel10k
+	url = https://github.com/romkatv/powerlevel10k
