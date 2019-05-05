@@ -6,6 +6,7 @@ Clone the repository to any directory. Use [dotbot](https://github.com/anishatha
 
 #### Fonts
 I've included the fonts I use in my themes. They are based on [Hack](https://sourcefoundry.org/hack/) and custom patched using [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts).
+
 Included Configurations
 -----------------------
 
