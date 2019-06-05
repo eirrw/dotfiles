@@ -51,7 +51,9 @@ set mouse=a
 set number
 
 " set GUI font
-set guifont=Hack\ 10
+if has('gui_running')
+    set guifont=Hack\ Nerd\ Font\ 11
+endif
 
 " do not store global and local values in a session
 " set ssop-=options

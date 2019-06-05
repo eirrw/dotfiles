@@ -1,5 +1,5 @@
 # .dotfiles
-Contains a selection of configuration files so that can be easily tracked and updated.
+Contains a selection of configuration files used across my systems.
 
 ### Installation
 Clone the repository to any directory. Use [dotbot](https://github.com/anishathalye/dotbot) to install by running "./install" after cloning. This will create symlinks in the home directory for each of the config files and download any necessary plugins. Dotbot will display any errors in the output messages.
@@ -64,4 +64,4 @@ Tweaks:
  - Use smart vim pane switching from [christoomey/vim-tmux-navigator](https://github.com/christoomey/vim-tmux-navigator)
 
 ### Simple (Suckless) Terminal
-A simple config.h for st.  Adjusts colors to use the Tango theme and selects the correct font.
+A simple config.h for st.  Adjusts colors to use the Tango theme and selects the correct font. Manually install by coopying to st source directory and recompiling.
