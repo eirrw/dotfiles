@@ -6,13 +6,18 @@
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
-    - > 
+    - 
+      command: > 
         [ ! -f "custom.zsh" ] && 
         echo 
         "# source default zshrc
         \nsource ~/.dotfiles/zshrc
         \n\n# add custom custom commands below\n" 
         > custom.zsh || true
+      stdout: true
+      stderr: true
+      description: Creating custom zsh config
+      quiet: true
 
 - link:
     ~/.dotfiles: ''
