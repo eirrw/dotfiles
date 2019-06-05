@@ -13,7 +13,13 @@ Included Configurations
 ### vimrc
 Vim configuration.  Requires [vim-plug](https://github.com/junegunn/vim-plug) as a package manager; it will be automatically installed on first run. Uses a powerline theme.
 
-Plugins included and installed with vim-plug:
+Tweaks:
+ - Activate mouse, number lines, and hidden buffers
+ - Sets the GUI font and CLI/GUI theme
+ - Sets tabstop and expands tabs
+ - Enables syntax
+
+Plugins:
  - vim-fugitive
  - vim-obsession
  - ctrlp
@@ -26,11 +32,18 @@ Plugins included and installed with vim-plug:
  - L9
  - syntastic
  - vim-tmux-navigator
+ - vim-dirdiff
 
 ### zshrc
 Configuration for the ZSH shell. Uses Git submodules to download and install plugins to avoid framework overhead. Includes a powerline theme and is configured for the included font. Uses a custom file as a symlink to allow for local editing.
 
-Plugins included:
+Tweaks:
+ - Autostart Tmux
+ - Use rsync for local copies
+ - Autoload zsh+bash completions
+ - Use PowerLevel10K 2-line prompt
+
+Plugins:
  - git-aliases
  - ls
  - tmux
@@ -43,3 +56,12 @@ Plugins included:
 
 ### tmux.conf
 Configuration for Tmux. Updates a few key areas like keybindings for better vim integration.  Uses a powerline theme.
+
+Tweaks: 
+ - Default terminal "screen-256color"
+ - Remapped prefix key and pane splits
+ - Reindexed windows for easy switching
+ - Use smart vim pane switching from [christoomey/vim-tmux-navigator](https://github.com/christoomey/vim-tmux-navigator)
+
+### Simple (Suckless) Terminal
+A simple config.h for st.  Adjusts colors to use the Tango theme and selects the correct font.
