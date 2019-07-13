@@ -20,22 +20,21 @@ Tweaks:
  - Enables syntax
 
 Plugins:
- - vim-fugitive
- - vim-obsession
- - ctrlp
- - nerdtree
- - delimitMate
- - vim-airline
- - vim-airline-themes
- - vim-colorschemes
- - vim-monokai
- - L9
- - syntastic
- - vim-tmux-navigator
- - vim-dirdiff
+ - [vim-obsession](https://github.com/tpope/vim-obsession)
+ - [ctrlp](https://github.com/ctrlpvim/ctrlp.vim)
+ - [nerdtree](https://github.com/scrooloose/nerdtree)
+ - [delimitMate](https://github.com/raimondi/delimitmate)
+ - [vim-airline](https://github.com/vim-airline/vim-airline)
+ - [vim-airline-themes](https://github.com/vim-airline/vim-airline-themes)
+ - [vim-colorschemes](https://github.com/flazz/vim-colorschemes)
+ - [vim-monokai](https://github.com/crusoexia/vim-monokai)
+ - [L9](https://github.com/vim-scripts/L9)
+ - [syntastic](https://github.com/vim-syntastic/syntastic)
+ - [vim-tmux-navigator](https://github.com/christoomey/vim-tmux-navigator)
+ - [vim-dirdiff](https://github.com/will133/vim-dirdiff)
 
 ### zshrc
-Configuration for the ZSH shell. Uses Git submodules to download and install plugins to avoid framework overhead. Includes a powerline theme and is configured for the included font. Uses a custom file as a symlink to allow for local editing.
+Configuration for the ZSH shell. Uses Git submodules to download and install plugins to avoid framework overhead. Includes a powerline theme and is configured for the included font. Uses a custom file as a symlink to allow for local editing and adjustment of some options.
 
 Tweaks:
  - Autostart Tmux
@@ -44,15 +43,15 @@ Tweaks:
  - Use PowerLevel10K 2-line prompt
 
 Plugins:
- - git-aliases
- - ls
- - tmux
- - history
- - zsh-autosuggestions
- - powerlevel10k
- - ssh
- - history-search-multi-word
- - zsh-syntax-highlighting
+ - [git-aliases](https://github.com/mdumitru/git-aliases)
+ - [ls](https://github.com/zpm-zsh/ls)
+ - [zsh-tmux](https://github.com/sharktamer/zsh-tmux)
+ - [history](https://github.com/robbyrussell/oh-my-zsh/blob/master/lib/history.zsh)
+ - [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
+ - [powerlevel10k](https://github.com/romkatv/powerlevel10k)
+ - [ssh](https://github.com/zpm-zsh/ssh)
+ - [history-search-multi-word](https://github.com/zdharma/history-search-multi-word)
+ - [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
 
 ### tmux.conf
 Configuration for Tmux. Updates a few key areas like keybindings for better vim integration.  Uses a powerline theme.
@@ -64,4 +63,4 @@ Tweaks:
  - Use smart vim pane switching from [christoomey/vim-tmux-navigator](https://github.com/christoomey/vim-tmux-navigator)
 
 ### Simple (Suckless) Terminal
-A simple config.h for st.  Adjusts colors to use the Tango theme and selects the correct font. Manually install by coopying to st source directory and recompiling.
+Some simple config.h files for st.  Selects the correct font and provides a few different options for colour.  Manually install by copying to st source directory and recompiling.

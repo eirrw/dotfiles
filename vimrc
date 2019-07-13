@@ -10,8 +10,6 @@ endif
 " Init VimPlug
 call plug#begin('~/.vim/plugins')
 
-Plug 'tpope/vim-fugitive'
-
 Plug 'tpope/vim-obsession'
 
 Plug 'ctrlpvim/ctrlp.vim'

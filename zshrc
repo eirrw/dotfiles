@@ -2,15 +2,12 @@
 autoload -Uz compinit
 compinit
 
-# bash
+# bash completions
 autoload bashcompinit
 bashcompinit
 
 # environment
 export PATH=$PATH:$HOME/scripts
-
-# tmux plugin config
-export ZSH_TMUX_AUTOSTART=true
 
 # plugins
 source ~/.dotfiles/zsh/git-aliases/git-aliases.zsh
@@ -19,14 +16,14 @@ source ~/.dotfiles/zsh/zsh-tmux/tmux.plugin.zsh
 source ~/.dotfiles/zsh/omz-plugins/history.zsh
 source ~/.dotfiles/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-# completions
+# completion plugins
 source ~/.dotfiles/zsh/completions/ssh/ssh.plugin.zsh
 
-# set keymaps
+# enable vim-mode keybinds. ESC to switch
 bindkey -v
 export KEYTIMEOUT=1
 
-# powerline9k
+# Powerline10K options
 POWERLEVEL9K_MODE="nerdfont-complete"
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(root_indicator dir_writable dir status)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(vcs virtualenv background_jobs context vi_mode time)
@@ -57,10 +54,10 @@ source ~/.dotfiles/zsh/themes/powerlevel10k/powerlevel10k.zsh-theme
 # case insensitive completion
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
-# syntax highlighting at end
+# aliasing
+alias cp='rsync -ahP'
+
+# syntax highlighting (must be at end of file)
 source ~/.dotfiles/zsh/history-search-multi-word/history-search-multi-word.plugin.zsh
 source ~/.dotfiles/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
 
-# aliasing
-alias please='sudo $(fc -nl -1)'
-alias cp='rsync -ahP'
