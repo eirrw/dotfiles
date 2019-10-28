@@ -20,8 +20,8 @@ source ~/.dotfiles/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.dotfiles/zsh/completions/ssh/ssh.plugin.zsh
 
 # enable vim-mode keybinds. ESC to switch
-bindkey -v
-export KEYTIMEOUT=1
+#bindkey -v
+#export KEYTIMEOUT=1
 
 # Powerline10K options
 POWERLEVEL9K_MODE="nerdfont-complete"
