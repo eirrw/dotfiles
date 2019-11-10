@@ -1,3 +1,3 @@
 *.swp
 antigen.zsh
-custom.zsh
+zsh/zshrc
