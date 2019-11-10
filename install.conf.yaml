@@ -8,8 +8,8 @@
     - [git submodule update --init --recursive, Installing submodules]
     - 
       command: > 
-        [ ! -f "custom.zsh" ] && 
-        cp zsh/custom.dist.zsh custom.zsh || true
+        [ ! -f "zsh/custom.zsh" ] && 
+        cp zsh/zshrc.dist zsh/zshrc || true
       stdout: true
       stderr: true
       description: Creating custom zsh config
@@ -17,8 +17,7 @@
 
 - link:
     ~/.dotfiles: ''
-    ~/.tmux: tmux/
-    ~/.tmux.conf: tmux.conf
-    ~/.vimrc: 
-    ~/.zshrc: custom.zsh
+    ~/.tmux.conf: tmux/tmux.conf
+    ~/.vimrc: vim/vimrc
+    ~/.zshrc: zsh/zshrc
 
