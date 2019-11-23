@@ -18,6 +18,10 @@
 - link:
     ~/.dotfiles: ''
     ~/.tmux.conf: tmux/tmux.conf
-    ~/.vimrc: vim/vimrc
     ~/.zshrc: zsh/zshrc
-
+    ~/.config/nvim/init.vim:
+        if: 'which nvim'
+        path: vim/vimrc
+    ~/.vimrc:
+        if: '! which nvim'
+        path: vim/vimrc

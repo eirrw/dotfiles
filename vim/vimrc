@@ -1,14 +1,21 @@
 set nocompatible              " be iMproved, required
 
 " Install vim-plug if not already installed
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+if has('nvim')
+    let datapath = stdpath('data') . '/site/autoload/plug.vim'
+    let plugpath = stdpath('data') . '/plugins'
+else
+    let datapath = $HOME . '/.vim/autoload/plug.vim'
+    let plugpath = $HOME . '/.vim/plugins'
+endif
+if empty(glob(datapath))
+    let url = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    execute 'silent !curl -fLo ' . datapath . ' --create-dirs ' . url
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 " Init VimPlug
-call plug#begin('~/.vim/plugins')
+call plug#begin(plugpath)
 
 Plug 'tpope/vim-obsession'
 
