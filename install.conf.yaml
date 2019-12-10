@@ -8,7 +8,7 @@
     - [git submodule update --init --recursive, Installing submodules]
     - 
       command: > 
-        [ ! -f "zsh/custom.zsh" ] && 
+        [ ! -f "zsh/zshrc" ] && 
         cp zsh/zshrc.dist zsh/zshrc || true
       stdout: true
       stderr: true
