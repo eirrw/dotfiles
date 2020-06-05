@@ -13,9 +13,6 @@
 [submodule "zsh/zsh-syntax-highlighting"]
 	path = zsh/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting
-[submodule "zsh/zsh-tmux"]
-	path = zsh/zsh-tmux
-	url = https://github.com/sharktamer/zsh-tmux
 [submodule "zsh/tmux"]
 	path = zsh/tmux
 	url = https://github.com/zpm-zsh/tmux
