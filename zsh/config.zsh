@@ -12,7 +12,7 @@ export PATH=$PATH:$HOME/scripts
 # plugins
 source ~/.dotfiles/zsh/git-aliases/git-aliases.zsh
 source ~/.dotfiles/zsh/ls/ls.plugin.zsh
-source ~/.dotfiles/zsh/zsh-tmux/tmux.plugin.zsh
+source ~/.dotfiles/zsh/tmux/tmux.plugin.zsh
 source ~/.dotfiles/zsh/omz-plugins/history.zsh
 source ~/.dotfiles/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
