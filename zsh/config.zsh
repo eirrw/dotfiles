@@ -9,6 +9,9 @@ bashcompinit
 # environment
 export PATH=$PATH:$HOME/scripts
 
+# plugin options
+TMUX_MOTD=false
+
 # plugins
 source ~/.dotfiles/zsh/git-aliases/git-aliases.zsh
 source ~/.dotfiles/zsh/ls/ls.plugin.zsh
@@ -39,6 +42,9 @@ DEFAULT_USER=$USER
 POWERLEVEL9K_CONTEXT_DEFAULT_FOREGROUND='black'
 POWERLEVEL9K_CONTEXT_DEFAULT_BACKGROUND='blue'
 POWERLEVEL9K_TIME_FORMAT='%D{%H:%M}'
+
+POWERLEVEL9K_TRANSIENT_PROMPT=always
+POWERLEVEL9K_INSTANT_PROMPT=verbose
 
 source ~/.dotfiles/zsh/themes/powerlevel10k/powerlevel10k.zsh-theme
 
