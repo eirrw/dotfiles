@@ -1,0 +1,9 @@
+[:6aef0d56-f6b3-491d-8a8c-f35a9bdf68dd]
+audible-bell=false
+font='Hack Nerd Font 11'
+foreground-color='#bdbdc3c3c7c7'
+background-color='#313136363b3b'
+palette=['#232324242323', '#baba29292222', '#7e7e80807e7e', '#4c4c4f4f4d4d', '#1616a0a08585', '#434374746a6a', '#0000cccccccc', '#e0e0e0e0e0e0', '#282829292828', '#cccc37372c2c', '#8d8d8f8f8d8d', '#4e4e52524f4f', '#1313bfbf9d9d', '#48487d7d7272', '#0000d1d1d1d1', '#e8e8e8e8e8e8']
+use-system-font=false
+use-theme-colors=false
+visible-name='Maia'
