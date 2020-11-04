@@ -40,6 +40,8 @@ Plug 'christoomey/vim-tmux-navigator'
 
 Plug 'will133/vim-dirdiff'
 
+Plug 'jeffkreeftmeijer/vim-dim'
+
 " All of your Plugins must be added before the following line
 call plug#end()            " required
 
@@ -75,7 +77,8 @@ set expandtab
 " colorscheme
 syntax enable
 set termguicolors
-colorscheme monokai
+colorscheme dim
+"colorscheme monokai
 
 " This is only necessary if you use "set termguicolors".
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
