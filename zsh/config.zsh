@@ -1,4 +1,6 @@
+#zmodload zsh/zprof
 # initialize completions
+#fpath=( ~/.config/zsh/completion ~/.dotfiles/zsh/completion "${fpath[@]}")
 autoload -Uz compinit
 compinit
 
@@ -53,8 +55,4 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
 # aliasing
 alias cp='rsync -ahP'
-
-# syntax highlighting (must be at end of file)
-source ~/.dotfiles/zsh/history-search-multi-word/history-search-multi-word.plugin.zsh
-source ~/.dotfiles/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
 
