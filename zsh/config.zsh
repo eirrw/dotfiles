@@ -1,10 +1,16 @@
-# initialize completions
-autoload -Uz compinit
-compinit
+### Added by Zinit's installer
+if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
+    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
+    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
+        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
+        print -P "%F{160}▓▒░ The clone has failed.%f%b"
+fi
 
-# bash completions
-autoload bashcompinit
-bashcompinit
+source "$HOME/.zinit/bin/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+### End of Zinit's installer chunk
 
 # environment
 export PATH=$PATH:$HOME/scripts
@@ -13,14 +19,27 @@ export PATH=$PATH:$HOME/scripts
 TMUX_MOTD=false
 
 # plugins
-source ~/.dotfiles/zsh/git-aliases/git-aliases.zsh
-source ~/.dotfiles/zsh/ls/ls.plugin.zsh
-source ~/.dotfiles/zsh/tmux/tmux.plugin.zsh
-source ~/.dotfiles/zsh/omz-plugins/history.zsh
-source ~/.dotfiles/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+zinit snippet OMZ::plugins/git/git.plugin.zsh
+zinit snippet OMZ::plugins/systemd/systemd.plugin.zsh
+zinit snippet OMZ::lib/history.zsh
 
-# completion plugins
-source ~/.dotfiles/zsh/completions/ssh/ssh.plugin.zsh
+zinit load zdharma/history-search-multi-word
+
+zinit ice blockf
+zinit load zsh-users/zsh-completions
+
+zinit load zpm-zsh/tmux
+zinit load zpm-zsh/ssh
+zinit load zpm-zsh/ls
+
+zinit load romkatv/powerlevel10k
+
+zinit wait lucid for \
+  atload"_zsh_autosuggest_start" \
+    zsh-users/zsh-autosuggestions \
+  atinit"zicompinit; zicdreplay" \
+    zsh-users/zsh-syntax-highlighting  
+  
 
 # Powerline10K options
 POWERLEVEL9K_MODE="nerdfont-complete"
@@ -46,15 +65,9 @@ POWERLEVEL9K_TIME_FORMAT='%D{%H:%M}'
 POWERLEVEL9K_TRANSIENT_PROMPT=always
 POWERLEVEL9K_INSTANT_PROMPT=verbose
 
-source ~/.dotfiles/zsh/themes/powerlevel10k/powerlevel10k.zsh-theme
-
 # case insensitive completion
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
 # aliasing
 alias cp='rsync -ahP'
-
-# syntax highlighting (must be at end of file)
-source ~/.dotfiles/zsh/history-search-multi-word/history-search-multi-word.plugin.zsh
-source ~/.dotfiles/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
 
