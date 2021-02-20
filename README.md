@@ -34,23 +34,25 @@ Plugins:
  - [vim-dirdiff](https://github.com/will133/vim-dirdiff)
 
 ### zshrc
-Configuration for the ZSH shell. Uses Git submodules to download and install plugins to avoid framework overhead. Includes a powerline theme and is configured for the included font. Uses a custom file as a symlink to allow for local editing and adjustment of some options.
+Configuration for the ZSH shell. Uses [zinit](https://github.com/zdharma/zinit) for plugin management. Includes a powerline theme and is configured for the included font. Uses a custom file as a symlink to allow for local editing and adjustment of some options.
 
 Tweaks:
  - Autostart Tmux
  - Use rsync for local copies
- - Autoload zsh+bash completions
+ - Autoload zsh completions
  - Use PowerLevel10K 2-line prompt
 
 Plugins:
- - [git-aliases](https://github.com/mdumitru/git-aliases)
- - [ls](https://github.com/zpm-zsh/ls)
- - [zsh-tmux](https://github.com/sharktamer/zsh-tmux)
- - [history](https://github.com/robbyrussell/oh-my-zsh/blob/master/lib/history.zsh)
- - [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
- - [powerlevel10k](https://github.com/romkatv/powerlevel10k)
- - [ssh](https://github.com/zpm-zsh/ssh)
+ - [git](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git)
+ - [systemd](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/systemd)
+ - [history](https://github.com/ohmyzsh/ohmyzsh/blob/master/lib/history.zsh)
  - [history-search-multi-word](https://github.com/zdharma/history-search-multi-word)
+ - [zsh-completions](https://github.com/zsh-users/zsh-completions)
+ - [tmux](https://github.com/zpm-zsh/tmux)
+ - [ls](https://github.com/zpm-zsh/ls)
+ - [ssh](https://github.com/zpm-zsh/ssh)
+ - [powerlevel10k](https://github.com/romkatv/powerlevel10k)
+ - [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
  - [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
 
 ### tmux.conf
