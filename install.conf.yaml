@@ -22,6 +22,12 @@
     ~/.config/nvim/init.vim:
         if: 'which nvim'
         path: vim/vimrc
+        create: true
     ~/.vimrc:
         if: '! which nvim'
         path: vim/vimrc
+    ~/.config/i3/config:
+        create: true
+        path: i3/i3.conf
+    ~/.config/i3/i3status.conf: i3/i3status.conf
+
