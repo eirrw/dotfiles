@@ -9,11 +9,3 @@ source ~/.dotfiles/zsh/keybind.zsh
 # add custom config below this line
 ###################################
 
-
-
-###################################
-# add custom config above this line
-
-# source syntax highlighting MUST BE LAST
-source ~/.dotfiles/zsh/syntax.zsh
-
