@@ -12,8 +12,8 @@ autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 ### End of Zinit's installer chunk
 
-# environment
-export PATH=$PATH:$HOME/scripts
+# 10ms wait for esc key sequences
+KEYTIMEOUT=1
 
 # plugin options
 TMUX_MOTD=false

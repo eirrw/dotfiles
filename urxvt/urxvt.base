@@ -19,4 +19,3 @@ URxvt.keysym.KP_End:  \033[4~
 URxvt.keysym.Shift-Control-V: eval:paste_clipboard
 
 URxvt.scrollBar: False
-
