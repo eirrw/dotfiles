@@ -1,6 +1,5 @@
 """
 Download themes from Gogh (https://github.com/Mayccoll/Gogh) formatted for URxvt.
-Output files are intended to be included in your .Xresources file.
 
 Usage:
     python gogh.py {theme}
@@ -36,6 +35,10 @@ if len(sys.argv) != 2:
 theme = sys.argv[1]
 
 r = requests.get(GOGH_URL.format(theme = theme))
+if r.status_code != 200:
+    print("Error retreiving theme. Reason: {reason}".format(reason = r.reason))
+    exit(r.status_code)
+
 gogh_data = r.text
 
 colors = re.findall(REGEX_COLOR, gogh_data)
