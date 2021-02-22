@@ -1,5 +1,5 @@
 *.swp
-antigen.zsh
+urxvt/urxvt.theme.*
 zsh/zshrc
 .idea/
 venv/
