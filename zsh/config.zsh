@@ -23,23 +23,21 @@ zinit snippet OMZ::plugins/git/git.plugin.zsh
 zinit snippet OMZ::plugins/systemd/systemd.plugin.zsh
 zinit snippet OMZ::lib/history.zsh
 
-zinit load zdharma/history-search-multi-word
+zinit light zdharma/history-search-multi-word
 
-zinit ice blockf
-zinit load zsh-users/zsh-completions
+zinit light zpm-zsh/tmux
+zinit light zpm-zsh/ssh
+zinit light zpm-zsh/ls
 
-zinit load zpm-zsh/tmux
-zinit load zpm-zsh/ssh
-zinit load zpm-zsh/ls
-
-zinit load romkatv/powerlevel10k
+zinit light romkatv/powerlevel10k
 
 zinit wait lucid for \
-  atload"_zsh_autosuggest_start" \
-    zsh-users/zsh-autosuggestions \
-  atinit"zicompinit; zicdreplay" \
-    zsh-users/zsh-syntax-highlighting  
-  
+    atinit"zicompinit; zicdreplay" \
+        zsh-users/zsh-syntax-highlighting \
+    blockf \
+        zsh-users/zsh-completions \
+    atload"!_zsh_autosuggest_start" \
+        zsh-users/zsh-autosuggestions
 
 # Powerline10K options
 POWERLEVEL9K_MODE="nerdfont-complete"
@@ -68,6 +66,8 @@ POWERLEVEL9K_INSTANT_PROMPT=verbose
 # case insensitive completion
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
-# aliasing
+# use rsync instead of cp
 alias cp='rsync -ahP'
 
+# add userscripts location to path
+path+=("${HOME}/bin")
