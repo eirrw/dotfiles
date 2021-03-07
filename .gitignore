@@ -1,5 +1,6 @@
 *.swp
 urxvt/urxvt.theme.*
+kitty/theme.*
 zsh/zshrc
 .idea/
 venv/
