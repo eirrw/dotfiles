@@ -61,6 +61,6 @@ with open(FILE_FORMAT.format(theme = theme), 'x') as f:
 conf = input(f"Add to kitty config file ({KITTY_CONF})? [Y/n] ")
 if (conf in 'Yy' or conf == ''):
     with open(os.path.expanduser(KITTY_CONF), 'a') as f:
-        f.write("#include $HOME/.dotfiles/theme/" + FILE_FORMAT.format(theme = theme) + "\n")
+        f.write("#include $HOME/.dotfiles/kitty/" + FILE_FORMAT.format(theme = theme) + "\n")
 
 print("DONE -> " + FILE_FORMAT.format(theme = theme))
