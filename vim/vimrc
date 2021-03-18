@@ -88,7 +88,10 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
 let g:airline_powerline_fonts = 1
 
-let g:syntastic_shell = "/bin/bash"
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 " ############################################
 " KEYMAPS
