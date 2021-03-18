@@ -17,30 +17,39 @@ endif
 " Init VimPlug
 call plug#begin(plugpath)
 
+" session management
 Plug 'tpope/vim-obsession'
 
+" fuzzy finder
 Plug 'ctrlpvim/ctrlp.vim'
 
+" directory sidebar
 Plug 'scrooloose/nerdtree'
 
+" auto-closing brackets, etc.
 Plug 'Raimondi/delimitMate'
 
+" airline status line
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-Plug 'flazz/vim-colorschemes'
+" common helper library
+"Plug 'vim-scripts/L9'
 
-Plug 'crusoexia/vim-monokai'
-
-Plug 'vim-scripts/L9'
-
+" syntax checking and highlighting
 Plug 'vim-syntastic/syntastic'
 
-Plug 'christoomey/vim-tmux-navigator'
+" combines with tmux config to allow seamless navigation
+"Plug 'christoomey/vim-tmux-navigator'
 
+" recursive diff
 Plug 'will133/vim-dirdiff'
 
+" dim colourscheme
 Plug 'jeffkreeftmeijer/vim-dim'
+
+" addtional syntax
+Plug 'cespare/vim-toml'
 
 " All of your Plugins must be added before the following line
 call plug#end()            " required
@@ -56,11 +65,6 @@ set mouse=a
 
 " show number lines
 set number
-
-" set GUI font/colors
-if has('gui_running')
-    set guifont=Hack\ Nerd\ Font\ 11
-endif
 
 " do not store global and local values in a session
 " set ssop-=options
@@ -88,6 +92,7 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
 let g:airline_powerline_fonts = 1
 
+" syntastic
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
