@@ -50,6 +50,7 @@ Plug 'jeffkreeftmeijer/vim-dim'
 
 " addtional syntax
 Plug 'cespare/vim-toml'
+Plug 'glench/vim-jinja2-syntax'
 
 " All of your Plugins must be added before the following line
 call plug#end()            " required
