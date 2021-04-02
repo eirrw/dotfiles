@@ -48,6 +48,9 @@ Plug 'will133/vim-dirdiff'
 " dim colourscheme
 Plug 'jeffkreeftmeijer/vim-dim'
 
+" train not to use hjkl excessively
+Plug 'takac/vim-hardtime'
+
 " addtional syntax
 Plug 'cespare/vim-toml'
 Plug 'glench/vim-jinja2-syntax'
@@ -94,12 +97,17 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
+" hardtime
+let g:hardtime_default_on = 1
+let g:hardtime_ignore_buffer_patterns = [ "NERD.*" ]
+
 " ############################################
 " KEYMAPS
 let mapleader="_"
 let maplocalleader="\\"
 
 map <C-n> :NERDTreeToggle<CR>
+map <leader>h :HardTimeToggle<CR>
 
 " ############################################
 " AUTOCMDS
