@@ -40,7 +40,11 @@ zinit wait lucid for \
         zsh-users/zsh-autosuggestions
 
 # Powerline10K options
-source "$HOME/.dotfiles/zsh/p10k.zsh"
+if [[ $(tty) =~ ^/dev/tty[0-9]+$ ]]; then
+    source "$HOME/.dotfiles/zsh/p10k.tty.zsh"
+else
+    source "$HOME/.dotfiles/zsh/p10k.zsh"
+fi
 
 # case insensitive completion
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
