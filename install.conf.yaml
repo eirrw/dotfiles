@@ -6,14 +6,23 @@
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
-    - 
-      command: > 
-        [ ! -f "zsh/zshrc" ] && 
+    -
+      command: >
+        [ ! -f "zsh/zshrc" ] &&
         cp zsh/zshrc.dist zsh/zshrc || true
       stdout: true
       stderr: true
       description: Creating custom zsh config
       quiet: true
+    -
+      command: >
+        [ ! -f "kitty/kitty.conf" ] &&
+        cp kitty/kitty.conf.dist kitty/kitty.conf || true
+      stdout: true
+      stderr: true
+      description: Creating custom kitty config
+      quiet: true
+
 
 - link:
     ~/.dotfiles: ''
@@ -30,4 +39,5 @@
         create: true
         path: i3/i3.conf
     ~/.config/i3/i3status.conf: i3/i3status.conf
+    ~/.config/kitty/kitty.conf: kitty/kitty.conf
 

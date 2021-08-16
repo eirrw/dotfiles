@@ -1,6 +1,7 @@
 *.swp
 urxvt/urxvt.theme.*
-kitty/theme.*
+kitty/kitty.conf
 zsh/zshrc
 .idea/
 venv/
+*.bak
