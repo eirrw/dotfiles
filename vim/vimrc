@@ -33,14 +33,8 @@ Plug 'Raimondi/delimitMate'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-" common helper library
-"Plug 'vim-scripts/L9'
-
 " syntax checking and highlighting
 Plug 'vim-syntastic/syntastic'
-
-" combines with tmux config to allow seamless navigation
-"Plug 'christoomey/vim-tmux-navigator'
 
 " recursive diff
 Plug 'will133/vim-dirdiff'
@@ -86,10 +80,14 @@ set mouse=a
 " show hybrid number lines
 set number relativenumber
 
-" do not store global and local values in a session
-" set ssop-=options
-" do not store folds
-" set ssop-=folds
+" extra space for commands
+set cmdheight=2
+
+" default 4000, more responsive for coc
+set updatetime=300
+
+" no ins-complete-menu messages
+set shortmess+=c
 
 " mapping delay 1000ms, keycode delay 10ms
 set timeoutlen=1000 ttimeoutlen=10
