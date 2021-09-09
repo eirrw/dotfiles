@@ -25,7 +25,6 @@ zinit snippet OMZ::lib/history.zsh
 
 zinit light zdharma/history-search-multi-word
 
-zinit light zpm-zsh/tmux
 zinit light zpm-zsh/ssh
 zinit light zpm-zsh/ls
 
@@ -50,7 +49,7 @@ fi
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
 # use rsync instead of cp
-alias cp='rsync -ahP'
+alias cp='rsync -ahPHAXSb --backup-dir=/tmp/rsync -e /dev/null'
 
 # add userscripts location to path
 path+=("${HOME}/bin")
