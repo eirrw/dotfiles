@@ -1,7 +1,3 @@
-# Autostart Tmux on shell launch
-# change to true to activate
-export ZSH_TMUX_AUTOSTART=false
-
 # source default configurations
 source ~/.dotfiles/zsh/config.zsh
 source ~/.dotfiles/zsh/keybind.zsh

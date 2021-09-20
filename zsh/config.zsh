@@ -15,9 +15,6 @@ autoload -Uz _zinit
 # 10ms wait for esc key sequences
 KEYTIMEOUT=1
 
-# plugin options
-TMUX_MOTD=false
-
 # plugins
 zinit snippet OMZ::plugins/git/git.plugin.zsh
 zinit snippet OMZ::plugins/systemd/systemd.plugin.zsh
