@@ -15,6 +15,10 @@ autoload -Uz _zinit
 # 10ms wait for esc key sequences
 KEYTIMEOUT=1
 
+# Bash completions
+autoload -U bashcompinit
+bashcompinit
+
 # plugins
 zinit snippet OMZ::plugins/git/git.plugin.zsh
 zinit snippet OMZ::plugins/systemd/systemd.plugin.zsh
