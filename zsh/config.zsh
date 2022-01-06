@@ -19,6 +19,9 @@ KEYTIMEOUT=1
 autoload -U bashcompinit
 bashcompinit
 
+# clean up path var
+typeset -U path
+
 # plugins
 zinit snippet OMZ::plugins/git/git.plugin.zsh
 zinit snippet OMZ::plugins/systemd/systemd.plugin.zsh
