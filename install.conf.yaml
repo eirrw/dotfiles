@@ -26,14 +26,13 @@
 
 - link:
     ~/.dotfiles: ''
-    ~/.tmux.conf: tmux/tmux.conf
     ~/.zshrc: zsh/zshrc
     ~/.config/nvim/init.vim:
-        if: 'which nvim'
+        if: 'command -v nvim'
         path: vim/vimrc
         create: true
     ~/.vimrc:
-        if: '! which nvim'
+        if: 'command -v vim'
         path: vim/vimrc
     ~/.config/i3/config:
         create: true
