@@ -4,9 +4,6 @@ Contains a selection of configuration files used across my systems.
 ### Installation
 Clone the repository to any directory. Use [dotbot](https://github.com/anishathalye/dotbot) to install by running "./install" after cloning. This will create symlinks in the home directory for each of the config files and download any necessary plugins. Dotbot will display any errors in the output messages.
 
-#### Fonts
-I've included the fonts I use in my themes. They are based on [Hack](https://sourcefoundry.org/hack/) and custom patched using [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts).
-
 Included Configurations
 -----------------------
 
