@@ -1,9 +1,0 @@
-[:afe55916-5c2c-4311-b9ab-081148c60531]
-audible-bell=false
-background-color='#000000000000'
-font='Hack Nerd Font 11'
-foreground-color='#ffffffffffff'
-palette=['#000000000000', '#ffff55555555', '#5555ffff5555', '#ffffffff5555', '#55555555ffff', '#ffff5555ffff', '#5555ffffffff', '#bbbbbbbbbbbb', '#555555555555', '#ffff55555555', '#5555ffff5555', '#ffffffff5555', '#55555555ffff', '#ffff5555ffff', '#5555ffffffff', '#ffffffffffff']
-use-system-font=false
-use-theme-colors=false
-visible-name='Dark Pastel'

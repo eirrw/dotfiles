@@ -1,9 +1,0 @@
-[:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
-audible-bell=false
-background-color='#0e0e10101919'
-font='Hack Nerd Font 11'
-foreground-color='#fffffafaf4f4'
-palette=['#232323232323', '#ffff00000f0f', '#8c8ce1e10b0b', '#ffffb9b90000', '#00008d8df8f8', '#6d6d4343a6a6', '#0000d8d8ebeb', '#ffffffffffff', '#444444444444', '#ffff27274040', '#ababe1e15b5b', '#ffffd2d24242', '#00009292ffff', '#9a9a5f5febeb', '#6767fffff0f0', '#ffffffffffff']
-use-system-font=false
-use-theme-colors=false
-visible-name='Argonaut'
