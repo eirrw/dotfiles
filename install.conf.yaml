@@ -27,13 +27,11 @@
 - link:
     ~/.dotfiles: ''
     ~/.zshrc: zsh/zshrc
-    ~/.config/nvim/init.lua:
+    ~/.config/nvim/:
         if: 'command -v nvim'
-        path: neovim/init.lua
+        glob: true
+        path: neovim/*
         create: true
-    ~/.config/nvim/lua:
-        if: 'command -v nvim'
-        path: neovim/lua
     ~/.vimrc:
         if: 'command -v vim'
         path: vim/vimrc

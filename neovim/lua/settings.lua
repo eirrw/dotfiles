@@ -1,7 +1,7 @@
 local opt = vim.opt
 local cmd = vim.cmd
 
-cmd 'colorscheme nightfox'
+cmd 'colorscheme themer_onedark'
 
 opt.cmdheight = 2                   -- extra space for cmds
 opt.dir = '/tmp'                    -- swpfiles in /tmp

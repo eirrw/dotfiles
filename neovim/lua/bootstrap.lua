@@ -23,8 +23,8 @@ local function bootstrap_paq()
     vim.cmd('autocmd User PaqDoneInstall quit')
 
     -- Read and install packages
-    paq(PKGS)
-    paq.install()
+    require('plugins')
+    paq:sync()
 end
 
 return { bootstrap_paq = bootstrap_paq }

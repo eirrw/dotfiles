@@ -10,6 +10,7 @@ local PKGS = {
 
     -- colourschemes
     "EdenEast/nightfox.nvim";
+    {"ThemerCorp/themer.lua", branch="dev"};
 
     -- lsp
     "neovim/nvim-lspconfig";
