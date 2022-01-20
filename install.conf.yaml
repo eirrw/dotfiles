@@ -37,7 +37,7 @@
         path: vim/vimrc
     ~/.config/i3/config:
         create: true
-        path: i3/i3.conf
+        path: i3/config
     ~/.config/i3/i3status.conf: i3/i3status.conf
     ~/.config/kitty/kitty.conf: kitty/kitty.conf
 

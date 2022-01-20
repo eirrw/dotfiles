@@ -185,9 +185,6 @@ set $mon3 HDMI-0
 # wallpaper
 exec --no-startup-id ./.fehbg
 
-# notification server (dunst)
-exec --no-startup-id /usr/bin/dunst
-
 # border
 default_border pixel 1
 default_floating_border none
