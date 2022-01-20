@@ -29,7 +29,11 @@ local PKGS = {
     "rafamadriz/friendly-snippets";
 
     -- languages
-    "crispgm/nvim-go"
+    "crispgm/nvim-go";
+
+    -- syntax
+    "mboughaba/i3config.vim";
+    "rpdelaney/vim-sourcecfg";
 }
 
 local paq = require('paq')

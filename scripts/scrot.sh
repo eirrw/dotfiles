@@ -21,6 +21,7 @@ source ~/.config/user-dirs.dirs
 
 FILE_NAME=$(date +%Y%m%d%H%M%S).png
 SCREENSHOTS_DIR=${XDG_PICTURES_DIR}/screenshots
+NOTIFY_TIME=3000
 
 if [[ ! -e ${SCREENSHOTS_DIR} ]]; then
     mkdir -p ${SCREENSHOTS_DIR}
@@ -28,12 +29,15 @@ fi
 
 if [[ 'screen' == $1 ]]; then
     # screen
+    notify-send -t ${NOTIFY_TIME} "capturing screen"
     maim_opt=""
 elif [[ 'select' == $1 ]]; then
     # select
+    notify-send -t ${NOTIFY_TIME} "capturing selection"
     maim_opt="-s"
 elif [[ 'window' == $1 ]]; then
     # window
+    notify-send -t ${NOTIFY_TIME} "capturing window"
     maim_opt="-i $(xdotool getactivewindow)"
 else
     usage
