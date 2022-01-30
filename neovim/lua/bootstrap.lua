@@ -1,30 +1,21 @@
-local function clone_paq()
-    local path = vim.fn.stdpath('data') .. '/site/pack/paqs/start/paq-nvim'
+local function clone_packer()
+    local fn = vim.fn
+    local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+    if fn.empty(fn.glob(install_path)) > 0 then
+      packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    end
 
-    if vim.fn.empty(vim.fn.glob(path)) > 0 then
-      vim.fn.system {
-        'git',
-        'clone',
-        '--depth=1',
-        'https://github.com/savq/paq-nvim.git',
-        path
-      }
+    return packer_bootstrap
+end
+
+local function bootstrap()
+    if clone_packer() then
+        vim.cmd('autocmd User PackerComplete quitall')
+
+        require('plugins').sync()
+    else
+        vim.cmd('quitall')
     end
 end
 
-local function bootstrap_paq()
-    clone_paq()
-
-    -- Load Paq
-    vim.cmd('packadd paq-nvim')
-    local paq = require('paq')
-
-    -- Exit nvim after installing plugins
-    vim.cmd('autocmd User PaqDoneInstall quit')
-
-    -- Read and install packages
-    require('plugins')
-    paq:sync()
-end
-
-return { bootstrap_paq = bootstrap_paq }
+return { bootstrap = bootstrap }

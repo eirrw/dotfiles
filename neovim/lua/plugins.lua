@@ -1,42 +1,68 @@
-local PKGS = {
-    "savq/paq-nvim";
-    "kyazdani42/nvim-web-devicons";
-    "kyazdani42/nvim-tree.lua";
-    "nvim-lualine/lualine.nvim";
-    "nvim-treesitter/nvim-treesitter";
-    "romgrk/barbar.nvim";
-    "nvim-lua/plenary.nvim";
-    "nvim-lua/popup.nvim";
+local packer = nil
+
+local function init()
+    if packer == nil then
+        packer = require("packer")
+        packer.init { disable_commands = true }
+    end
+
+    local use = packer.use
+    packer.reset()
+
+    -- packer
+    use 'wbthomason/packer.nvim'
+
+    -- utility
+    use 'kyazdani42/nvim-web-devicons'
+    use 'nvim-lua/plenary.nvim'
+    use 'nvim-lua/popup.nvim'
+
+    -- user interface
+    use 'romgrk/barbar.nvim'
+    use { 'nvim-lualine/lualine.nvim', config = [[require('config.lualine')]] }
+    use { 'kyazdani42/nvim-tree.lua', config = [[require('config.nvim-tree')]] }
+
+    use { 'nvim-treesitter/nvim-treesitter', config = [[require('config.nvim-treesitter')]] }
 
     -- colourschemes
-    "EdenEast/nightfox.nvim";
-    {"ThemerCorp/themer.lua", branch="dev"};
+    use 'EdenEast/nightfox.nvim'
+    use { 'ThemerCorp/themer.lua', config = [[require('config.themer')]] }
 
     -- lsp
-    "neovim/nvim-lspconfig";
+    use { 'neovim/nvim-lspconfig', config = [[require("config.nvim-lspconfig")]] }
 
     -- completions
-    "hrsh7th/cmp-nvim-lsp";
-    "hrsh7th/cmp-buffer";
-    "hrsh7th/cmp-path";
-    "hrsh7th/cmp-cmdline";
-    "hrsh7th/nvim-cmp";
+    use {
+        'hrsh7th/nvim-cmp',
+        requires = {
+            'L3MON4D3/LuaSnip',
+            { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
+            'hrsh7th/cmp-nvim-lsp',
+            'hrsh7th/cmp-nvim-lsp-signature-help',
+            { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
+            { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' },
+            { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' },
+            { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' }
+        },
+        config = [[require("config.nvim-cmp")]]
+    }
 
     -- snippets
-    "hrsh7th/cmp-vsnip";
-    "hrsh7th/vim-vsnip";
-    "hrsh7th/vim-vsnip-integ";
-    "rafamadriz/friendly-snippets";
+    use { 'rafamadriz/friendly-snippets' }
 
     -- languages
-    "crispgm/nvim-go";
+    use { 'crispgm/nvim-go', config = [[require("config.nvim-go")]] }
 
     -- syntax
-    "mboughaba/i3config.vim";
-    "rpdelaney/vim-sourcecfg";
-}
+    use 'mboughaba/i3config.vim'
+    use 'rpdelaney/vim-sourcecfg'
+end
 
-local paq = require('paq')
+local plugins = setmetatable({}, {
+    __index = function(_, key)
+        init()
+        return packer[key]
+    end,
+})
 
-paq(PKGS)
-
+return plugins
