@@ -11,6 +11,7 @@ end
 local function bootstrap()
     if clone_packer() then
         vim.cmd('autocmd User PackerComplete quitall')
+        vim.cmd('packloadall')
 
         require('plugins').sync()
     else
