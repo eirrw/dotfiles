@@ -14,13 +14,15 @@ local function init()
 
     -- utility
     use 'kyazdani42/nvim-web-devicons'
-    use 'nvim-lua/plenary.nvim'
-    use 'nvim-lua/popup.nvim'
 
     -- user interface
     use 'romgrk/barbar.nvim'
     use { 'nvim-lualine/lualine.nvim', config = [[require('config.lualine')]] }
     use { 'kyazdani42/nvim-tree.lua', config = [[require('config.nvim-tree')]] }
+
+    -- motion
+    use { 'justinmk/vim-sneak' }
+    use { 'chaoren/vim-wordmotion' }
 
     use { 'nvim-treesitter/nvim-treesitter', config = [[require('config.nvim-treesitter')]] }
 
@@ -30,6 +32,49 @@ local function init()
 
     -- lsp
     use { 'neovim/nvim-lspconfig', config = [[require("config.nvim-lspconfig")]] }
+
+    -- git
+    use {
+        'lewis6991/gitsigns.nvim',
+        requires = {
+            'nvim-lua/plenary.nvim'
+        },
+        config = function()
+            require('gitsigns').setup()
+        end
+    }
+
+    -- search
+    use {
+        {
+            'nvim-telescope/telescope.nvim',
+            requires = {
+                'nvim-lua/popup.nvim',
+                'nvim-lua/plenary.nvim',
+                'telescope-frecency.nvim',
+                'telescope-fzf-native.nvim',
+            },
+            wants = {
+                'popup.nvim',
+                'plenary.nvim',
+                'telescope-frecency.nvim',
+                'telescope-fzf-native.nvim',
+            },
+            setup = [[require('config.telescope_setup')]],
+            config = [[require('config.telescope')]],
+            cmd = 'Telescope',
+            module = 'telescope',
+        },
+        {
+            'nvim-telescope/telescope-frecency.nvim',
+            after = 'telescope.nvim',
+            requires = 'tami5/sqlite.lua',
+        },
+        {
+            'nvim-telescope/telescope-fzf-native.nvim',
+            run = 'make',
+        },
+    }
 
     -- completions
     use {
