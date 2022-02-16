@@ -44,4 +44,8 @@ else
     exit 1
 fi
 
-maim ${maim_opt} | tee ${SCREENSHOTS_DIR}/${FILE_NAME} | xclip -selection clipboard -t image/png
+scrot=`maim ${maim_opt} | base64`
+
+if [[ -n "${scrot}" ]]; then
+    echo -n "$scrot" | base64 -d | tee ${SCREENSHOTS_DIR}/${FILE_NAME} | xclip -selection clipboard -t image/png
+fi
