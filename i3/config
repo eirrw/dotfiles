@@ -205,8 +205,11 @@ workspace $ws4 output $mon1
 workspace $ws5 output $mon2
 workspace $ws6 output $mon3
 
+focus_on_window_activation urgent
+
 # Discord
 assign [class="^discord$"] workspace $ws3
+no_focus [class="^discord$"]
 
 # Signal
 assign [class="^Signal$"] workspace $ws3
@@ -233,3 +236,4 @@ for_window [instance="^origin.exe$" class="Wine"] floating enable, fullscreen di
 exec --no-startup-id /usr/bin/lxqt-policykit-agent
 exec --no-startup-id discord
 exec --no-startup-id nm-applet
+exec --no-startup-id keepassxc
