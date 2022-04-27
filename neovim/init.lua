@@ -1,4 +1,9 @@
-local cmd = vim.cmd
+if not vim.fn.has 'nvim-0.7' then
+    vim.api.nvim_err_writeln("Neovim 0.7+ is required")
+end
+local ucmd = vim.api.nvim_create_user_command
+local kset = vim.api.nvim_set_keymap
+local kdel = vim.api.nvim_del_keymap
 local opt = vim.opt
 local u = require('utils')
 local map = u.map
@@ -27,49 +32,55 @@ opt.updatetime = 300                -- more responsive updates
 opt.wildmode = {'list', 'longest'}  -- cmdline completion mode
 opt.wrap = false                    -- disable line wrap
 
-map('n', '<Space>', '')
+kset('n', '<Space>', '', {desc='unbound leader key'})
 vim.g.mapleader = ' '
 
-map('', '<leader>c', '"+y') -- copy to system clipboard
+kset('', '<leader>c', '"+y', {desc='copy to system clipboard'}) -- copy to system clipboard
 
 -- splits
-map('n', '<leader>w', '<C-w>v<C-w>l')
-map('n', '<leader>h', '<C-w>h')
-map('n', '<leader>l', '<C-w>l')
-map('n', '<leader>j', '<C-w>j')
-map('n', '<leader>k', '<C-w>k')
+kset('n', '<leader>w', '<C-w>v<C-w>l', {desc='create vertical split'})
+kset('n', '<leader>h', '<C-w>h', {desc='focus split on the left'})
+kset('n', '<leader>l', '<C-w>l', {desc='focus split on the right'})
+kset('n', '<leader>j', '<C-w>j', {desc='focus split on the bottom'})
+kset('n', '<leader>k', '<C-w>k', {desc='focus split on the top'})
 
 -- barbar
 local opts = { silent = true }
 -- move to previous/next
-map('n', '<A-,>', ':BufferPrevious<CR>', opts)
-map('n', '<A-.>', ':BufferNext<CR>', opts)
+kset('n', '<A-,>', ':BufferPrevious<CR>', {silent=true, desc='switch to previous buffer'})
+kset('n', '<A-.>', ':BufferNext<CR>', {silent=true, desc='switch to next buffer'})
 -- Re-order to previous/next
-map('n', '<A-<>', ':BufferMovePrevious<CR>', opts)
-map('n', '<A->>', ' :BufferMoveNext<CR>', opts)
+kset('n', '<A-<>', ':BufferMovePrevious<CR>', opts)
+kset('n', '<A->>', ' :BufferMoveNext<CR>', opts)
 -- Goto buffer in position...
-map('n', '<A-1>', ':BufferGoto 1<CR>', opts)
-map('n', '<A-2>', ':BufferGoto 2<CR>', opts)
-map('n', '<A-3>', ':BufferGoto 3<CR>', opts)
-map('n', '<A-4>', ':BufferGoto 4<CR>', opts)
-map('n', '<A-5>', ':BufferGoto 5<CR>', opts)
-map('n', '<A-6>', ':BufferGoto 6<CR>', opts)
-map('n', '<A-7>', ':BufferGoto 7<CR>', opts)
-map('n', '<A-8>', ':BufferGoto 8<CR>', opts)
-map('n', '<A-9>', ':BufferGoto 9<CR>', opts)
-map('n', '<A-0>', ':BufferLast<CR>', opts)
+kset('n', '<A-1>', ':BufferGoto 1<CR>', opts)
+kset('n', '<A-2>', ':BufferGoto 2<CR>', opts)
+kset('n', '<A-3>', ':BufferGoto 3<CR>', opts)
+kset('n', '<A-4>', ':BufferGoto 4<CR>', opts)
+kset('n', '<A-5>', ':BufferGoto 5<CR>', opts)
+kset('n', '<A-6>', ':BufferGoto 6<CR>', opts)
+kset('n', '<A-7>', ':BufferGoto 7<CR>', opts)
+kset('n', '<A-8>', ':BufferGoto 8<CR>', opts)
+kset('n', '<A-9>', ':BufferGoto 9<CR>', opts)
+kset('n', '<A-0>', ':BufferLast<CR>', opts)
 -- Close buffer
-map('n', '<A-c>', ':BufferClose<CR>', opts)
+kset('n', '<A-c>', ':BufferClose<CR>', opts)
 
 -- change numbering on focus/insert
-u.create_augroup({
-    { 'BufEnter,FocusGained,InsertLeave', '!NvimTree', 'set relativenumber'},
-    { 'BufLeave,FocusLost,InsertEnter', '*', 'set norelativenumber'},
-}, 'numbertoggle')
+local numberGroup = vim.api.nvim_create_augroup("numbertoggle", {clear = true})
+vim.api.nvim_create_autocmd({'BufEnter', 'FocusGained', 'InsertLeave'}, {
+    command = "set relativenumber",
+    pattern = "!NvimTree",
+    group = numberGroup,
+})
+vim.api.nvim_create_autocmd({'BufLeave', 'FocusLost', 'InsertEnter'}, {
+    command = "set norelativenumber",
+    group = numberGroup,
+})
 
 -- packer commands
-cmd [[command! PackerInstall lua require('plugins').install()]]
-cmd [[command! PackerUpdate lua require('plugins').update()]]
-cmd [[command! PackerSync lua require('plugins').sync()]]
-cmd [[command! PackerClean lua require('plugins').clean()]]
-cmd [[command! PackerCompile lua require('plugins').compile()]]
+ucmd('PackerInstall', function() require('plugins').install() end, {})
+ucmd('PackerUpdate', function() require('plugins').update() end, {})
+ucmd('PackerSync', function() require('plugins').sync() end, {})
+ucmd('PackerClean', function() require('plugins').clean() end, {})
+ucmd('PackerCompile', function() require('plugins').compile() end, {})

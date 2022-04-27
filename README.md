@@ -8,7 +8,7 @@ Included Configurations
 -----------------------
 
 ### neovim
-Neovim configuration. Uses [paq-nvim](https://github.com/savq/paq-nvim) as a package manager. See [plugins](neovim/lua/plugins.lua) and [settings](neovim/lua/settings.lua).
+Neovim configuration. Uses [packer](https://github.com/wbthomason/packer.nvim) as a package manager. See [plugins](neovim/lua/plugins.lua) and [settings](neovim/lua/settings.lua).
 
 ### zshrc
 Configuration for the ZSH shell. Uses [zinit](https://github.com/zdharma/zinit) for plugin management. Includes a powerline theme and is configured for the included font. Uses a custom file as a symlink to allow for local editing and adjustment of some options.
