@@ -1,12 +1,12 @@
-if not vim.fn.has 'nvim-0.7' then
-    vim.api.nvim_err_writeln("Neovim 0.7+ is required")
+if vim.fn.has 'nvim-0.7' == 0 then
+    error("Neovim 0.7+ is required")
+    return nil
 end
+
 local ucmd = vim.api.nvim_create_user_command
 local kset = vim.api.nvim_set_keymap
 local kdel = vim.api.nvim_del_keymap
 local opt = vim.opt
-local u = require('utils')
-local map = u.map
 
 opt.cmdheight = 2                   -- extra space for cmds
 opt.dir = '/tmp'                    -- swpfiles in /tmp
@@ -66,17 +66,8 @@ kset('n', '<A-0>', ':BufferLast<CR>', opts)
 -- Close buffer
 kset('n', '<A-c>', ':BufferClose<CR>', opts)
 
--- change numbering on focus/insert
-local numberGroup = vim.api.nvim_create_augroup("numbertoggle", {clear = true})
-vim.api.nvim_create_autocmd({'BufEnter', 'FocusGained', 'InsertLeave'}, {
-    command = "set relativenumber",
-    pattern = "!NvimTree",
-    group = numberGroup,
-})
-vim.api.nvim_create_autocmd({'BufLeave', 'FocusLost', 'InsertEnter'}, {
-    command = "set norelativenumber",
-    group = numberGroup,
-})
+-- nvim-tree
+kset('n', '<C-n>', ':NvimTreeToggle<CR>', {desc='open or close nvim-tree'})
 
 -- packer commands
 ucmd('PackerInstall', function() require('plugins').install() end, {})
