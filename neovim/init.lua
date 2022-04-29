@@ -5,7 +5,6 @@ end
 
 local ucmd = vim.api.nvim_create_user_command
 local kset = vim.api.nvim_set_keymap
-local kdel = vim.api.nvim_del_keymap
 local opt = vim.opt
 
 opt.cmdheight = 2                   -- extra space for cmds
