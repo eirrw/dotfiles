@@ -1,0 +1,20 @@
+# xdg
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+
+# editor
+export EDITOR="nvim"
+export VISUAL="nvim"
+
+# zsh
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export HISTFILE="$ZDOTDIR/.zsh_history"
+export HISTSIZE=10000
+export SAVEHIST=10000
+
+# man
+export MANPAGER='nvim +Man!'
+
+# ls
+export LS_COLORS="rs=0:di=01;33:ln=target:or=41:ex=32"
