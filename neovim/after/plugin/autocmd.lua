@@ -41,3 +41,12 @@ au('BufEnter', {
     end,
     nested = true
 })
+
+-- 
+local lsp = agrp('lspAutoGroup', {})
+au({ 'CursorHold', 'CursorHoldI' }, {
+    group = lsp,
+    callback = function()
+        vim.diagnostic.open_float(nil, { focus = false })
+    end,
+})
