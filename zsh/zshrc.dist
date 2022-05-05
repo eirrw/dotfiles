@@ -1,7 +1,0 @@
-# source default configurations
-source ~/.dotfiles/zsh/config.zsh
-source ~/.dotfiles/zsh/keybind.zsh
-
-# add custom config below this line
-###################################
-

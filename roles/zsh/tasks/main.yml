@@ -1,0 +1,26 @@
+- name: Install zsh
+  ansible.builtin.package:
+    name:
+      - zsh
+    state: present
+  become: yes
+
+- name: create zsh config directory
+  ansible.builtin.file:
+    path: ~/.config/zsh
+    state: directory
+
+- name: copy zsh config
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "~/.config/zsh/{{ item }}"
+  loop:
+    - config.zsh
+    - keybind.zsh
+    - p10k.tty.zsh
+    - p10k.zsh
+
+- name: copy zshrc
+  ansible.builtin.copy:
+    src: zshrc.dist
+    dest: ~/.zshrc
