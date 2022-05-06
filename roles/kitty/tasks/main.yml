@@ -1,0 +1,22 @@
+- name: install kitty
+  ansible.bulitin.package:
+    name: kitty
+    state: present
+  become: yes
+
+- name: create kitty config dir
+  ansible.bulitin.file:
+    path: ~/.config/kitty/
+    type: directory
+
+- name: copy kitty config
+  ansible.bulitin.copy:
+    src: kitty.conf
+    dest: ~/.config/kitty/kitty.conf
+
+- name: get kitty config
+  ansible.bulitin.command:
+    cmd: kitty +kitten themes --dump-theme "Dimmed Monokai"
+  register: kitty_theme
+
+- name: write kitty theme:
