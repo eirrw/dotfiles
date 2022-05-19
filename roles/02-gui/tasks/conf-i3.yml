@@ -1,0 +1,19 @@
+- name: install i3
+  ansible.builtin.package:
+    name:
+      - i3wm
+    state: present
+  become: yes
+
+- name: create i3 config
+  ansible.builtin.file:
+    name: ~/.config/i3/
+    state: directory
+
+- name: copy i3 config
+  ansible.builtin.copy:
+    dest: "~/.config/i3/{ item }"
+    src: "{ item }"
+  loop:
+    - config
+    - py3status.conf

@@ -1,0 +1,20 @@
+- name: install packages
+  become: yes
+  tags:
+    - pkg
+    - cli
+    - git
+    - nvim
+  community.general.pacman:
+    state: present
+    name:
+      - curl
+      - exa
+      - fzf
+      - git
+      - htop
+      - neovim
+      - ripgrep
+      - zsh
+      - zsh-autosuggestions
+      - zsh-syntax-highlighting

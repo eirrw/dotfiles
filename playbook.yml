@@ -1,6 +1,6 @@
 - name: Setup local environment
   hosts: localhost
   roles:
-    - neovim
-    - zsh
-    - kitty
+    - 00-base
+    - 01-config
+    - 02-gui
