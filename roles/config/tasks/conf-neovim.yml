@@ -6,7 +6,7 @@
 - name: copy neovim config files
   ansible.builtin.copy:
     src: "{{ item }}"
-    dest: "{{ config_dir }}/nvim/{{ item | basename }}"
+    dest: "{{ config_dir }}/{{ item }}"
   loop:
-    - neovim/init.lua
-    - neovim/lua/
+    - nvim/init.lua
+    - nvim/lua/

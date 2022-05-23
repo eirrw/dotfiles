@@ -6,7 +6,7 @@
 - name: copy zsh config
   ansible.builtin.copy:
     src: "{{ item }}"
-    dest: "{{ config_dir }}/zsh/{{ item | basename }}"
+    dest: "{{ config_dir }}/{{ item }}"
   loop:
     - zsh/config.zsh
     - zsh/keybind.zsh
