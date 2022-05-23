@@ -1,0 +1,4 @@
+- import_tasks: conf-i3.yml
+- import_tasks: conf-kitty.yml
+- import_tasks: conf-neovim.yml
+- import_tasks: conf-zsh.yml

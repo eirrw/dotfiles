@@ -1,12 +1,12 @@
 - name: create neovim config directory
   ansible.builtin.file:
-    path: ~/.config/nvim
+    path: "{{ config_dir }}/nvim"
     state: directory
 
-- name: symlink neovim config files
+- name: copy neovim config files
   ansible.builtin.copy:
     src: "{{ item }}"
-    dest: "~/.config/nvim/{{ item }}"
+    dest: "{{ config_dir }}/nvim/{{ item | basename }}"
   loop:
-    - init.lua
-    - lua/
+    - neovim/init.lua
+    - neovim/lua/

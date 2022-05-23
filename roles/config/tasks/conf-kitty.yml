@@ -1,20 +1,14 @@
-- name: install kitty
-  ansible.builtin.package:
-    name: kitty
-    state: present
-  become: yes
-
 - name: create kitty config dir
   ansible.builtin.file:
-    path: ~/.config/kitty/
+    path: "{{ config_dir }}/kitty/"
     state: directory
 
 - name: copy kitty config
   ansible.builtin.copy:
-    src: kitty.conf
-    dest: ~/.config/kitty/kitty.conf
+    src: kitty/kitty.conf
+    dest: "{{ config_dir }}/kitty/kitty.conf"
 
 - name: copy kitty theme
   ansible.builtin.copy:
-    src: current-theme.conf
-    dest: ~/.config/kitty/current-theme.conf
+    src: kitty/current-theme.conf
+    dest: "{{ config_dir }}/kitty/current-theme.conf"
