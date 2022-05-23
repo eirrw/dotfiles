@@ -16,7 +16,7 @@ font pango:Hack Nerd Font Mono 10
 # screen before suspend. Use loginctl lock-session to lock your screen.
 exec --no-startup-id xset dpms 0 0 0
 exec --no-startup-id xset s 300 5
-exec --no-startup-id xss-lock --transfer-sleep-lock -- ~/.dotfiles/scripts/lock.sh
+exec --no-startup-id xss-lock --transfer-sleep-lock -- ${XDG_CONFIG_HOME-~/.config}/i3/scripts/lock.sh
 bindsym $mod+Escape exec --no-startup-id loginctl lock-session
 
 # Use pactl to adjust volume in PulseAudio.
@@ -27,9 +27,9 @@ bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 
 # Use maim to make screenshots
-bindsym $mod+Print exec --no-startup-id "bash ~/.dotfiles/scripts/scrot.sh screen"
-bindsym $mod+Shift+Print exec --no-startup-id "bash ~/.dotfiles/scripts/scrot.sh select"
-bindsym $mod+Control+Print exec --no-startup-id "bash ~/.dotfiles/scripts/scrot.sh window"
+bindsym $mod+Print exec --no-startup-id "zsh ${XDG_CONFIG_HOME-.config/i3}/scripts/scrot.sh screen"
+bindsym $mod+Shift+Print exec --no-startup-id "zsh ${XDG_CONFIG_HOME-.config/i3}/scripts/scrot.sh select"
+bindsym $mod+Control+Print exec --no-startup-id "zsh ${XDG_CONFIG_HOME-.config/i3}/scripts/scrot.sh window"
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod

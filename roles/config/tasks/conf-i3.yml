@@ -8,6 +8,12 @@
     dest: "{{ config_dir }}/i3/config"
     src: "i3/i3config"
 
+- name: copy i3 scripts
+  ansible.builtin.copy:
+    dest: "{{ config_dir }}/i3/"
+    src: i3/scripts
+    mode: preserve
+
 - name: create py3status config directory
   ansible.builtin.file:
     name: "{{ config_dir }}/py3status/"
