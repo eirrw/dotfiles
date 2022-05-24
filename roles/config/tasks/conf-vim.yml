@@ -1,5 +1,6 @@
-- name: copy vimrc
-  ansible.builtin.copy:
-    src: vim/vimrc
-    dest: ~/.vimrc
+- name: link vimrc
+  ansible.builtin.file:
+    state: link
+    path: "{{ ansible_env.HOME }}/.vimrc"
+    src: "{{ files_path }}/vim/vimrc"
   tags: [ never, vim ]

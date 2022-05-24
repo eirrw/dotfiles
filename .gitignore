@@ -1,7 +1,5 @@
 *.swp
-urxvt/urxvt.theme.*
-kitty/kitty.conf
-zsh/zshrc
 .idea/
 venv/
 *.bak
+__pycache__

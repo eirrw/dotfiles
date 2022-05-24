@@ -1,30 +1,27 @@
 - name: create i3 config
   ansible.builtin.file:
-    name: "{{ config_dir }}/i3/"
     state: directory
+    name: "{{ config_dir }}/i3/"
 
-- name: copy i3 config
-  ansible.builtin.copy:
-    dest: "{{ config_dir }}/i3/config"
-    src: "i3/i3config"
-
-- name: copy i3 scripts
-  ansible.builtin.copy:
-    dest: "{{ config_dir }}/i3/"
-    src: i3/scripts
-    mode: preserve
+- name: link i3 config
+  ansible.builtin.file:
+    state: link
+    name: "{{ config_dir }}/i3/{{ item }}"
+    src: "{{ files_path }}/i3/{{ item }}"
+  loop:
+    - config
+    - scripts
 
 - name: create py3status config directory
   ansible.builtin.file:
-    name: "{{ config_dir }}/py3status/"
     state: directory
+    name: "{{ config_dir }}/py3status/"
 
-- name: copy py3status config
-  ansible.builtin.copy:
-    dest: "{{ config_dir }}/py3status/config"
-    src: "py3status/config"
-
-- name: copy py3status modules
-  ansible.builtin.copy:
-    dest: "{{ config_dir }}/py3status/modules/"
-    src: "py3status/modules/"
+- name: link py3status config
+  ansible.builtin.file:
+    state: link
+    name: "{{ config_dir }}/py3status/{{ item }}"
+    src: "{{ files_path }}/py3status/{{ item }}"
+  loop:
+    - config
+    - modules
