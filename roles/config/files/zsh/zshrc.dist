@@ -1,0 +1,17 @@
+# source default configurations
+source ~/.config/zsh/config.zsh
+source ~/.config/zsh/keybind.zsh
+
+# add custom config below this line
+###################################
+
+export EDITOR=nvim
+export SUDO_EDITOR=nvim
+
+# Set up Node Version Manager
+source /usr/share/nvm/init-nvm.sh --no-use
+
+path+=("${HOME}/go/bin")
+
+# Created by `pipx` on 2021-10-15 21:30:30
+path+=("${HOME}/.local/bin")

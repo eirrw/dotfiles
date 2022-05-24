@@ -16,7 +16,7 @@ font pango:Hack Nerd Font Mono 10
 # screen before suspend. Use loginctl lock-session to lock your screen.
 exec --no-startup-id xset dpms 0 0 0
 exec --no-startup-id xset s 300 5
-exec --no-startup-id xss-lock --transfer-sleep-lock -- ~/.dotfiles/scripts/lock.sh
+exec --no-startup-id xss-lock --transfer-sleep-lock -- ${XDG_CONFIG_HOME-~/.config}/i3/scripts/lock.sh
 bindsym $mod+Escape exec --no-startup-id loginctl lock-session
 
 # Use pactl to adjust volume in PulseAudio.
@@ -27,9 +27,9 @@ bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 
 # Use maim to make screenshots
-bindsym $mod+Print exec --no-startup-id "bash ~/.dotfiles/scripts/scrot.sh screen"
-bindsym $mod+Shift+Print exec --no-startup-id "bash ~/.dotfiles/scripts/scrot.sh select"
-bindsym $mod+Control+Print exec --no-startup-id "bash ~/.dotfiles/scripts/scrot.sh window"
+bindsym $mod+Print exec --no-startup-id "zsh ${XDG_CONFIG_HOME-.config/i3}/scripts/scrot.sh screen"
+bindsym $mod+Shift+Print exec --no-startup-id "zsh ${XDG_CONFIG_HOME-.config/i3}/scripts/scrot.sh select"
+bindsym $mod+Control+Print exec --no-startup-id "zsh ${XDG_CONFIG_HOME-.config/i3}/scripts/scrot.sh window"
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -172,11 +172,22 @@ bar {
     separator_symbol ""
     tray_output DP-2
     tray_padding 1
+
+    colors {
+        background #000000
+        statusline #ffffff
+        separator  #666666
+
+        # class            border  backgr. text
+        focused_workspace  #666666 #000000 #00ff00
+        active_workspace   #222222 #000000 #ffffff
+        inactive_workspace #222222 #000000 #666666
+        urgent_workspace   #900000 #000000 #900000
+    }
 }
 
 # keyboard settings
 exec --no-startup-id xdotool key Num_Lock
-exec --no-startup-id setxkbmap -option caps:none
 
 # monitor settings
 set $mon1 DP-2
@@ -189,13 +200,15 @@ exec --no-startup-id ./.fehbg
 # border
 default_border pixel 1
 default_floating_border none
-hide_edge_borders vertical
+hide_edge_borders smart
 
-client.focused          #ffffff #285577 #ffffff #2e9ef4 #ff5e13
-client.focused_inactive #333333 #5f676a #ffffff #484e50 #5f676a
-client.unfocused        #333333 #222222 #888888 #292d2e #000000
-client.urgent           #2f343a #900000 #ffffff #900000 #900000
-client.placeholder      #000000 #0c0c0c #ffffff #000000 #0c0c0c
+#                       [      titlebar       ]  new dir   window border
+# class                 border  backgr. text    indicator child_border
+client.focused          #ffffff #285577 #ffffff #0066aa   #00aa00
+client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
+client.unfocused        #333333 #222222 #888888 #292d2e   #333333
+client.urgent           #2f343a #900000 #ffffff #900000   #900000
+client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 
 # workspace arrangement
 workspace $ws1 output $mon1

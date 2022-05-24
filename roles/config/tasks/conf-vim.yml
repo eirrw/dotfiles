@@ -1,0 +1,5 @@
+- name: copy vimrc
+  ansible.builtin.copy:
+    src: vim/vimrc
+    dest: ~/.vimrc
+  tags: [ never, vim ]

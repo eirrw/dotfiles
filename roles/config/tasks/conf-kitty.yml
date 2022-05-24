@@ -1,0 +1,14 @@
+- name: create kitty config dir
+  ansible.builtin.file:
+    path: "{{ config_dir }}/kitty/"
+    state: directory
+
+- name: copy kitty config
+  ansible.builtin.copy:
+    src: kitty/kitty.conf
+    dest: "{{ config_dir }}/kitty/kitty.conf"
+
+- name: copy kitty theme
+  ansible.builtin.copy:
+    src: kitty/current-theme.conf
+    dest: "{{ config_dir }}/kitty/current-theme.conf"

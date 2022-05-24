@@ -64,9 +64,9 @@ typeset -U path
 
 # Powerline10K options
 if [[ $(tty) =~ ^/dev/tty[0-9]+$ ]]; then
-    source "$HOME/.dotfiles/zsh/p10k.tty.zsh"
+    source "$HOME/.config/zsh/p10k.tty.zsh"
 else
-    source "$HOME/.dotfiles/zsh/p10k.zsh"
+    source "$HOME/.config/zsh/p10k.zsh"
 fi
 
 # completion
