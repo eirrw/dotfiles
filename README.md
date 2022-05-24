@@ -2,7 +2,7 @@
 Contains a selection of configuration files used across my systems.
 
 ### Installation
-Clone the repository to any directory. Use [dotbot](https://github.com/anishathalye/dotbot) to install by running "./install" after cloning. This will create symlinks in the home directory for each of the config files and download any necessary plugins. Dotbot will display any errors in the output messages.
+The dotfiles are managed by an Ansible playbook. Use `ansible-playbook -i hosts playbool.yml` to install.
 
 Included Configurations
 -----------------------
