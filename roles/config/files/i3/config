@@ -19,7 +19,7 @@ exec --no-startup-id xset s 300 5
 exec --no-startup-id xss-lock --transfer-sleep-lock -- ${XDG_CONFIG_HOME-~/.config}/i3/scripts/lock.sh
 bindsym $mod+Escape exec --no-startup-id loginctl lock-session
 
-# Use pactl to adjust volume in PulseAudio.
+# media controls
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
 bindsym XF86AudioStop exec --no-startup-id playerctl stop
 bindsym XF86AudioNext exec --no-startup-id playerctl next
