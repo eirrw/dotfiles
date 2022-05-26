@@ -11,6 +11,7 @@
   loop:
     - config
     - scripts
+    - callisto
 
 - name: create py3status config directory
   ansible.builtin.file:
@@ -23,5 +24,5 @@
     name: "{{ config_dir }}/py3status/{{ item }}"
     src: "{{ files_path }}/py3status/{{ item }}"
   loop:
-    - config
     - modules
+    - callisto.conf
