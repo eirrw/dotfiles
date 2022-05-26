@@ -12,6 +12,7 @@
     - config
     - scripts
     - callisto
+    - erwilson-lap
 
 - name: create py3status config directory
   ansible.builtin.file:
@@ -26,3 +27,4 @@
   loop:
     - modules
     - callisto.conf
+    - erwilson-lap.conf

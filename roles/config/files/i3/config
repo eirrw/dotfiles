@@ -20,7 +20,6 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- ${XDG_CONFIG_HOME-~/.conf
 bindsym $mod+Escape exec --no-startup-id loginctl lock-session
 
 # Use pactl to adjust volume in PulseAudio.
-bindsym XF86AudioMute exec --no-startup-id amixer set 'Master' playback toggle
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
 bindsym XF86AudioStop exec --no-startup-id playerctl stop
 bindsym XF86AudioNext exec --no-startup-id playerctl next
@@ -41,7 +40,7 @@ bindsym $mod+Return exec kitty -1
 bindsym $mod+Shift+q kill
 
 # start rofi (a program launcher)
-bindcode $mod+d exec "rofi -modi drun,run -show drun"
+bindsym $mod+d exec "rofi -modi drun,run -show drun"
 
 # change focus
 bindsym $mod+$left focus left
@@ -164,12 +163,6 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# keyboard settings
-exec --no-startup-id xdotool key Num_Lock
-
-# wallpaper
-exec --no-startup-id ./.fehbg
-
 # border
 default_border pixel 1
 default_floating_border none
@@ -183,6 +176,4 @@ client.unfocused        #333333 #222222 #888888 #292d2e   #333333
 client.urgent           #2f343a #900000 #ffffff #900000   #900000
 client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 
-include `cat /etc/hostname`/bar.conf
-include `cat /etc/hostname`/workspace.conf
-include `cat /etc/hostname`/exec.conf
+include `cat /etc/hostname`/*.conf
