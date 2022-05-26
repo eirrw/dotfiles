@@ -13,6 +13,7 @@
     - scripts
     - callisto
     - erwilson-lap
+    - r9133vpk
 
 - name: create py3status config directory
   ansible.builtin.file:
@@ -28,3 +29,4 @@
     - modules
     - callisto.conf
     - erwilson-lap.conf
+    - r9133vpk.conf
