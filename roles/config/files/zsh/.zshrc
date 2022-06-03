@@ -17,7 +17,6 @@ setopt AUTO_PARAM_KEYS                  # Intelligent handling of characters
 setopt AUTO_PARAM_SLASH                 #   after a completion.
 setopt AUTO_REMOVE_SLASH                # Remove trailing slash when needed.
 setopt COMPLETE_ALIASES                 # Allow autocompletion for aliases.
-setopt COMPLETE_ALIASES                 # Tab complete aliases.
 setopt COMPLETE_IN_WORD                 # Allow completion from middle of word
 setopt EXTENDED_HISTORY                 # Record additional information.
 setopt HIST_EXPIRE_DUPS_FIRST           # Remove duplicate entries first.
@@ -35,14 +34,17 @@ setopt SHARE_HISTORY                    # Share history between ZSH instances.
 unsetopt FLOW_CONTROL                   # Disable start/stop characters.
 unsetopt MENU_COMPLETE                  # Don't autoselect completions.
 
+# get external config
+source "${ZDOTDIR}/keybind.zsh"
+source "${ZDOTDIR}/alias.zsh"
+source "${ZDOTDIR}/functions.zsh"
+
 # 10ms wait for esc key sequences
 KEYTIMEOUT=1
-
 
 # clean up path var
 typeset -U path
 
-# plugins
 #zinit snippet OMZ::plugins/git/git.plugin.zsh
 #zinit snippet OMZ::plugins/systemd/systemd.plugin.zsh
 #zinit snippet OMZ::lib/history.zsh
@@ -51,16 +53,14 @@ typeset -U path
 #
 #zinit light zpm-zsh/ssh
 #zinit light zpm-zsh/ls
-#
-#zinit light romkatv/powerlevel10k
-#
-#zinit wait lucid for \
-#    atinit"zicompinit; zicdreplay" \
-#        zsh-users/zsh-syntax-highlighting \
-#    blockf \
-#        zsh-users/zsh-completions \
-#    atload"!_zsh_autosuggest_start" \
-#        zsh-users/zsh-autosuggestions
+
+# plugins are loaded in list order
+plugins=(
+    romkatv/powerlevel10k
+    zsh-users/zsh-completions
+    zsh-users/zsh-autosuggestions
+)
+plugin-load $plugins
 
 # Powerline10K options
 if [[ $(tty) =~ ^/dev/tty[0-9]+$ ]]; then
@@ -77,12 +77,9 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'              # Case-insen
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"             # Set list-colors to enable filename colorizing.
 zstyle ':completion:*:descriptions' format '[%d]'                   # Set descriptions format to enable group support.
 zstyle ':completion:*:git-checkout:*' sort false                    # Disable sort when completing `git checkout`.
-#zstyle -e ':completion:*:hosts' hosts 'reply=()'
+zstyle -e ':completion:*:hosts' hosts 'reply=()'                    # enable completions for ssh, etc
 compinit
 bashcompinit
 
-# use rsync instead of cp
-alias cp='rsync -ahPHAXSb --backup-dir=/tmp/rsync -e /dev/null'
-
-# add userscripts location to path
-path+=("${HOME}/bin")
+# must be last
+plugin-load "zsh-users/zsh-syntax-highlighting"

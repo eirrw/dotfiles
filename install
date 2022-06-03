@@ -9,6 +9,11 @@ if ! [ -x "$(command -v ansible)" ]; then
     exit 2
 fi
 
+# ensure expected environment
+source roles/config/files/zsh/zshenv
+
+# run playbook
 ansible-playbook -i ./hosts ./dotfiles.yml --tags ${tags}
 
+# alert on finish
 tput bel

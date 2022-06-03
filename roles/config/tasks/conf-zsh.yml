@@ -9,13 +9,15 @@
     name: "{{ config_dir }}/zsh/{{ item }}"
     src: "{{ files_path }}/zsh/{{ item }}"
   loop:
-    - config.zsh
+    - .zshrc
+    - alias.zsh
+    - functions.zsh
     - keybind.zsh
     - p10k.tty.zsh
     - p10k.zsh
 
-- name: link zshrc
+- name: link zshenv
   ansible.builtin.file:
     state: link
-    name: "{{ ansible_env.HOME }}/.zshrc"
-    src: "{{ files_path }}/zsh/zshrc.dist"
+    name: "{{ ansible_env.HOME }}/.zshenv"
+    src: "{{ files_path }}/zsh/zshenv"
