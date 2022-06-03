@@ -1,7 +1,10 @@
-- name: create zsh config directory
+- name: create zsh directories
   ansible.builtin.file:
     state: directory
-    path: "{{ config_dir }}/zsh"
+    path: "{{ item }}"
+  loop:
+    - "{{ config_dir }}/zsh"
+    - "{{ cache_dir}}/zsh"
 
 - name: link zsh config
   ansible.builtin.file:
@@ -10,6 +13,7 @@
     src: "{{ files_path }}/zsh/{{ item }}"
   loop:
     - .zshrc
+    - .zshenv
     - alias.zsh
     - functions.zsh
     - keybind.zsh
@@ -20,4 +24,4 @@
   ansible.builtin.file:
     state: link
     name: "{{ ansible_env.HOME }}/.zshenv"
-    src: "{{ files_path }}/zsh/zshenv"
+    src: "{{ files_path }}/zsh/.zshenv"

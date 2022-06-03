@@ -9,8 +9,9 @@ export EDITOR="nvim"
 export VISUAL="nvim"
 
 # zsh
-export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
-export HISTFILE="$ZDOTDIR/.zsh_history"
+export ZDOTDIR="${XDG_CONFIG_HOME-:${HOME}/.config}/zsh"
+export ZCOMPDUMP="${XDG_CACHE_HOME}/zsh/zcompdump"
+export HISTFILE="${XDG_CACHE_HOME}/zsh/zhistory"
 export HISTSIZE=10000
 export SAVEHIST=10000
 

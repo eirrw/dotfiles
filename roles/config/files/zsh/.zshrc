@@ -1,3 +1,6 @@
+# +---------+
+# | options |
+# +---------+
 setopt AUTO_CD              # Go to folder path without using cd.
 
 setopt AUTO_PUSHD           # Push the old directory onto the stack on cd.
@@ -12,7 +15,7 @@ setopt ALWAYS_TO_END                    # Move cursor after completion.
 setopt APPEND_HISTORY                   # Append to $HISTFILE, not replace.
 setopt AUTO_LIST                        # List choices on ambiguous completion.
 setopt AUTO_MENU                        # Show completion menu on tab press.
-setopt AUTO_NAME_DIRS                   # Allows 'cd ~borntyping' (see below).
+#setopt AUTO_NAME_DIRS                   # Allows 'cd ~borntyping' (see below).
 setopt AUTO_PARAM_KEYS                  # Intelligent handling of characters
 setopt AUTO_PARAM_SLASH                 #   after a completion.
 setopt AUTO_REMOVE_SLASH                # Remove trailing slash when needed.
@@ -57,6 +60,9 @@ typeset -U path
 # plugins are loaded in list order
 plugins=(
     romkatv/powerlevel10k
+    le0me55i/zsh-systemd
+    Tarrasch/zsh-bd
+    eirrw/zsh-git
     zsh-users/zsh-completions
     zsh-users/zsh-autosuggestions
 )
@@ -69,6 +75,12 @@ else
     source "$HOME/.config/zsh/p10k.zsh"
 fi
 
+# load fzf if available
+if [ $(command -v fzf) ]; then
+    [ -f "/usr/share/fzf/key-bindings.zsh" ] && source "/usr/share/fzf/key-bindings.zsh"
+    [ -f "/usr/share/fzf/completion.zsh" ] && source "/usr/share/fzf/completion.zsh"
+fi
+
 # completion
 autoload -U bashcompinit
 autoload -U compinit
@@ -78,8 +90,8 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"             # Set list-c
 zstyle ':completion:*:descriptions' format '[%d]'                   # Set descriptions format to enable group support.
 zstyle ':completion:*:git-checkout:*' sort false                    # Disable sort when completing `git checkout`.
 zstyle -e ':completion:*:hosts' hosts 'reply=()'                    # enable completions for ssh, etc
-compinit
+compinit -d $ZCOMPDUMP
 bashcompinit
 
-# must be last
+# syntax highlighting - must be last
 plugin-load "zsh-users/zsh-syntax-highlighting"
