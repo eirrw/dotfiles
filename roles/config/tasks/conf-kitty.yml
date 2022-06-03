@@ -1,14 +1,21 @@
 - name: create kitty config dir
   ansible.builtin.file:
-    path: "{{ config_dir }}/kitty/"
     state: directory
+    path: "{{ config_dir }}/kitty/"
 
-- name: copy kitty config
-  ansible.builtin.copy:
-    src: kitty/kitty.conf
-    dest: "{{ config_dir }}/kitty/kitty.conf"
+- name: link kitty config
+  ansible.builtin.file:
+    state: link
+    name: "{{ config_dir }}/kitty/kitty.conf"
+    src: "{{ files_path}}/kitty/kitty.conf"
+
+- name: check if theme is set
+  ansible.builtin.stat:
+    path: "{{ config_dir }}/kitty/current-theme.conf"
+  register: theme_file
 
 - name: copy kitty theme
   ansible.builtin.copy:
     src: kitty/current-theme.conf
     dest: "{{ config_dir }}/kitty/current-theme.conf"
+  when: theme_file.stat.exists == "False"
