@@ -48,20 +48,11 @@ KEYTIMEOUT=1
 # clean up path var
 typeset -U path
 
-#zinit snippet OMZ::plugins/git/git.plugin.zsh
-#zinit snippet OMZ::plugins/systemd/systemd.plugin.zsh
-#zinit snippet OMZ::lib/history.zsh
-#
-#zinit light zdharma-continuum/history-search-multi-word
-#
-#zinit light zpm-zsh/ssh
-#zinit light zpm-zsh/ls
-
 # plugins are loaded in list order
 plugins=(
     romkatv/powerlevel10k
+    skywind3000/z.lua
     le0me55i/zsh-systemd
-    Tarrasch/zsh-bd
     eirrw/zsh-git
     zsh-users/zsh-completions
     zsh-users/zsh-autosuggestions
@@ -92,6 +83,9 @@ zstyle ':completion:*:git-checkout:*' sort false                    # Disable so
 zstyle -e ':completion:*:hosts' hosts 'reply=()'                    # enable completions for ssh, etc
 compinit -d $ZCOMPDUMP
 bashcompinit
+
+# nvm
+[ -f /usr/share/nvm/init-nvm.sh ] && source /usr/share/nvm/init-nvm.sh --no-use
 
 # syntax highlighting - must be last
 plugin-load "zsh-users/zsh-syntax-highlighting"

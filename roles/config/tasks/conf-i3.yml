@@ -10,7 +10,6 @@
     src: "{{ files_path }}/i3/{{ item }}"
   loop:
     - config
-    - scripts
     - callisto
     - erwilson-lap
     - r9133vpk

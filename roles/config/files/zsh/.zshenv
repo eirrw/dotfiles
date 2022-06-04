@@ -11,9 +11,12 @@ export VISUAL="nvim"
 # zsh
 export ZDOTDIR="${XDG_CONFIG_HOME-:${HOME}/.config}/zsh"
 export ZCOMPDUMP="${XDG_CACHE_HOME}/zsh/zcompdump"
+
 export HISTFILE="${XDG_CACHE_HOME}/zsh/zhistory"
 export HISTSIZE=10000
 export SAVEHIST=10000
+
+export _ZL_DATA="${XDG_CACHE_HOME}/zsh/zlua"
 
 # man
 export MANPAGER='nvim +Man!'

@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/usr/bin/env bash
 
 usage() {
     echo "scrot: takes screenshots"
@@ -16,11 +16,11 @@ usage() {
     echo "    takes a screenshot of the currently active window"
 }
 
-
-source ~/.config/user-dirs.dirs
+USERDIRS="${XDG_CONFIG_HOME:-${HOME}/.config}/user-dirs.dirs"
+[ -f ${USERDIRS} ] && source ${USERDIRS}
 
 FILE_NAME=$(date +%Y%m%d%H%M%S).png
-SCREENSHOTS_DIR=${XDG_PICTURES_DIR}/screenshots
+SCREENSHOTS_DIR=${XDG_PICTURES_DIR:-${HOME}/Pictures}/screenshots
 NOTIFY_TIME=3000
 
 if [[ ! -e ${SCREENSHOTS_DIR} ]]; then
@@ -41,10 +41,10 @@ elif [[ 'window' == $1 ]]; then
     maim_opt="-i $(xdotool getactivewindow)"
 else
     usage
-    exit 1
+    exit 0
 fi
 
-scrot=`maim ${maim_opt} | base64`
+scrot=$(maim ${maim_opt} | base64)
 
 if [[ -n "${scrot}" ]]; then
     echo -n "$scrot" | base64 -d | tee ${SCREENSHOTS_DIR}/${FILE_NAME} | xclip -selection clipboard -t image/png
