@@ -68,8 +68,8 @@ fi
 
 # load fzf if available
 if [ $(command -v fzf) ]; then
-    [ -f "/usr/share/fzf/key-bindings.zsh" ] && source "/usr/share/fzf/key-bindings.zsh"
-    [ -f "/usr/share/fzf/completion.zsh" ] && source "/usr/share/fzf/completion.zsh"
+    source /usr/share/(doc/)#fzf/(examples/)#key-bindings.zsh
+    source /usr/share/(doc/)#fzf/(examples/)#completion.zsh
 fi
 
 # completion
