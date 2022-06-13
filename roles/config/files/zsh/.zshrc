@@ -19,7 +19,7 @@ setopt AUTO_MENU                        # Show completion menu on tab press.
 setopt AUTO_PARAM_KEYS                  # Intelligent handling of characters
 setopt AUTO_PARAM_SLASH                 #   after a completion.
 setopt AUTO_REMOVE_SLASH                # Remove trailing slash when needed.
-setopt COMPLETE_ALIASES                 # Allow autocompletion for aliases.
+#setopt COMPLETE_ALIASES                 # Allow custom autocompletion for aliases.
 setopt COMPLETE_IN_WORD                 # Allow completion from middle of word
 setopt EXTENDED_HISTORY                 # Record additional information.
 setopt HIST_EXPIRE_DUPS_FIRST           # Remove duplicate entries first.
@@ -52,7 +52,7 @@ typeset -U path
 plugins=(
     romkatv/powerlevel10k
     skywind3000/z.lua
-    le0me55i/zsh-systemd
+    eirrw/zsh-systemd
     eirrw/zsh-git
     zsh-users/zsh-completions
     zsh-users/zsh-autosuggestions
@@ -80,7 +80,8 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'              # Case-insen
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"             # Set list-colors to enable filename colorizing.
 zstyle ':completion:*:descriptions' format '[%d]'                   # Set descriptions format to enable group support.
 zstyle ':completion:*:git-checkout:*' sort false                    # Disable sort when completing `git checkout`.
-zstyle -e ':completion:*:hosts' hosts 'reply=()'                    # enable completions for ssh, etc
+zstyle -e ':completion:*:hosts' hosts 'reply=()'                    # dont autocomplete from hostsfile
+zstyle -e ':completion:*:ssh:*:users' users 'reply=()'                    # dont 
 compinit -d $ZCOMPDUMP
 bashcompinit
 

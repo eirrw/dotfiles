@@ -21,3 +21,17 @@ function plugin-load {
   done
 }
 
+function plugin-update {
+  ZPLUGINDIR=${ZPLUGINDIR:-${ZDOTDIR:-$HOME/.config/zsh}/plugins}
+  for d in $ZPLUGINDIR/*/.git(/); do
+    echo "Updating ${d:h:t}..."
+    command git -C "$d:h" pull --ff --recurse-submodules --depth 1 --rebase --autostash
+  done
+}
+
+function plugin-list {
+  ZPLUGINDIR=${ZPLUGINDIR:-${ZDOTDIR:-$HOME/.config/zsh}/plugins}
+  for d in $ZPLUGINDIR/*/.git(/); do
+    git -C "${d:h}" remote get-url origin
+  done
+}
