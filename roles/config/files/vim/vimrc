@@ -49,6 +49,7 @@ Plug 'takac/vim-hardtime'
 Plug 'cespare/vim-toml'
 Plug 'glench/vim-jinja2-syntax'
 Plug 'rpdelaney/vim-sourcecfg'
+Plug 'rodjek/vim-puppet'
 
 " All of your Plugins must be added before the following line
 call plug#end()            " required

@@ -1,0 +1,14 @@
+- name: create local bin
+  ansible.builtin.file:
+    state: directory
+    path: "{{ ansible_env.HOME }}/.local/bin"
+
+- name: link scripts
+  ansible.builtin.file:
+    state: link
+    name: "{{ ansible_env.HOME }}/.local/bin/{{ item }}"
+    src: "{{ files_path }}/scripts/{{ item }}"
+  loop:
+    - scrot
+    - i3locker
+    - i3exit

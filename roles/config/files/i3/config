@@ -16,20 +16,34 @@ font pango:Hack Nerd Font Mono 10
 # screen before suspend. Use loginctl lock-session to lock your screen.
 exec --no-startup-id xset dpms 0 0 0
 exec --no-startup-id xset s 300 5
-exec --no-startup-id xss-lock --transfer-sleep-lock -- ${XDG_CONFIG_HOME-~/.config}/i3/scripts/lock.sh
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3locker
+
 bindsym $mod+Escape exec --no-startup-id loginctl lock-session
 
-# Use pactl to adjust volume in PulseAudio.
-bindsym XF86AudioMute exec --no-startup-id amixer set 'Master' playback toggle
+# set up power menu
+set $mode_system System (l) lock, (e) logout, (r) reboot, (Shift+s) shutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id i3exit lock, mode "default"
+    bindsym e exec --no-startup-id i3exit logout, mode "default"
+    bindsym r exec --no-startup-id i3exit reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"  
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Control+Mod1+Escape mode "$mode_system"
+
+# media controls
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
 bindsym XF86AudioStop exec --no-startup-id playerctl stop
 bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 
 # Use maim to make screenshots
-bindsym $mod+Print exec --no-startup-id "zsh ${XDG_CONFIG_HOME-.config/i3}/scripts/scrot.sh screen"
-bindsym $mod+Shift+Print exec --no-startup-id "zsh ${XDG_CONFIG_HOME-.config/i3}/scripts/scrot.sh select"
-bindsym $mod+Control+Print exec --no-startup-id "zsh ${XDG_CONFIG_HOME-.config/i3}/scripts/scrot.sh window"
+bindsym $mod+Print exec --no-startup-id scrot screen
+bindsym $mod+Shift+Print exec --no-startup-id scrot select
+bindsym $mod+Control+Print exec --no-startup-id scrot window
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -41,7 +55,7 @@ bindsym $mod+Return exec kitty -1
 bindsym $mod+Shift+q kill
 
 # start rofi (a program launcher)
-bindcode $mod+40 exec "rofi -modi drun,run -show drun"
+bindsym $mod+d exec "rofi -modi drun,run -show drun"
 
 # change focus
 bindsym $mod+$left focus left
@@ -134,8 +148,6 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+Control+Mod1+Escape exit
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -164,42 +176,9 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-bar {
-    status_command py3status
-    position top
-    separator_symbol ""
-    tray_output DP-2
-    tray_padding 1
-
-    colors {
-        background #000000
-        statusline #ffffff
-        separator  #666666
-
-        # class            border  backgr. text
-        focused_workspace  #666666 #000000 #00ff00
-        active_workspace   #222222 #000000 #ffffff
-        inactive_workspace #222222 #000000 #666666
-        urgent_workspace   #900000 #000000 #900000
-    }
-}
-
-# keyboard settings
-exec --no-startup-id xdotool key Num_Lock
-
-# monitor settings
-set $mon1 DP-2
-set $mon2 DP-4
-set $mon3 HDMI-0
-
-# wallpaper
-exec --no-startup-id ./.fehbg
-
 # border
 default_border pixel 1
-default_floating_border none
+default_floating_border normal
 hide_edge_borders smart
 
 #                       [      titlebar       ]  new dir   window border
@@ -210,43 +189,4 @@ client.unfocused        #333333 #222222 #888888 #292d2e   #333333
 client.urgent           #2f343a #900000 #ffffff #900000   #900000
 client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 
-# workspace arrangement
-workspace $ws1 output $mon1
-workspace $ws2 output $mon2
-workspace $ws3 output $mon3
-workspace $ws4 output $mon1
-workspace $ws5 output $mon2
-workspace $ws6 output $mon3
-
-focus_on_window_activation urgent
-
-# Discord
-assign [class="^discord$"] workspace $ws3
-no_focus [class="^discord$"]
-
-# Signal
-assign [class="^Signal$"] workspace $ws3
-
-# Steam
-for_window [class="^Steam$" title="^Settings$"] floating enable
-assign [class="^Steam$"] workspace $ws6
-no_focus [class="^Steam$"]
-
-# Lutris
-assign [class="^Lutris$"] workspace $ws6
-
-# CSGO
-for_window [class="csgo_linux64"] fullscreen enable
-assign [class="csgo_linux64"] workspace $ws5
-
-# Minecraft/MultiMC
-for_window [class="^MultiMC5$" title="^Console window"] floating enable
-
-# Origin (Lutris)
-for_window [instance="^origin.exe$" class="Wine"] floating enable, fullscreen disable
-
-# exec on start
-exec --no-startup-id /usr/bin/lxqt-policykit-agent
-exec --no-startup-id discord
-exec --no-startup-id nm-applet
-exec --no-startup-id keepassxc
+include `cat /etc/hostname`/*.conf

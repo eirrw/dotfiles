@@ -101,6 +101,7 @@ local function init()
     -- syntax
     use 'mboughaba/i3config.vim'
     use 'rpdelaney/vim-sourcecfg'
+    use 'fladson/vim-kitty'
 end
 
 local plugins = setmetatable({}, {

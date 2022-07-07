@@ -1,19 +1,27 @@
-- name: create zsh config directory
+- name: create zsh directories
   ansible.builtin.file:
-    path: "{{ config_dir }}/zsh"
     state: directory
-
-- name: copy zsh config
-  ansible.builtin.copy:
-    src: "{{ item }}"
-    dest: "{{ config_dir }}/{{ item }}"
+    path: "{{ item }}"
   loop:
-    - zsh/config.zsh
-    - zsh/keybind.zsh
-    - zsh/p10k.tty.zsh
-    - zsh/p10k.zsh
+    - "{{ config_dir }}/zsh"
+    - "{{ cache_dir}}/zsh"
 
-- name: copy zshrc
-  ansible.builtin.copy:
-    src: zsh/zshrc.dist
-    dest: ~/.zshrc
+- name: link zsh config
+  ansible.builtin.file:
+    state: link
+    name: "{{ config_dir }}/zsh/{{ item }}"
+    src: "{{ files_path }}/zsh/{{ item }}"
+  loop:
+    - .zshrc
+    - .zshenv
+    - alias.zsh
+    - functions.zsh
+    - keybind.zsh
+    - p10k.tty.zsh
+    - p10k.zsh
+
+- name: link zshenv
+  ansible.builtin.file:
+    state: link
+    name: "{{ ansible_env.HOME }}/.zshenv"
+    src: "{{ files_path }}/zsh/.zshenv"
