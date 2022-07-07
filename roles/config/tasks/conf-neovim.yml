@@ -11,3 +11,4 @@
   loop:
     - init.lua
     - lua
+    - after

@@ -20,9 +20,12 @@ ts.setup {
         buffers = {
           sort_lastused = true,
           previewer = false,
-        }
+          theme = 'dropdown',
+        },
+        find_files = { theme = 'dropdown' },
+        git_files = { theme = 'dropdown' },
+        live_grep = { theme = 'dropdown' },
     }
 }
 
-ts.load_extension('frecency')
 ts.load_extension('fzf')

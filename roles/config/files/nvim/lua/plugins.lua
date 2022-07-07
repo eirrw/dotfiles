@@ -24,7 +24,11 @@ local function init()
     use { 'justinmk/vim-sneak' }
     use { 'chaoren/vim-wordmotion' }
 
-    use { 'nvim-treesitter/nvim-treesitter', config = [[require('config.nvim-treesitter')]] }
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        config = [[require('config.nvim-treesitter')]],
+        run = ':TSUpdate'
+    }
 
     -- colourschemes
     use 'EdenEast/nightfox.nvim'
@@ -51,24 +55,17 @@ local function init()
             requires = {
                 'nvim-lua/popup.nvim',
                 'nvim-lua/plenary.nvim',
-                'telescope-frecency.nvim',
                 'telescope-fzf-native.nvim',
             },
             wants = {
                 'popup.nvim',
                 'plenary.nvim',
-                'telescope-frecency.nvim',
                 'telescope-fzf-native.nvim',
             },
             setup = [[require('config.telescope_setup')]],
             config = [[require('config.telescope')]],
             cmd = 'Telescope',
             module = 'telescope',
-        },
-        {
-            'nvim-telescope/telescope-frecency.nvim',
-            after = 'telescope.nvim',
-            requires = 'tami5/sqlite.lua',
         },
         {
             'nvim-telescope/telescope-fzf-native.nvim',
@@ -87,7 +84,8 @@ local function init()
             { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
             { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' },
             { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' },
-            { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' }
+            { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' },
+            { 'ray-x/cmp-treesitter', after = 'nvim-cmp' }
         },
         config = [[require("config.nvim-cmp")]]
     }

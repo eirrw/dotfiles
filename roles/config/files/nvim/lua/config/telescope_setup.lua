@@ -1,9 +1,8 @@
-local map = require('utils').map
+local map = vim.keymap.set
 
 local silent = { silent = true }
 -- Navigate buffers and repos
-map('n', '<c-a>', [[<cmd>Telescope buffers show_all_buffers=true theme=get_dropdown<cr>]], silent)
-map('n', '<c-e>', [[<cmd>Telescope frecency theme=get_dropdown<cr>]], silent)
-map('n', '<c-s>', [[<cmd>Telescope git_files theme=get_dropdown<cr>]], silent)
-map('n', '<c-d>', [[<cmd>Telescope find_files theme=get_dropdown<cr>]], silent)
-map('n', '<c-g>', [[<cmd>Telescope live_grep theme=get_dropdown<cr>]], silent)
+map('n', '<c-a>', function() require('telescope.builtin').buffers() end, silent)
+map('n', '<c-s>', function() require('telescope.builtin').git_files() end, silent)
+map('n', '<c-d>', function() require('telescope.builtin').find_files() end, silent)
+map('n', '<c-g>', function() require('telescope.builtin').live_grep() end, silent)
