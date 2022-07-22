@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 usage() {
     echo "scrot: takes screenshots"
     echo ""
@@ -27,15 +29,15 @@ if [[ ! -e ${SCREENSHOTS_DIR} ]]; then
     mkdir -p ${SCREENSHOTS_DIR}
 fi
 
-if [[ 'screen' == $1 ]]; then
+if [[ 'screen' == ${1-} ]]; then
     # screen
     notify-send -t ${NOTIFY_TIME} "capturing screen"
     maim_opt=""
-elif [[ 'select' == $1 ]]; then
+elif [[ 'select' == ${1-} ]]; then
     # select
     notify-send -t ${NOTIFY_TIME} "capturing selection"
     maim_opt="-s"
-elif [[ 'window' == $1 ]]; then
+elif [[ 'window' == ${1-} ]]; then
     # window
     notify-send -t ${NOTIFY_TIME} "capturing window"
     maim_opt="-i $(xdotool getactivewindow)"

@@ -8,7 +8,7 @@ setopt PUSHD_IGNORE_DUPS    # Do not store duplicates in the stack.
 setopt PUSHD_SILENT         # Do not print the directory stack after pushd or popd.
 
 setopt CORRECT              # Spelling correction
-setopt CDABLE_VARS          # Change directory to a path stored in a variable.
+#setopt CDABLE_VARS          # Change directory to a path stored in a variable.
 setopt EXTENDED_GLOB        # Use extended globbing syntax.
 
 setopt ALWAYS_TO_END                    # Move cursor after completion.
@@ -72,18 +72,25 @@ if [ $(command -v fzf) ]; then
     source /usr/share/(doc/)#fzf/(examples/)#completion.zsh
 fi
 
+function ks {
+  kitty +kitten ssh "$@"
+}
+
 # completion
 autoload -U bashcompinit
 autoload -U compinit
-zstyle ':completion:*:*:*:*:*' menu select                          # Select completions with an interactive menu.
+zstyle ':completion:*' menu select                                  # Select completions with an interactive menu.
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'              # Case-insensitive completion
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"             # Set list-colors to enable filename colorizing.
 zstyle ':completion:*:descriptions' format '[%d]'                   # Set descriptions format to enable group support.
+zstyle ':completion:*' group-name ''                                # put descriptions in the right spot
 zstyle ':completion:*:git-checkout:*' sort false                    # Disable sort when completing `git checkout`.
 zstyle -e ':completion:*:hosts' hosts 'reply=()'                    # dont autocomplete from hostsfile
 zstyle -e ':completion:*:ssh:*:users' users 'reply=()'                    # dont 
 compinit -d $ZCOMPDUMP
 bashcompinit
+
+compdef ks=ssh
 
 # nvm
 [ -f /usr/share/nvm/init-nvm.sh ] && source /usr/share/nvm/init-nvm.sh --no-use
