@@ -32,25 +32,10 @@ class Py3status:
     # available configuration parameters
     button_toggle = 1
     cache_timeout = 15
+    screen_timeout = 300
     format = "{icon}"
     icon_off = "XSS"
     icon_on = "XSS"
-
-    class Meta:
-        deprecated = {
-            "rename": [
-                {
-                    "param": "format_on",
-                    "new": "icon_on",
-                    "msg": "obsolete parameter use `icon_on`",
-                },
-                {
-                    "param": "format_off",
-                    "new": "icon_off",
-                    "msg": "obsolete parameter use `icon_off`",
-                },
-            ]
-        }
 
     def post_config_hook(self):
         self.color_on = self.py3.COLOR_ON or self.py3.COLOR_GOOD
@@ -89,7 +74,10 @@ class Py3status:
             if self._is_xss_enabled():
                 self.py3.command_run("xset s off")
             else:
-                self.py3.command_run("xset s default")
+                if isinstance(self.screen_timeout, int):
+                    self.py3.command_run(f"xset s {self.screen_timeout} {self.screen_timeout}")
+                else:
+                    self.py3.command_run("xset s default")
 
 
 if __name__ == "__main__":
