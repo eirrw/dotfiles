@@ -15,3 +15,4 @@ alias s="ssh"
 [[ -x "$(command -v rg)" ]] && alias grep=rg
 [[ -x "$(command -v rsync)" ]] && \
     alias cp='rsync -ahPHAXSb --backup-dir=/tmp/rsync -e /dev/null'
+[[ -x "$(command -v podman)" ]] && alias docker=podman
