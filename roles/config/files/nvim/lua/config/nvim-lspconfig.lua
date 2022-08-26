@@ -6,10 +6,16 @@ vim.diagnostic.config({ virtual_text = true })
 local servers = {
     pylsp = {},
     gopls = {},
+    tailwindcss = {},
+    html = {},
 }
 
 
 lsp.pylsp.setup {
+    capabilities = capabilities
+}
+
+lsp.tailwindcss.setup {
     capabilities = capabilities
 }
 
@@ -23,5 +29,9 @@ lsp.gopls.setup {
             staticcheck = true,
         },
     },
+    capabilities = capabilities
+}
+
+lsp.html.setup {
     capabilities = capabilities
 }
