@@ -1,0 +1,9 @@
+#!/usr/bin/bash
+
+set -euo pipefail
+
+CONFIG="${XDG_CONFIG_HOME:-${HOME}/.config}/rofi/launcher.rasi"
+
+rofi \
+    -show drun \
+    -config "${CONFIG}"

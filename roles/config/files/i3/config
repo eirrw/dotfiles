@@ -23,16 +23,20 @@ bindsym $mod+Escape exec --no-startup-id loginctl lock-session
 # set up power menu
 set $mode_system System (l) lock, (e) logout, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
+    # set up power options
     bindsym l exec --no-startup-id i3exit lock, mode "default"
     bindsym e exec --no-startup-id i3exit logout, mode "default"
     bindsym r exec --no-startup-id i3exit reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"  
+    bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
 bindsym $mod+Control+Mod1+Escape mode "$mode_system"
+
+# app launcher
+bindsym $mod+d exec launcher
 
 # media controls
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
@@ -55,27 +59,14 @@ bindsym $mod+Return exec kitty -1
 bindsym $mod+Shift+q kill
 
 # start rofi (a program launcher)
-bindsym $mod+d exec "rofi -modi drun,run -show drun"
 
 # change focus
-bindsym $mod+$left focus left
-bindsym $mod+$down focus down
-bindsym $mod+$up focus up
-bindsym $mod+$right focus right
-
-# alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+$left move left
-bindsym $mod+Shift+$down move down
-bindsym $mod+Shift+$up move up
-bindsym $mod+Shift+$right move right
-
-# alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
@@ -152,21 +143,20 @@ bindsym $mod+Shift+r restart
 # resize window (you can also use the mouse for that)
 mode "resize" {
     # These bindings trigger as soon as you enter the resize mode
+    bindsym Left resize shrink width 10 px or 5 ppt
+    bindsym Down resize grow height 10 px or 5 ppt
+    bindsym Up resize shrink height 10 px or 5 ppt
+    bindsym Right resize grow width 10 px or 5 ppt
 
-    # Pressing left will shrink the window’s width.
-    # Pressing right will grow the window’s width.
-    # Pressing up will shrink the window’s height.
-    # Pressing down will grow the window’s height.
-    bindsym $left resize shrink width 1 px or 1 ppt
-    bindsym $down resize grow height 1 px or 1 ppt
-    bindsym $up resize shrink height 1 px or 1 ppt
-    bindsym $right resize grow width 1 px or 1 ppt
+    bindsym Shift+Left resize shrink width 50 px or 10 ppt
+    bindsym Shift+Down resize grow height 50 px or 10 ppt
+    bindsym Shift+Up resize shrink height 50 px or 10 ppt
+    bindsym Shift+Right resize grow width 50 px or 10 ppt
 
-    # same bindings, but for the arrow keys
-    bindsym Left resize shrink width 10 px or 10 ppt
-    bindsym Down resize grow height 10 px or 10 ppt
-    bindsym Up resize shrink height 10 px or 10 ppt
-    bindsym Right resize grow width 10 px or 10 ppt
+    bindsym Ctrl+Left resize shrink width 1 px or 1 ppt
+    bindsym Ctrl+Down resize grow height 1 px or 1 ppt
+    bindsym Ctrl+Up resize shrink height 1 px or 1 ppt
+    bindsym Ctrl+Right resize grow width 1 px or 1 ppt
 
     # back to normal: Enter or Escape or $mod+r
     bindsym Return mode "default"
