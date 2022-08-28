@@ -1,3 +1,1 @@
-- import_tasks: conf-vim.yml
-- import_tasks: conf-zsh.yml
 - import_tasks: scripts.yml

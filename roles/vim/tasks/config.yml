@@ -2,5 +2,4 @@
   ansible.builtin.file:
     state: link
     path: "{{ ansible_env.HOME }}/.vimrc"
-    src: "{{ files_path }}/vim/vimrc"
-  tags: [ never, vim ]
+    src: "{{ files_path }}/vimrc"

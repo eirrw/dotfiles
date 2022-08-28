@@ -12,3 +12,7 @@
       tags: [ gui, util, term ]
     - role: neovim
       tags: [ cli, util ]
+    - role: vim
+      tags: [ vim, never ]
+    - role: zsh
+      tags: [ cli, term, util ]

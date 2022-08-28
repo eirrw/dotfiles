@@ -4,13 +4,14 @@
     path: "{{ item }}"
   loop:
     - "{{ config_dir }}/zsh"
-    - "{{ cache_dir}}/zsh"
+    - "{{ cache_dir }}/zsh"
+  register: zsh_dirs
 
 - name: link zsh config
   ansible.builtin.file:
     state: link
-    name: "{{ config_dir }}/zsh/{{ item }}"
-    src: "{{ files_path }}/zsh/{{ item }}"
+    name: "{{ zsh_dirs.results[0].path }}/{{ item }}"
+    src: "{{ files_path }}/{{ item }}"
   loop:
     - .zshrc
     - .zshenv
@@ -24,4 +25,4 @@
   ansible.builtin.file:
     state: link
     name: "{{ ansible_env.HOME }}/.zshenv"
-    src: "{{ files_path }}/zsh/.zshenv"
+    src: "{{ files_path }}/.zshenv"

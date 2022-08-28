@@ -1,0 +1,5 @@
+- name: Install - arch
+  community.general.pacman:
+    name:
+      - zsh
+    state: present
