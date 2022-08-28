@@ -13,7 +13,7 @@ fi
 source roles/config/files/zsh/.zshenv
 
 # run playbook
-ansible-playbook -i ./hosts ./dotfiles.yml --tags ${tags}
+ansible-playbook -v -i ./hosts ./dotfiles.yml --tags ${tags} --check
 
 # alert on finish
 tput bel

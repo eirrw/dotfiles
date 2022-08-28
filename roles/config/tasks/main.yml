@@ -1,4 +1,3 @@
-- import_tasks: conf-kitty.yml
 - import_tasks: conf-neovim.yml
 - import_tasks: conf-vim.yml
 - import_tasks: conf-zsh.yml

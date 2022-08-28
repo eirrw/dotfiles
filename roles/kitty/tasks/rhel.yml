@@ -1,0 +1,5 @@
+- name: Install kitty - rhel
+  ansible.builtin.dnf:
+    name:
+      - kitty
+    state: latest
