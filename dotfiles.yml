@@ -2,3 +2,7 @@
   hosts: localhost
   roles:
     - config
+    - role: i3
+      tags: [ gui, wm ]
+    - role: py3status
+      tags: [ gui, wm ]

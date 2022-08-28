@@ -1,0 +1,16 @@
+- name: create py3status config directory
+  ansible.builtin.file:
+    state: directory
+    name: "{{ config_dir }}/py3status"
+  register: py3_config
+
+- name: link py3status config
+  ansible.builtin.file:
+    state: link
+    name: "{{ py3_config.path }}/{{ item }}"
+    src: "{{ files_path }}/{{ item }}"
+  loop:
+    - modules
+    - callisto.conf
+    - erwilson-lap.conf
+    - r9133vpk.conf

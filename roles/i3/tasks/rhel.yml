@@ -1,0 +1,8 @@
+- name: Install i3 - rhel
+  ansible.builtin.dnf:
+    name:
+      - i3
+      - i3lock
+      - i3status
+      - xss-lock
+    state: latest
