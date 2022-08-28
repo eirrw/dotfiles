@@ -2,13 +2,15 @@
   ansible.builtin.file:
     state: directory
     path: "{{ ansible_env.HOME }}/.local/bin"
+  register: bin_dir
 
 - name: link scripts
   ansible.builtin.file:
     state: link
-    name: "{{ ansible_env.HOME }}/.local/bin/{{ item }}"
-    src: "{{ files_path }}/scripts/{{ item }}"
+    name: "{{ bin_dir.path }}/{{ item }}"
+    src: "{{ files_path }}/{{ item }}"
   loop:
     - scrot
     - i3locker
     - i3exit
+    - launcher

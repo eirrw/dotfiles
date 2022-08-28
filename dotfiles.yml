@@ -16,3 +16,5 @@
       tags: [ vim, never ]
     - role: zsh
       tags: [ cli, term, util ]
+    - role: gui-scripts
+      tags: [ gui, util ]
