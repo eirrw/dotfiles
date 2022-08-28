@@ -2,12 +2,13 @@
   ansible.builtin.file:
     state: directory
     path: "{{ config_dir }}/nvim"
+  register: neovim_conf
 
 - name: link neovim config files
   ansible.builtin.file:
     state: link
-    name: "{{ config_dir }}/nvim/{{ item }}"
-    src: "{{ files_path }}/nvim/{{ item }}"
+    name: "{{ neovim_conf.path }}/{{ item }}"
+    src: "{{ files_path }}/{{ item }}"
   loop:
     - init.lua
     - lua

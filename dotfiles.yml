@@ -10,3 +10,5 @@
       tags: [ gui, util ]
     - role: kitty
       tags: [ gui, util, term ]
+    - role: neovim
+      tags: [ cli, util ]

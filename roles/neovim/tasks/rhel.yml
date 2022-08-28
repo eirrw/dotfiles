@@ -1,0 +1,5 @@
+- name: Install - rhel
+  ansible.builtin.dnf:
+    name:
+      - neovim
+    state: latest
