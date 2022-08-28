@@ -7,4 +7,4 @@ CONFIG="${XDG_CONFIG_HOME:-${HOME}/.config}/rofi/launcher.rasi"
 rofi \
     -show drun \
     -config "${CONFIG}" \
-    -dpi 0
+    -dpi 1
