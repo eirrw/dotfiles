@@ -1,0 +1,12 @@
+- import_tasks: config.yml
+  tags: [ config ]
+
+- name: Install on Arch
+  import_tasks: arch.yml
+  when: ansible_facts.os_family|lower == "archlinux"
+  tags: [ install, pacman ]
+
+- name: Install Fedora/RHEL
+  import_tasks: rhel.yml
+  when: ansible_facts.os_family|lower == "redhat"
+  tags: [ install, dnf ]

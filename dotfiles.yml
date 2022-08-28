@@ -6,3 +6,5 @@
       tags: [ gui, wm ]
     - role: py3status
       tags: [ gui, wm ]
+    - role: rofi
+      tags: [ gui, util ]

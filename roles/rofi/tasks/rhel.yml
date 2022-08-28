@@ -1,0 +1,5 @@
+- name: Install rofi - rhel
+  ansible.builtin.dnf:
+    name:
+      - rofi
+    state: latest
