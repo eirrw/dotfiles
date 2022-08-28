@@ -1,4 +1,5 @@
 - name: Install i3 - rhel
+  become: yes
   ansible.builtin.dnf:
     name:
       - i3
