@@ -68,8 +68,15 @@ fi
 
 # load fzf if available
 if [ $(command -v fzf) ]; then
-    source /usr/share/(doc/)#fzf/(examples/)#key-bindings.zsh
-    source /usr/share/(doc/)#fzf/(examples/)#completion.zsh
+    searchDirs=(
+        "/usr/share/fzf"
+        "/usr/share/fzf/shell"
+        "/usr/share/doc/fzf/examples"
+    )
+    for d in $searchDirs; do
+        [ -f $d/completion.zsh ] && source $d/completion.zsh
+        [ -f $d/key-bindings.zsh ] && source $d/key-bindings.zsh
+    done
 fi
 
 function ks {

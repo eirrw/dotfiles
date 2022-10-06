@@ -7,10 +7,5 @@
 - name: link i3 config
   ansible.builtin.file:
     state: link
-    name: "{{ i3_config.path }}/{{ item }}"
-    src: "{{ files_path }}/{{ item }}"
-  loop:
-    - config
-    - callisto
-    - erwilson-lap
-    - r9133vpk
+    name: "{{ i3_config.path }}/config"
+    src: "{{ files_path }}/config"
