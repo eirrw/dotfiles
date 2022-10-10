@@ -2,18 +2,18 @@
   hosts: localhost
   roles:
     - role: i3
-      tags: [ gui, wm ]
+      tags: [ gui, wm, i3 ]
     - role: py3status
-      tags: [ gui, wm ]
+      tags: [ gui, wm, py3status ]
     - role: rofi
-      tags: [ gui, util ]
+      tags: [ gui, util, rofi ]
     - role: kitty
-      tags: [ gui, util, term ]
+      tags: [ gui, util, term, kitty ]
     - role: neovim
-      tags: [ cli, util ]
+      tags: [ cli, util, neovim ]
     - role: vim
       tags: [ vim, never ]
     - role: zsh
-      tags: [ cli, term, util ]
+      tags: [ cli, term, util, zsh ]
     - role: gui-scripts
-      tags: [ gui, util ]
+      tags: [ gui, util, scripts ]

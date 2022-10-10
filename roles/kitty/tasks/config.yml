@@ -19,4 +19,4 @@
   ansible.builtin.copy:
     src: current-theme.conf
     dest: "{{ kitty_conf.path }}/current-theme.conf"
-  when: theme_file.stat.exists == "False"
+  when: theme_file.stat.exists == false
