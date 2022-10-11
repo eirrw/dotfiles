@@ -10,3 +10,6 @@
   import_tasks: rhel.yml
   when: ansible_facts.os_family|lower == "redhat"
   tags: [ install, dnf ]
+
+- name: setup plugins
+  command: nvim --headless -u NONE -c 'lua require("bootstrap").bootstrap()'
