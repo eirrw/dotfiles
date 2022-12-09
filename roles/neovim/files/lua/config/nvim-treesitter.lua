@@ -10,6 +10,7 @@ ts.setup {
         'lua',
         'make',
         'python',
+        'rust',
         'toml',
         'vim',
         'yaml',
