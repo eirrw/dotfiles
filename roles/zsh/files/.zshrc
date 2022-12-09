@@ -100,7 +100,7 @@ bashcompinit
 compdef ks=ssh
 
 # nvm
-[ -f /usr/share/nvm/init-nvm.sh ] && source /usr/share/nvm/init-nvm.sh --no-use
+[ -f /usr/share/nvm/init-nvm.sh ] && source /usr/share/nvm/init-nvm.sh
 
 # syntax highlighting - must be last
 plugin-load "zsh-users/zsh-syntax-highlighting"
