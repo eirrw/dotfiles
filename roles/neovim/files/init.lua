@@ -66,7 +66,8 @@ kset('n', '<A-0>', ':BufferLast<CR>', opts)
 kset('n', '<A-c>', ':BufferClose<CR>', opts)
 
 -- nvim-tree
-kset('n', '<C-n>', ':NvimTreeToggle<CR>', {desc='open or close nvim-tree'})
+kset('n', '<C-n>', ':NvimTreeFocus<CR>', {desc='open nvim-tree'})
+kset('n', '<leader><C-n>', ':NvimTreeClose<CR>', {desc='close nvim-tree'})
 
 -- packer commands
 ucmd('PackerInstall', function() require('plugins').install() end, {})
