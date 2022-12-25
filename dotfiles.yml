@@ -17,3 +17,5 @@
       tags: [ cli, term, util, zsh ]
     - role: gui-scripts
       tags: [ gui, util, scripts ]
+    - role: nvm
+      tags: [ nvm, never ]
