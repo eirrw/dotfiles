@@ -38,9 +38,15 @@ unsetopt FLOW_CONTROL                   # Disable start/stop characters.
 unsetopt MENU_COMPLETE                  # Don't autoselect completions.
 
 # get external config
-source "${ZDOTDIR}/keybind.zsh"
-source "${ZDOTDIR}/alias.zsh"
-source "${ZDOTDIR}/functions.zsh"
+config_dir="${XDG_CONFIG_HOME}/zsh"
+config_files=(
+    "alias.zsh"
+    "custom.zsh"
+    "functions.zsh"
+    "keybind.zsh"
+)
+for f ($^config_files) \
+    [ -f ${config_dir}/${f} ] && source "${config_dir}/${f}"
 
 # 10ms wait for esc key sequences
 KEYTIMEOUT=1
@@ -61,9 +67,9 @@ plugin-load $plugins
 
 # Powerline10K options
 if [[ $(tty) =~ ^/dev/tty[0-9]+$ ]]; then
-    source "$HOME/.config/zsh/p10k.tty.zsh"
+    source "${config_dir}/p10k/p10k.tty.zsh"
 else
-    source "$HOME/.config/zsh/p10k.zsh"
+    source "${config_dir}/p10k/p10k.zsh"
 fi
 
 # load fzf if available
@@ -100,7 +106,8 @@ bashcompinit
 compdef ks=ssh
 
 # nvm
-[ -f /usr/share/nvm/init-nvm.sh ] && source /usr/share/nvm/init-nvm.sh
+[ -f ${NVM_DIR}/nvm.sh ] && source ${NVM_DIR}/nvm.sh
+[[ -r $NVM_DIR/bash_completion ]] && \. $NVM_DIR/bash_completion
 
 # syntax highlighting - must be last
 plugin-load "zsh-users/zsh-syntax-highlighting"

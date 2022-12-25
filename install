@@ -10,7 +10,7 @@ if ! [ -x "$(command -v ansible)" ]; then
 fi
 
 # ensure expected environment
-source roles/zsh/files/.zshenv
+source roles/zsh/files/zshenv
 
 # run playbook
 ansible-playbook -K -i ./hosts ./dotfiles.yml --tags ${tags}

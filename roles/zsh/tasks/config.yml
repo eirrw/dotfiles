@@ -7,22 +7,22 @@
     - "{{ cache_dir }}/zsh"
   register: zsh_dirs
 
+- name: link main config
+  ansible.builtin.file:
+    state: link
+    name: "{{ ansible_env.HOME }}/.{{ item }}"
+    src: "{{ files_path }}/{{ item }}"
+  loop:
+    - zshrc
+    - zshenv
+
 - name: link zsh config
   ansible.builtin.file:
     state: link
     name: "{{ zsh_dirs.results[0].path }}/{{ item }}"
     src: "{{ files_path }}/{{ item }}"
   loop:
-    - .zshrc
-    - .zshenv
     - alias.zsh
     - functions.zsh
     - keybind.zsh
-    - p10k.tty.zsh
-    - p10k.zsh
-
-- name: link zshenv
-  ansible.builtin.file:
-    state: link
-    name: "{{ ansible_env.HOME }}/.zshenv"
-    src: "{{ files_path }}/.zshenv"
+    - p10k
