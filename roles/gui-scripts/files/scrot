@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
+set -eEuo pipefail
+trap "notify-send -t 3000 \"scrot\" \"capture failed\"" ERR
 
 usage() {
     echo "scrot: takes screenshots"
@@ -31,15 +32,15 @@ fi
 
 if [[ 'screen' == ${1-} ]]; then
     # screen
-    notify-send -t ${NOTIFY_TIME} "capturing screen"
+    notify_message="capturing screen"
     maim_opt=""
 elif [[ 'select' == ${1-} ]]; then
     # select
-    notify-send -t ${NOTIFY_TIME} "capturing selection"
+    notify_message="capturing selection"
     maim_opt="-s"
 elif [[ 'window' == ${1-} ]]; then
     # window
-    notify-send -t ${NOTIFY_TIME} "capturing window"
+    notify_message="capturing window"
     maim_opt="-i $(xdotool getactivewindow)"
 else
     usage
@@ -51,3 +52,5 @@ scrot=$(maim ${maim_opt} | base64)
 if [[ -n "${scrot}" ]]; then
     echo -n "$scrot" | base64 -d | tee ${SCREENSHOTS_DIR}/${FILE_NAME} | xclip -selection clipboard -t image/png
 fi
+
+notify-send -t ${NOTIFY_TIME} "scrot" "${notify_message}"
