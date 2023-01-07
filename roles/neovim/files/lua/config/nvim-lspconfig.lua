@@ -82,3 +82,13 @@ lsp.rust_analyzer.setup {
     capabilities = capabilities,
     on_attach = on_attach,
 }
+
+lsp.eslint.setup {
+    capabilities = capabilities,
+    on_attach = on_attach,
+}
+
+lsp.tsserver.setup {
+    capabilities = capabilities,
+    on_attach = on_attach,
+}
