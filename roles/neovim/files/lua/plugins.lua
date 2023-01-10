@@ -12,13 +12,11 @@ local function init()
     -- packer
     use 'wbthomason/packer.nvim'
 
-    -- utility
-    use 'kyazdani42/nvim-web-devicons'
-
     -- user interface
     use 'romgrk/barbar.nvim'
     use { 'nvim-lualine/lualine.nvim', config = [[require('config.lualine')]] }
-    use { 'kyazdani42/nvim-tree.lua', config = [[require('config.nvim-tree')]] }
+    use 'nvim-tree/nvim-web-devicons'
+    use { 'nvim-tree/nvim-tree.lua', config = [[require('config.nvim-tree')]] }
 
     -- motion
     use { 'justinmk/vim-sneak' }
@@ -95,6 +93,7 @@ local function init()
 
     -- languages
     use { 'crispgm/nvim-go', config = [[require("config.nvim-go")]] }
+    use { 'jakewvincent/mkdnflow.nvim', config = [[require("config.mkdnflow")]] }
 
     -- syntax
     use 'mboughaba/i3config.vim'
