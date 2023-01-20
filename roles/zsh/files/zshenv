@@ -21,11 +21,12 @@ export _ZL_DATA="${XDG_CACHE_HOME}/zsh/zlua"
 export MANPAGER='nvim +Man!'
 
 # ls
-export LS_COLORS="rs=0:di=01;33:ln=target:or=41:ex=32"
+# LS_COLORS provided by plugin
 
 # golang
 export GOPATH="${XDG_DATA_HOME}/go"
 export PATH="${PATH}:${GOPATH}"
+export PATH="${PATH}:/usr/local/go/bin/"
 
 # node
 export NVM_DIR="${XDG_DATA_HOME}/nvm"

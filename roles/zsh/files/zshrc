@@ -62,6 +62,7 @@ plugins=(
     eirrw/zsh-git
     zsh-users/zsh-completions
     zsh-users/zsh-autosuggestions
+    trapd00r/LS_COLORS
 )
 plugin-load $plugins
 
