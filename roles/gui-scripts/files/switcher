@@ -1,0 +1,10 @@
+#!/usr/bin/bash
+
+set -euo pipefail
+
+CONFIG="${XDG_CONFIG_HOME:-${HOME}/.config}/rofi/switcher.rasi"
+
+rofi \
+    -show window \
+    -config "${CONFIG}" \
+    -dpi 1

@@ -37,6 +37,7 @@ bindsym $mod+Control+Mod1+Escape mode "$mode_system"
 
 # app launcher
 bindsym $mod+d exec launcher
+bindsym $mod+Tab exec switcher
 
 # media controls
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause

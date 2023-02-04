@@ -11,3 +11,4 @@
     src: "{{ files_path }}/{{ item }}"
   loop:
     - launcher.rasi
+    - switcher.rasi
