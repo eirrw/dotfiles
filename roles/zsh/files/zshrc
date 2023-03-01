@@ -48,6 +48,8 @@ config_files=(
 for f ($^config_files) \
     [ -f ${config_dir}/${f} ] && source "${config_dir}/${f}"
 
+fpath=($fpath "$config_dir/completions")
+
 # 10ms wait for esc key sequences
 KEYTIMEOUT=1
 
