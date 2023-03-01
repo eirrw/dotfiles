@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 set -eEuo pipefail
-trap "notify-send -t 3000 \"scrot\" \"capture failed\"" ERR
 
 usage() {
     echo "scrot: takes screenshots"
@@ -19,17 +18,25 @@ usage() {
     echo "    takes a screenshot of the currently active window"
 }
 
-USERDIRS="${XDG_CONFIG_HOME:-${HOME}/.config}/user-dirs.dirs"
-[ -f ${USERDIRS} ] && source ${USERDIRS}
-
+# set up vars
 FILE_NAME=$(date +%Y%m%d%H%M%S).png
 SCREENSHOTS_DIR=${XDG_PICTURES_DIR:-${HOME}/Pictures}/screenshots
 NOTIFY_TIME=3000
 
+# create directory if needed
 if [[ ! -e ${SCREENSHOTS_DIR} ]]; then
     mkdir -p ${SCREENSHOTS_DIR}
 fi
 
+# notify and cleanup if scrot fails
+function handleFailure()
+{
+    rm -f ${SCREENSHOTS_DIR}/${FILE_NAME}
+    notify-send -t ${NOTIFY_TIME} "scrot" "capture failed"
+}
+trap handleFailure ERR
+
+# handle options
 if [[ 'screen' == ${1-} ]]; then
     # screen
     notify_message="capturing screen"
@@ -47,10 +54,13 @@ else
     exit 0
 fi
 
+# take screenshot
 scrot=$(maim ${maim_opt} | base64)
 
+# save to file and clipboard
 if [[ -n "${scrot}" ]]; then
     echo -n "$scrot" | base64 -d | tee ${SCREENSHOTS_DIR}/${FILE_NAME} | xclip -selection clipboard -t image/png
 fi
 
+# notify success
 notify-send -t ${NOTIFY_TIME} "scrot" "${notify_message}"
