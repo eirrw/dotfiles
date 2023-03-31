@@ -6,15 +6,17 @@ local numberGroup = agrp("numbertoggle", {clear = true})
 au({'BufEnter', 'FocusGained', 'InsertLeave'}, {
     group = numberGroup,
     callback = function(data)
-        -- no number in file tree
-        if not string.find(data.file, 'NvimTree_' .. vim.api.nvim_tabpage_get_number(0)) then
-            vim.wo.relativenumber = true
-        end
+        vim.wo.relativenumber = true
     end,
 })
 au({'BufLeave', 'FocusLost', 'InsertEnter'}, {
     group = numberGroup,
-    command = "set norelativenumber",
+    callback = function(data)
+        -- no number in file tree
+        if not string.find(data.file, 'NvimTree_' .. vim.api.nvim_tabpage_get_number(0)) then
+            vim.wo.relativenumber = false
+        end
+    end,
 })
 
 -- windows to close with 'q'
@@ -33,9 +35,17 @@ local nvimTreeGrp = agrp('closeNvimTree', {})
 au('BufEnter', {
     group = nvimTreeGrp,
     callback = function(data)
-        if table.getn(vim.api.nvim_tabpage_list_wins(0)) == 1
+        if table.getn(vim.api.nvim_tabpage_list_wins(0)) == 1 
             and string.find(data.match, 'NvimTree_' .. vim.api.nvim_tabpage_get_number(0))
         then
+            -- check for unsaved buffers
+            for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+                if vim.api.nvim_buf_get_option(buf, 'modified') then
+                    vim.api.nvim_win_set_buf(0, buf)
+                    return 'Unsaved buffers'
+                end
+            end
+
             vim.api.nvim_command('quit')
         end
     end,

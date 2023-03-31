@@ -1,12 +1,15 @@
-if vim.fn.has 'nvim-0.7' == 0 then
-    error("Neovim 0.7+ is required")
+if vim.fn.has 'nvim-0.8' == 0 then
+    error("Neovim 0.8+ is required")
     return nil
 end
 
+local u = require('utils')
+
 local ucmd = vim.api.nvim_create_user_command
-local kset = vim.api.nvim_set_keymap
+local kset = vim.keymap.set
 local opt = vim.opt
 
+-- set options
 opt.cmdheight = 2                   -- extra space for cmds
 opt.dir = '/tmp'                    -- swpfiles in /tmp
 opt.expandtab = true                -- use spaces instead of tabs
@@ -31,10 +34,16 @@ opt.updatetime = 300                -- more responsive updates
 opt.wildmode = {'list', 'longest'}  -- cmdline completion mode
 opt.wrap = false                    -- disable line wrap
 
+-- disable netrw
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- set leader
 kset('n', '<Space>', '', {desc='unbound leader key'})
 vim.g.mapleader = ' '
 
-kset('', '<leader>c', '"+y', {desc='copy to system clipboard'}) -- copy to system clipboard
+-- copy to system clipboard
+kset('', '<leader>c', '"+y', {desc='copy to system clipboard'})
 
 -- splits
 kset('n', '<leader>w', '<C-w>v<C-w>l', {desc='create vertical split'})
@@ -46,8 +55,8 @@ kset('n', '<leader>k', '<C-w>k', {desc='focus split on the top'})
 -- barbar
 local opts = { silent = true }
 -- move to previous/next
-kset('n', '<A-,>', ':BufferPrevious<CR>', {silent=true, desc='switch to previous buffer'})
-kset('n', '<A-.>', ':BufferNext<CR>', {silent=true, desc='switch to next buffer'})
+kset('n', '<A-,>', ':BufferPrevious<CR>', u.merge(opts, {desc='switch to previous buffer'}))
+kset('n', '<A-.>', ':BufferNext<CR>', u.merge(opts, {desc='switch to next buffer'}))
 -- Re-order to previous/next
 kset('n', '<A-<>', ':BufferMovePrevious<CR>', opts)
 kset('n', '<A->>', ' :BufferMoveNext<CR>', opts)
@@ -66,8 +75,8 @@ kset('n', '<A-0>', ':BufferLast<CR>', opts)
 kset('n', '<A-c>', ':BufferClose<CR>', opts)
 
 -- nvim-tree
-kset('n', '<C-n>', ':NvimTreeFocus<CR>', {desc='open nvim-tree'})
-kset('n', '<leader><C-n>', ':NvimTreeClose<CR>', {desc='close nvim-tree'})
+kset('n', '<C-n>', require('nvim-tree.api').tree.focus, u.merge(opts, {desc='open nvim-tree'}))
+kset('n', '<leader><C-n>', require('nvim-tree.api').tree.close, u.merge(opts, {desc='close nvim-tree'}))
 
 -- packer commands
 ucmd('PackerInstall', function() require('plugins').install() end, {})

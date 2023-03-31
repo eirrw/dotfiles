@@ -1,19 +1,28 @@
 local M = {}
-local cmd = vim.cmd
 
-function M.create_augroup(autocmds, name)
-    cmd('augroup ' .. name)
-    cmd('autocmd!')
-    for _, autocmd in ipairs(autocmds) do
-        cmd('autocmd ' .. table.concat(autocmd, ' '))
+function M.merge(t1, t2)
+    for k, v in pairs(t2) do
+        if (type(v) == "table") and (type(t1[k] or false) == "table") then
+            M.merge(t1[k], t2[k])
+        else
+            t1[k] = v
+        end
     end
-    cmd('augroup END')
+    return t1
 end
 
-function M.map(mode, lhs, rhs, opts)
-    local options = {noremap = true}
-    if opts then options = vim.tbl_extend('force', options, opts) end
-    vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+
+function M.dump(o)
+   if type(o) == 'table' then
+      local s = '{ '
+      for k,v in pairs(o) do
+         if type(k) ~= 'number' then k = '"'..k..'"' end
+         s = s .. '['..k..'] = ' .. M.dump(v) .. ','
+      end
+      return s .. '} '
+   else
+      return tostring(o)
+   end
 end
 
 return M

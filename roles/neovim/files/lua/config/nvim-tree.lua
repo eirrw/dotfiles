@@ -1,1 +1,6 @@
-require('nvim-tree').setup({view = {relativenumber = false}})
+require('nvim-tree').setup({
+    view = {
+        relativenumber = true,
+        width = 40,
+    }
+})
