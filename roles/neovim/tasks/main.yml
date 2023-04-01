@@ -1,15 +1,25 @@
-- import_tasks: config.yml
-  tags: [ config ]
+- name: create neovim config directory
+  ansible.builtin.file:
+    state: directory
+    path: "{{ config_dir }}/nvim"
+  register: neovim_conf
 
-- name: Install on Arch
-  import_tasks: arch.yml
-  when: ansible_facts.os_family|lower == "archlinux"
-  tags: [ install, pacman ]
+- name: link neovim config files
+  ansible.builtin.file:
+    state: link
+    name: "{{ neovim_conf.path }}/{{ item }}"
+    src: "{{ files_path }}/{{ item }}"
+  loop:
+    - init.lua
+    - lua
+    - after
+    - ftplugin
 
-- name: Install Fedora/RHEL
-  import_tasks: rhel.yml
-  when: ansible_facts.os_family|lower == "redhat"
-  tags: [ install, dnf ]
+- name: install
+  import_tasks: "{{ playbook_dir }}/shared/install.yml"
+  vars:
+    packages:
+      - neovim
 
 - name: setup plugins
   command: nvim --headless -u NONE -c 'lua require("bootstrap").bootstrap()'

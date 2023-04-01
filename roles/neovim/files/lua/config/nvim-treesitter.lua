@@ -3,6 +3,7 @@ ts.setup {
     ensure_installed = {
         'bash',
         'c',
+        'fish',
         'go',
         'html',
         'javascript',
@@ -11,6 +12,7 @@ ts.setup {
         'lua',
         'make',
         'python',
+        'rasi',
         'rust',
         'toml',
         'typescript',
