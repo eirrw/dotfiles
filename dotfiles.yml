@@ -1,20 +1,20 @@
 - name: Setup local environment
   hosts: localhost
   roles:
+    - role: profile
+      tags: [ cli, term, env ]
+    - role: fish
+      tags: [ cli, term, fish ]
+    - role: neovim
+      tags: [ cli, neovim ]
     - role: i3
       tags: [ gui, wm, i3 ]
     - role: py3status
       tags: [ gui, wm, py3status ]
     - role: rofi
-      tags: [ gui, util, rofi ]
+      tags: [ gui, wm, rofi ]
     - role: kitty
-      tags: [ gui, util, term, kitty ]
-    - role: neovim
-      tags: [ cli, util, neovim ]
-    - role: vim
-      tags: [ vim, never ]
-    - role: zsh
-      tags: [ cli, term, util, zsh ]
+      tags: [ gui, term, kitty ]
     - role: gui-scripts
       tags: [ gui, scripts ]
     - role: utils
@@ -23,3 +23,5 @@
       tags: [ zsh, never ]
     - role: nvm
       tags: [ nvm, never ]
+    - role: vim
+      tags: [ vim, never ]

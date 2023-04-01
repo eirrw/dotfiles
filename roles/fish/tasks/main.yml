@@ -1,0 +1,24 @@
+- name: install
+  import_tasks: "{{ playbook_dir }}/shared/install.yml"
+  vars:
+    packages:
+      - fish
+
+- name: create fish configuration directories
+  ansible.builtin.file:
+    state: directory
+    path: "{{ config_dir }}/fish"
+  register: fish_dir
+
+- name: gather fish configuration files
+  ansible.builtin.find:
+    paths: "{{ files_path }}"
+    recurse: yes
+  register: find
+
+- name: link fish configuration files
+  ansible.builtin.file:
+    state: link
+    src:  "{{ item.path }}"
+    dest: "{{ fish_dir.path }}/{{ item.path | dirname | split('/') | last }}/{{ item.path | basename }}"
+  loop: "{{ find.files }}"

@@ -1,0 +1,15 @@
+- name: create directory
+  become: yes
+  ansible.builtin.file:
+    state: directory
+    path: "/etc/profile.d"
+  register: profiled
+
+- name: link profile files
+  become: yes
+  ansible.builtin.file:
+    state: link
+    name: "{{ profiled.path }}/{{ item }}"
+    src: "{{ files_path }}/{{ item }}"
+  loop:
+    - environment.sh
