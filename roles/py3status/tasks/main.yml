@@ -1,12 +1,23 @@
-- import_tasks: config.yml
-  tags: [ config ]
+- name: create py3status config directory
+  ansible.builtin.file:
+    state: directory
+    name: "{{ config_dir }}/py3status"
+  register: py3_config
 
-- name: Install on Arch
-  import_tasks: arch.yml
-  when: ansible_facts.os_family|lower == "archlinux"
-  tags: [ install, pacman ]
+- name: link py3status config
+  ansible.builtin.file:
+    state: link
+    name: "{{ py3_config.path }}/{{ item }}"
+    src: "{{ files_path }}/{{ item }}"
+  loop:
+    - modules
+    - callisto.conf
+    - erwilson-lap.conf
+    - europa.conf
+    - r9133vpk.conf
 
-- name: Install Fedora/RHEL
-  import_tasks: rhel.yml
-  when: ansible_facts.os_family|lower == "redhat"
-  tags: [ install, dnf ]
+- name: install
+  import_tasks: "{{ playbook_dir }}/shared/install.yml"
+  vars:
+    packages:
+      - py3status

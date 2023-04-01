@@ -1,6 +1,0 @@
-- name: Install py3status - rhel
-  become: yes
-  ansible.builtin.dnf:
-    name:
-      - py3status
-    state: latest

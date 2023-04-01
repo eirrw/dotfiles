@@ -1,5 +1,0 @@
-- name: Install py3status - arch
-  community.general.pacman:
-    name:
-      - py3status
-    state: present
