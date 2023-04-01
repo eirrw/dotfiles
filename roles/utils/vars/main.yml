@@ -1,0 +1,30 @@
+cli:
+  # packages that share a name
+  packages:
+    - lua
+    - fzf
+    - git
+    - ripgrep
+
+  # arch specific packages
+  arch_packages: []
+
+  # rhel specific packages
+  rhel_packages: []
+
+gui:
+  # packages that share a name
+  packages:
+    - maim
+    - playerctl
+    - imagemagick
+    - xdotool
+
+  # arch specific packages
+  arch_packages:
+    - xorg-xset
+
+  # rhel specific packages
+  rhel_packages:
+    - xset
+

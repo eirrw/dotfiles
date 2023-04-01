@@ -16,6 +16,10 @@
     - role: zsh
       tags: [ cli, term, util, zsh ]
     - role: gui-scripts
-      tags: [ gui, util, scripts ]
+      tags: [ gui, scripts ]
+    - role: utils
+      tags: [ utils ]
+    - role: zsh
+      tags: [ zsh, never ]
     - role: nvm
       tags: [ nvm, never ]
