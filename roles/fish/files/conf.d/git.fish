@@ -106,7 +106,6 @@ abbr glo 'git log --date=format:"%d/%m/%y" --pretty=format:"%C(yellow)%h%Creset 
 # Usage: gloc <Line-of-Code> [<file>]
 abbr gloc 'git_locate_string'
 # Regular 'git log' in style:
-abbr glog 'git log --date=format:"%A %B %d %Y at %H:%M" --pretty=format:"%C(yellow)%H%Creset%x09%C(bold green)%D%Creset%n%<|(40)%C(white)%ad%x09%an%Creset%n%n    %C(bold)%s%Creset%n%w(0,4,4)%n%-b%n"' # %w(0,4,4): no line-wrap, indent first line 4 chars, subsequent lines also 4 lines
 abbr glr 'glog --reverse --name-status'
 abbr gls 'git ls-files'
 
