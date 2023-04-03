@@ -22,3 +22,9 @@
     src:  "{{ item.path }}"
     dest: "{{ fish_dir.path }}/{{ item.path | dirname | split('/') | last }}/{{ item.path | basename }}"
   loop: "{{ find.files }}"
+
+- name: get ls_colors config
+  ansible.builtin.get_url:
+    url: https://raw.githubusercontent.com/trapd00r/LS_COLORS/master/lscolors.csh
+    dest: "{{ fish_dir.path }}/conf.d/ls_colors.fish"
+    mode: '0644'
