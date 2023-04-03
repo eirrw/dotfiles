@@ -2,26 +2,42 @@
   hosts: localhost
   roles:
     - role: profile
-      tags: [ cli, term, env ]
+      tags: [ cli, env ]
+
     - role: fish
-      tags: [ cli, term, fish ]
+      tags: [ cli, fish ]
+
+    - role: prompt
+      tags: [ cli, prompt ]
+
     - role: neovim
       tags: [ cli, neovim ]
+
     - role: i3
-      tags: [ gui, wm, i3 ]
+      tags: [ gui, i3 ]
+
     - role: py3status
-      tags: [ gui, wm, py3status ]
+      tags: [ gui, py3status ]
+
     - role: rofi
-      tags: [ gui, wm, rofi ]
+      tags: [ gui, rofi ]
+
     - role: kitty
-      tags: [ gui, term, kitty ]
+      tags: [ gui, kitty ]
+
     - role: gui-scripts
       tags: [ gui, scripts ]
+
     - role: utils
       tags: [ utils ]
+      # cli/gui are set in the role
+
+    # deprecated/optional
     - role: zsh
       tags: [ zsh, never ]
+
     - role: nvm
       tags: [ nvm, never ]
+
     - role: vim
       tags: [ vim, never ]
