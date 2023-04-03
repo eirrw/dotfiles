@@ -13,3 +13,14 @@
     src: "{{ files_path }}/{{ item }}"
   loop:
     - environment.sh
+
+- name: create bashrc
+  ansible.builtin.file:
+    state: file
+    path: "{{ ansible_env.HOME }}/.bashrc"
+
+- name: setup bashrc
+  ansible.builtin.blockinfile:
+    path: "{{ ansible_env.HOME }}/.bashrc"
+    block: |
+      exec fish
