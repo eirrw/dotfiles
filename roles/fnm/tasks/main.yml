@@ -3,6 +3,7 @@
     url: https://github.com/Schniz/fnm/releases/latest/download/fnm-{{ arch | trim }}.zip
     dest: "/tmp/fnm.zip"
     mode: '0644'
+  when: (arch)
   register: result
 
 - name: extract fnm
