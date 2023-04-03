@@ -12,7 +12,6 @@
   loop:
     - modules
     - callisto.conf
-    - erwilson-lap.conf
     - europa.conf
     - r9133vpk.conf
 
