@@ -114,20 +114,6 @@ version = 2.0
     [blocks.segments.properties]
       fetch_version = false
 
-  [[blocks.segments]]
-    background = "transparent"
-    foreground = "#9B6BDF"
-    foreground_templates = ["{{if eq \"Charging\" .State.String}}#40c4ff{{end}}", "{{if eq \"Discharging\" .State.String}}#ff5722{{end}}", "{{if eq \"Full\" .State.String}}#4caf50{{end}}"]
-    leading_diamond = " \ue0b6"
-    style = "plain"
-    template = "{{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }}{{ .Error }}"
-    trailing_diamond = "\ue0b4"
-    type = "battery"
-    [blocks.segments.properties]
-      charged_icon = " "
-      charging_icon = "\u21e1 "
-      discharging_icon = "\u21e3 "
-
 [[blocks]]
   alignment = "left"
   newline = true
