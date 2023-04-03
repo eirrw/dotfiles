@@ -7,8 +7,12 @@
 - name: create fish configuration directories
   ansible.builtin.file:
     state: directory
-    path: "{{ config_dir }}/fish"
-  register: fish_dir
+    path: "{{ config_dir }}/{{ item }}"
+  loop:
+    - fish
+    - fish/completions
+    - fish/conf.d
+    - fish/functions
 
 - name: gather fish configuration files
   ansible.builtin.find:
@@ -20,11 +24,11 @@
   ansible.builtin.file:
     state: link
     src:  "{{ item.path }}"
-    dest: "{{ fish_dir.path }}/{{ item.path | dirname | split('/') | last }}/{{ item.path | basename }}"
+    dest: "{{ config_dir }}/fish/{{ item.path | dirname | split('/') | last }}/{{ item.path | basename }}"
   loop: "{{ find.files }}"
 
 - name: get ls_colors config
   ansible.builtin.get_url:
     url: https://raw.githubusercontent.com/trapd00r/LS_COLORS/master/lscolors.csh
-    dest: "{{ fish_dir.path }}/conf.d/ls_colors.fish"
+    dest: "{{ config_dir }}/fish/conf.d/ls_colors.fish"
     mode: '0644'
