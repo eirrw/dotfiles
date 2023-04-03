@@ -1,5 +1,0 @@
-- name: Install kitty - arch
-  community.general.pacman:
-    name:
-      - kitty
-    state: present
