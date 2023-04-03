@@ -11,8 +11,10 @@
     src: "{{ result.dest }}"
     dest: "{{ ansible_env.HOME }}/.local/bin"
     mode: '0755'
+  when: (arch)
 
 - name: remove fnm archive
   ansible.builtin.file:
     state: absent
     path: "{{ result.dest }}"
+  when: (arch)
