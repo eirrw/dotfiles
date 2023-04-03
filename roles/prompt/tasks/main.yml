@@ -1,0 +1,12 @@
+- name: install oh-my-posh
+  ansible.builtin.get_url:
+    url: https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-{{ arch }}
+    dest: "{{ ansible_env.HOME }}/.local/bin/oh-my-posh"
+    mode: '0755'
+  when: (arch)
+
+- name: link config
+  ansible.builtin.file:
+    state: link
+    src:  "{{ files_path }}/oh-my-posh.toml"
+    dest: "{{ config_dir }}/oh-my-posh.toml"
