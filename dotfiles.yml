@@ -2,7 +2,7 @@
   hosts: localhost
   roles:
     - role: profile
-      tags: [ cli, env ]
+      tags: [ cli, profile ]
 
     - role: fish
       tags: [ cli, fish ]

@@ -23,4 +23,5 @@
   ansible.builtin.blockinfile:
     path: "{{ ansible_env.HOME }}/.bashrc"
     block: |
-      exec fish
+      # start fish if interactive shell
+      [[ $- == *i* ]] && exec fish
