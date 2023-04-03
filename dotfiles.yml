@@ -32,7 +32,10 @@
       tags: [ utils ]
       # cli/gui are set in the role
 
-    # deprecated/optional
+    - role: fnm
+      tags: [ fnm, never ]
+
+  # deprecated/optional
     - role: zsh
       tags: [ zsh, never ]
 
