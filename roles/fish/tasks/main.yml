@@ -32,3 +32,34 @@
     url: https://raw.githubusercontent.com/trapd00r/LS_COLORS/master/lscolors.csh
     dest: "{{ config_dir }}/fish/conf.d/ls_colors.fish"
     mode: '0644'
+
+- name: clone fzf.fish
+  ansible.builtin.git:
+    repo: https://github.com/PatrickF1/fzf.fish.git
+    dest: "{{ playbook_dir }}/.tmp/fzf.fish"
+    single_branch: yes
+    version: main
+
+- name: copy fzf.fish
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/.tmp/fzf.fish/{{ item }}"
+    dest: "{{ config_dir}}/fish/{{ item }}"
+  loop:
+    - "conf.d/"
+    - "functions/"
+    - "completions/"
+
+- name: clone z
+  ansible.builtin.git:
+    repo: https://github.com/jethrokuan/z.git
+    dest: "{{ playbook_dir }}/.tmp/z"
+    single_branch: yes
+    version: master
+
+- name: copy z
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/.tmp/z/{{ item }}"
+    dest: "{{ config_dir}}/fish/{{ item }}"
+  loop:
+    - "conf.d/"
+    - "functions/"
