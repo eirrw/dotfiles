@@ -22,6 +22,12 @@ local function init()
     use { 'justinmk/vim-sneak' }
     use { 'chaoren/vim-wordmotion' }
 
+    -- utility
+    use {
+        'johmsalas/text-case.nvim',
+         config = function() require('textcase').setup {} end
+    }
+
     use {
         'nvim-treesitter/nvim-treesitter',
         config = [[require('config.nvim-treesitter')]],

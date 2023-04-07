@@ -58,7 +58,7 @@ typeset -U path
 
 # plugins are loaded in list order
 plugins=(
-    romkatv/powerlevel10k
+#    romkatv/powerlevel10k
     skywind3000/z.lua
     eirrw/zsh-systemd
     eirrw/zsh-git
@@ -69,11 +69,11 @@ plugins=(
 plugin-load $plugins
 
 # Powerline10K options
-if [[ $(tty) =~ ^/dev/tty[0-9]+$ ]]; then
-    source "${config_dir}/p10k/p10k.tty.zsh"
-else
-    source "${config_dir}/p10k/p10k.zsh"
-fi
+#if [[ $(tty) =~ ^/dev/tty[0-9]+$ ]]; then
+#    source "${config_dir}/p10k/p10k.tty.zsh"
+#else
+#    source "${config_dir}/p10k/p10k.zsh"
+#fi
 
 # load fzf if available
 if [ $(command -v fzf) ]; then
@@ -114,3 +114,5 @@ compdef ks=ssh
 
 # syntax highlighting - must be last
 plugin-load "zsh-users/zsh-syntax-highlighting"
+
+eval $(starship init zsh)
