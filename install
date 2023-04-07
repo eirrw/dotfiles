@@ -1,12 +1,45 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-tags="${1-all}"
+tags="${1-default}"
+
+function tag_append() {
+    if [[ -z ${tags} ]]; then
+        tags=${1}
+    else
+        tags="${tags},${1}"
+    fi
+}
 
 # exit if ansible not available
 if ! [ -x "$(command -v ansible)" ]; then
     echo "ansible must be installed"
     exit 2
+fi
+
+if [[ ${tags} == 'default' ]]; then
+    if ! [[ -f config ]]; then
+        echo "create \"config\" file, or provide specific tags"
+        exit 2
+    fi
+
+    source config
+
+    tags=""
+    if [[ ${DOT_FISH} -eq 1 ]]; then tag_append fish; fi
+    if [[ ${DOT_FNM} -eq 1 ]]; then tag_append fnm; fi
+    if [[ ${DOT_GUI_SCRIPTS} -eq 1 ]]; then tag_append scripts; fi
+    if [[ ${DOT_I3} -eq 1 ]]; then tag_append i3; fi
+    if [[ ${DOT_KITTY} -eq 1 ]]; then tag_append kitty; fi
+    if [[ ${DOT_NEOVIM} -eq 1 ]]; then tag_append neovim; fi
+    if [[ ${DOT_NVM} -eq 1 ]]; then tag_append nvm; fi
+    if [[ ${DOT_PROFILE} -eq 1 ]]; then tag_append profile; fi
+    if [[ ${DOT_PROMPT} -eq 1 ]]; then tag_append profile; fi
+    if [[ ${DOT_PY3STATUS} -eq 1 ]]; then tag_append py3status; fi
+    if [[ ${DOT_ROFI} -eq 1 ]]; then tag_append rofi; fi
+    if [[ ${DOT_UTILS} -eq 1 ]]; then tag_append utils; fi
+    if [[ ${DOT_VIM} -eq 1 ]]; then tag_append vim; fi
+    if [[ ${DOT_ZSH} -eq 1 ]]; then tag_append zsh; fi
 fi
 
 # ensure expected environment
