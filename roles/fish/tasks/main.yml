@@ -34,15 +34,14 @@
     mode: '0644'
 
 - name: clone fzf.fish
-  ansible.builtin.git:
-    repo: https://github.com/PatrickF1/fzf.fish.git
-    dest: "{{ playbook_dir }}/.tmp/fzf.fish"
-    single_branch: yes
-    version: main
+  import_tasks: "{{ playbook_dir }}/shared/github.yml"
+  vars:
+    repo: PatrickF1/fzf.fish
+    branch: main
 
 - name: copy fzf.fish
   ansible.builtin.copy:
-    src: "{{ playbook_dir }}/.tmp/fzf.fish/{{ item }}"
+    src: "{{ repo_dir.path }}/{{ item }}"
     dest: "{{ config_dir}}/fish/{{ item }}"
   loop:
     - "conf.d/"
@@ -50,15 +49,14 @@
     - "completions/"
 
 - name: clone z
-  ansible.builtin.git:
-    repo: https://github.com/jethrokuan/z.git
-    dest: "{{ playbook_dir }}/.tmp/z"
-    single_branch: yes
-    version: master
+  import_tasks: "{{ playbook_dir }}/shared/github.yml"
+  vars:
+    repo: jethrokuan/z
+    branch: master
 
 - name: copy z
   ansible.builtin.copy:
-    src: "{{ playbook_dir }}/.tmp/z/{{ item }}"
+    src: "{{ repo_dir.path }}/{{ item }}"
     dest: "{{ config_dir}}/fish/{{ item }}"
   loop:
     - "conf.d/"
