@@ -11,4 +11,3 @@
     name: "{{ packages + rhel_packages | default([]) }}"
     state: latest
   when: ansible_facts.os_family|lower == "redhat"
-

@@ -1,0 +1,12 @@
+- name: create {{ repo }} dir
+  ansible.builtin.file:
+    state: directory
+    path: "{{ dot_cache_dir }}/git/{{ repo | regex_replace('\/', '__') }}"
+  register: repo_dir
+
+- name: clone {{ repo }}
+  ansible.builtin.git:
+    repo: https://github.com/{{ repo }}.git
+    dest: "{{ repo_dir.path }}"
+    single_branch: yes
+    version: "{{ branch }}"

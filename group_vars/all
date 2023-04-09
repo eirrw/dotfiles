@@ -1,3 +1,4 @@
 config_dir: "{{ ansible_env.XDG_CONFIG_HOME | default('~/.config') }}"
 cache_dir: "{{ ansible_env.XDG_CACHE_HOME | default('~/.cache') }}"
 files_path: "{{ role_path }}/files"
+dot_cache_dir: "{{ cache_dir }}/eirrw/dotfiles"
