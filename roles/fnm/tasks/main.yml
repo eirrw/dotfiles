@@ -1,7 +1,7 @@
 - name: download fnm archive
   ansible.builtin.get_url:
     url: https://github.com/Schniz/fnm/releases/latest/download/fnm-{{ arch | trim }}.zip
-    dest: "/tmp/fnm.zip"
+    dest: "{{ dot_cache_dir }}/fnm.zip"
     mode: '0644'
   when: (arch)
   register: result
@@ -11,10 +11,4 @@
     src: "{{ result.dest }}"
     dest: "{{ ansible_env.HOME }}/.local/bin"
     mode: '0755'
-  when: (arch)
-
-- name: remove fnm archive
-  ansible.builtin.file:
-    state: absent
-    path: "{{ result.dest }}"
-  when: (arch)
+  when: (arch) and result.changed
