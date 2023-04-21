@@ -96,7 +96,7 @@ version = 2.0
     template = "\ue73d{{ .Full }} "
     type = "php"
     [blocks.segments.properties]
-      fetch_version = false
+      fetch_version = true
 
 [[blocks]]
   alignment = "left"
