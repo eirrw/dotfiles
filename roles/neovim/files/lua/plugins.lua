@@ -13,9 +13,13 @@ local function init()
     use 'wbthomason/packer.nvim'
 
     -- user interface
-    use 'romgrk/barbar.nvim'
-    use { 'nvim-lualine/lualine.nvim', config = [[require('config.lualine')]] }
     use 'nvim-tree/nvim-web-devicons'
+    use {
+        'romgrk/barbar.nvim',
+        requires = 'nvim-web-devicons',
+        config = [[require('config.barbar')]]
+    }
+    use { 'nvim-lualine/lualine.nvim', config = [[require('config.lualine')]] }
     use { 'nvim-tree/nvim-tree.lua', config = [[require('config.nvim-tree')]] }
 
     -- motion

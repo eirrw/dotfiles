@@ -75,7 +75,10 @@ kset('n', '<A-0>', ':BufferLast<CR>', opts)
 kset('n', '<A-c>', ':BufferClose<CR>', opts)
 
 -- nvim-tree
-kset('n', '<C-n>', require('nvim-tree.api').tree.focus, u.merge(opts, {desc='open nvim-tree'}))
+kset('n', '<C-n>', function()
+    require('nvim-tree.api').tree.focus()
+    vim.api.nvim_exec_autocmds('BufWinEnter', {buffer = vim.fn.bufnr('#')})
+end, u.merge(opts, {desc='open nvim-tree'}))
 kset('n', '<leader><C-n>', require('nvim-tree.api').tree.close, u.merge(opts, {desc='close nvim-tree'}))
 
 -- packer commands
