@@ -4,4 +4,4 @@ venv/
 *.bak
 __pycache__
 .tmp/*
-config
+/config
