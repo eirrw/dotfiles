@@ -42,6 +42,12 @@ local function init()
     use 'EdenEast/nightfox.nvim'
     use { 'ThemerCorp/themer.lua', config = [[require('config.themer')]] }
 
+    -- dependancy management
+    use {
+        { "williamboman/mason.nvim", config = function () require("mason").setup {} end },
+        { "williamboman/mason-lspconfig.nvim", config = [[require('config.mason-lspconfig')]] }
+    }
+
     -- lsp
     use { 'neovim/nvim-lspconfig', config = [[require("config.nvim-lspconfig")]] }
 
