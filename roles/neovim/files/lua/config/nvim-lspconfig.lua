@@ -92,3 +92,7 @@ lsp.tsserver.setup {
     capabilities = capabilities,
     on_attach = on_attach,
 }
+lsp.bashls.setup {
+    capabilities = capabilities,
+    on_attach = on_attach,
+}

@@ -47,7 +47,7 @@ fi
 source roles/profile/files/environment.sh
 
 # run playbook
-ansible-playbook -K -i ./hosts ./dotfiles.yml --tags ${tags}
+ansible-playbook -K -i ./hosts ./dotfiles.yml --tags "${tags}"
 
 # alert on finish
 tput bel
