@@ -33,10 +33,11 @@ if [[ ${tags} == 'default' ]]; then
     if [[ ${DOT_KITTY} -eq 1 ]]; then tag_append kitty; fi
     if [[ ${DOT_NEOVIM} -eq 1 ]]; then tag_append neovim; fi
     if [[ ${DOT_NVM} -eq 1 ]]; then tag_append nvm; fi
+    if [[ ${DOT_OMP} -eq 1 ]]; then tag_append ohmyposh; fi
     if [[ ${DOT_PROFILE} -eq 1 ]]; then tag_append profile; fi
-    if [[ ${DOT_PROMPT} -eq 1 ]]; then tag_append profile; fi
     if [[ ${DOT_PY3STATUS} -eq 1 ]]; then tag_append py3status; fi
     if [[ ${DOT_ROFI} -eq 1 ]]; then tag_append rofi; fi
+    if [[ ${DOT_STARSHIP} -eq 1 ]]; then tag_append starship; fi
     if [[ ${DOT_UTILS} -eq 1 ]]; then tag_append utils; fi
     if [[ ${DOT_VIM} -eq 1 ]]; then tag_append vim; fi
     if [[ ${DOT_ZSH} -eq 1 ]]; then tag_append zsh; fi

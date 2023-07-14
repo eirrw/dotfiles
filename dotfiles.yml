@@ -7,8 +7,8 @@
     - role: fish
       tags: [ cli, fish ]
 
-    - role: prompt
-      tags: [ cli, prompt ]
+    - role: starship
+      tags: [ cli, starship ]
 
     - role: neovim
       tags: [ cli, neovim ]
@@ -44,3 +44,6 @@
 
     - role: vim
       tags: [ vim, never ]
+
+    - role: ohmyposh
+      tags: [ ohmyposh, never ]
