@@ -44,8 +44,16 @@ local function init()
 
     -- dependancy management
     use {
-        { "williamboman/mason.nvim", config = function () require("mason").setup {} end },
-        { "williamboman/mason-lspconfig.nvim", config = [[require('config.mason-lspconfig')]] }
+        "williamboman/mason.nvim",
+        run = ':MasonUpdate',
+        config = function ()
+            require("mason").setup {}
+        end
+    }
+    use {
+        "williamboman/mason-lspconfig.nvim",
+        requires = "mason.nvim",
+        config = [[require('config.mason-lspconfig')]],
     }
 
     -- lsp
