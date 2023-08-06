@@ -47,12 +47,12 @@ local function init()
         "williamboman/mason.nvim",
         run = ':MasonUpdate',
         config = function ()
-            require("mason").setup {}
+            require("mason").setup()
         end
     }
     use {
         "williamboman/mason-lspconfig.nvim",
-        requires = "mason.nvim",
+        after = 'mason.nvim',
         config = [[require('config.mason-lspconfig')]],
     }
 
