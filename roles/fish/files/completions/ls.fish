@@ -9,7 +9,10 @@ for f in $fish_complete_path
     and break
 end
 
-if command -q exa
+if command -q eza
+    complete -c ls -e
+    complete -c ls -w eza
+else if command -q exa
     complete -c ls -e
     complete -c ls -w exa
 end
