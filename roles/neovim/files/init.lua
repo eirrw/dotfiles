@@ -38,6 +38,14 @@ opt.wrap = false                    -- disable line wrap
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+-- treesitter folding
+opt.foldmethod = 'expr'
+opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+-- opt.foldenable = false
+opt.foldminlines = 8
+opt.foldnestmax = 5
+opt.foldcolumn = 'auto:5'
+
 -- set leader
 kset('n', '<Space>', '', {desc='unbound leader key'})
 vim.g.mapleader = ' '

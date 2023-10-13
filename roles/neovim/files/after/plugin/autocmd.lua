@@ -60,3 +60,11 @@ au({ 'CursorHold', 'CursorHoldI' }, {
         vim.diagnostic.open_float(nil, { focus = false })
     end,
 })
+
+local folding = agrp('foldingAutoGroup', {})
+au({'BufReadPost', 'FileReadPost'}, {
+    group = folding,
+    callback = function ()
+        vim.cmd.normal('zR')
+    end,
+})
