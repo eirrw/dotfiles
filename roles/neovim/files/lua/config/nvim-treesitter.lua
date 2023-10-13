@@ -11,6 +11,8 @@ ts.setup {
         'latex',
         'lua',
         'make',
+        'markdown',
+        'markdown_inline',
         'python',
         'rasi',
         'rust',
@@ -19,5 +21,9 @@ ts.setup {
         'vim',
         'yaml',
     },
+    auto_install = false,
+    sync_install = false,
+    ignore_install = {},
+    modules = {},
     highlight = {enable = true}
 }
