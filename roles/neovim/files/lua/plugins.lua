@@ -112,6 +112,15 @@ local function init()
         config = [[require("config.nvim-cmp")]]
     }
 
+    -- notes
+    use {
+        "nvim-neorg/neorg",
+        tag = "*",
+        ft = "norg",
+        after = "nvim-treesitter", -- You may want to specify Telescope here as well
+        config = [[require("config.neorg")]]
+    }
+
     -- snippets
     use { 'rafamadriz/friendly-snippets' }
 
