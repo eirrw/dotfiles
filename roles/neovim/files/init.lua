@@ -3,8 +3,6 @@ if vim.fn.has 'nvim-0.8' == 0 then
   return nil
 end
 
-local u = require('utils')
-
 local kset = vim.keymap.set
 local opt = vim.opt
 
@@ -15,7 +13,7 @@ opt.expandtab = true               -- use spaces instead of tabs
 opt.hidden = true                  -- enable background buffers
 opt.ignorecase = true              -- ignore casing in searches
 opt.list = true                    -- display hidden characters
-opt.mouse = 'nv'                   -- mouse in normal and visual modes
+opt.mouse = 'a'                    -- mouse in normal and visual modes
 opt.number = true                  -- turn on line numbers
 opt.relativenumber = true          -- numberlines relative to cursor
 opt.sidescrolloff = 8              -- lines of context
@@ -74,25 +72,3 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("plugins")
-
--- barbar
-local opts = { silent = true }
--- move to previous/next
-kset('n', '<A-,>', ':BufferPrevious<CR>', u.merge(opts, { desc = 'switch to previous buffer' }))
-kset('n', '<A-.>', ':BufferNext<CR>', u.merge(opts, { desc = 'switch to next buffer' }))
--- Re-order to previous/next
-kset('n', '<A-<>', ':BufferMovePrevious<CR>', opts)
-kset('n', '<A->>', ' :BufferMoveNext<CR>', opts)
--- Goto buffer in position...
-kset('n', '<A-1>', ':BufferGoto 1<CR>', opts)
-kset('n', '<A-2>', ':BufferGoto 2<CR>', opts)
-kset('n', '<A-3>', ':BufferGoto 3<CR>', opts)
-kset('n', '<A-4>', ':BufferGoto 4<CR>', opts)
-kset('n', '<A-5>', ':BufferGoto 5<CR>', opts)
-kset('n', '<A-6>', ':BufferGoto 6<CR>', opts)
-kset('n', '<A-7>', ':BufferGoto 7<CR>', opts)
-kset('n', '<A-8>', ':BufferGoto 8<CR>', opts)
-kset('n', '<A-9>', ':BufferGoto 9<CR>', opts)
-kset('n', '<A-0>', ':BufferLast<CR>', opts)
--- Close buffer
-kset('n', '<A-c>', ':BufferClose<CR>', opts)
