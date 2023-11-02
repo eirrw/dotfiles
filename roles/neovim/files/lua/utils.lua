@@ -25,4 +25,8 @@ function M.dump(o)
    end
 end
 
+function M.plugin(plugin)
+  return require("lazy.core.config").spec.plugins[plugin] ~= nil
+end
+
 return M

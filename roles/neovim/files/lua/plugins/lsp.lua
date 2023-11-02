@@ -2,6 +2,7 @@ return {
   {
     'neovim/nvim-lspconfig',
     dependencies = {
+      { "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
       { "folke/neodev.nvim", opts = {} },
       "mason.nvim",
       "williamboman/mason-lspconfig.nvim",
@@ -12,21 +13,7 @@ return {
         virtual_text = true
       },
       servers = {
-        pylsp = {},
-        tailwindcss = {},
-        gopls = {
-          settings = {
-            gopls = {
-              analyses = {
-                unusedparams = true,
-              },
-              staticcheck = true,
-            },
-          },
-          cmd = { "gopls", "serve" },
-        },
-        html = {},
-        texlab = {},
+        bashls = {},
         lua_ls = {
           settings = {
             Lua = {
@@ -40,10 +27,7 @@ return {
             }
           }
         },
-        rust_analyzer = {},
-        eslint = {},
-        tsserver = {},
-        bashls = {},
+        pylsp = {},
       },
       on_attach = function(client, bufnr)
         local bufopts = { noremap = true, silent = true, buffer = bufnr }
@@ -66,10 +50,17 @@ return {
       setup = {},
     },
     config = function(_, opts)
+      -- use neoconf for machine local lsp configs
+      if require("utils").plugin("neoconf.nvim") then
+        local plugin = require("lazy.core.config").spec.plugins["neoconf.nvim"]
+        require("neoconf").setup(require("lazy.core.plugin").values(plugin, "opts", false))
+      end
+
       local servers = opts.servers
+
+      -- set up lsp completion
       local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
       local capabilities = vim.tbl_deep_extend(
-
         "force",
         {},
         vim.lsp.protocol.make_client_capabilities(),
@@ -77,6 +68,7 @@ return {
         opts.capabilities or {}
       )
 
+      -- default lsp setup handler
       local function setup(server)
         local server_opts = vim.tbl_deep_extend(
           "force",
@@ -104,6 +96,7 @@ return {
         all_mlsp_servers = vim.tbl_keys(require("mason-lspconfig.mappings.server").lspconfig_to_package)
       end
 
+      -- install and setup default servers
       local ensure_installed = {} ---@type string[]
       for server, server_opts in pairs(servers) do
         if server_opts then
@@ -132,8 +125,8 @@ return {
       },
     },
     config = function(_, opts)
-      require('mason').setup(opts)
       require("mason").setup(opts)
+
       local mr = require("mason-registry")
       mr:on("package:install:success", function()
         vim.defer_fn(function()
@@ -144,6 +137,7 @@ return {
           })
         end, 100)
       end)
+
       local function ensure_installed()
         for _, tool in ipairs(opts.ensure_installed) do
           local p = mr.get_package(tool)
@@ -152,6 +146,7 @@ return {
           end
         end
       end
+
       if mr.refresh then
         mr.refresh(ensure_installed)
       else
