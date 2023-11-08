@@ -1,5 +1,0 @@
-- name: Install rofi - arch
-  community.general.pacman:
-    name:
-      - rofi
-    state: present

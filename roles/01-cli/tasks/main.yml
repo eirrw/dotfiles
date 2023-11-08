@@ -1,0 +1,11 @@
+- import_tasks: fish.yml
+  tags: [ fish ]
+
+- import_tasks: nvim.yml
+  tags: [ nvim ]
+
+- import_tasks: fnm.yml
+  tags: [ fnm ]
+
+- import_tasks: starship.yml
+  tags: [ starship ]

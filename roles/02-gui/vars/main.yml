@@ -1,0 +1,8 @@
+xorg_scripts:
+  - scrot
+  - i3exit
+  - i3locker
+
+scripts:
+  - launcher
+  - switcher

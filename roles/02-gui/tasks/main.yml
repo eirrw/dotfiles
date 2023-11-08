@@ -1,0 +1,76 @@
+- import_tasks: xorg.yml
+  tags: [ xorg ]
+
+- import_tasks: wayland.yml
+  tags: [ wayland ]
+
+- name: install and configure kitty
+  block:
+    - name: create kitty config dir
+      ansible.builtin.file:
+        state: directory
+        path: "{{ config_dir }}/kitty"
+      register: kitty_conf
+
+    - name: link kitty config
+      ansible.builtin.file:
+        state: link
+        name: "{{ kitty_conf.path }}/kitty.conf"
+        src: "{{ files_path }}/kitty/kitty.conf"
+
+    - name: install kitty
+      import_tasks: "{{ playbook_dir }}/shared/install.yml"
+      vars:
+        packages:
+          - kitty
+  tags: [ kitty ]
+
+- name: install and configure py3status
+  block:
+    - name: create py3status config directory
+      ansible.builtin.file:
+        state: directory
+        name: "{{ config_dir }}/py3status"
+      register: py3_config
+
+    - name: link py3status config
+      ansible.builtin.file:
+        state: link
+        name: "{{ py3_config.path }}/{{ item }}"
+        src: "{{ files_path }}/py3status/{{ item }}"
+      loop:
+        - modules
+        - callisto.conf
+        - europa.conf
+        - r9133vpk.conf
+
+    - name: install
+      import_tasks: "{{ playbook_dir }}/shared/install.yml"
+      vars:
+        packages:
+          - py3status
+  tags: [ py3status ]
+
+- name: install and configure rofi
+  block:
+    - name: create rofi config directory
+      ansible.builtin.file:
+        state: directory
+        name: "{{ config_dir }}/rofi"
+      register: rofi_config
+
+    - name: link rofi config
+      ansible.builtin.file:
+        state: link
+        name: "{{ rofi_config.path }}/{{ item }}"
+        src: "{{ files_path }}/rofi/{{ item }}"
+      loop:
+        - launcher.rasi
+        - switcher.rasi
+
+    - name: install
+      import_tasks: "{{ playbook_dir }}/shared/install.yml"
+      vars:
+        packages:
+          - rofi
+  tags: [ rofi ]

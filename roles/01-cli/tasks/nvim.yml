@@ -1,0 +1,26 @@
+- name: create neovim config directory
+  ansible.builtin.file:
+    state: directory
+    path: "{{ config_dir }}/nvim"
+  register: neovim_conf
+
+- name: link neovim config files
+  ansible.builtin.file:
+    state: link
+    name: "{{ neovim_conf.path }}/{{ item }}"
+    src: "{{ files_path }}/nvim/{{ item }}"
+  loop:
+    - after
+    - ftplugin
+    - init.lua
+    - lazy-lock.json
+    - lua
+
+- name: install
+  import_tasks: "{{ playbook_dir }}/shared/install.yml"
+  vars:
+    packages:
+      - neovim
+
+- name: setup plugins
+  command: nvim --headless "+Lazy! restore" +qa

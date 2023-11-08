@@ -1,0 +1,20 @@
+- name: create i3 config directory
+  ansible.builtin.file:
+    state: directory
+    name: "{{ config_dir }}/i3"
+  register: i3_config
+
+- name: link i3 config
+  ansible.builtin.file:
+    state: link
+    name: "{{ i3_config.path }}/config"
+    src: "{{ files_path }}/i3/config"
+
+- name: install base group
+  import_tasks: "{{ playbook_dir }}/shared/install.yml"
+  vars:
+    packages:
+      - "@i3 desktop"
+    exclude:
+      - azote
+      - dmenu

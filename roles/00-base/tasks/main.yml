@@ -1,0 +1,15 @@
+- name: install base utilities
+  import_tasks: "{{ playbook_dir }}/shared/install.yml"
+  vars:
+    title: "utilities"
+    packages:
+      - eza
+      - fzf
+      - git
+      - lua
+      - ripgrep
+  tags: [ utilities ]
+
+- name: setup shell environment
+  import_tasks: environment.yml
+  tags: [ environment ]

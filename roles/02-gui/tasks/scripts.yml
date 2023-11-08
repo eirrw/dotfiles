@@ -1,0 +1,12 @@
+- name: create local bin
+  ansible.builtin.file:
+    state: directory
+    path: "{{ ansible_env.HOME }}/.local/bin"
+  register: bin_dir
+
+- name: link scripts
+  ansible.builtin.file:
+    state: link
+    name: "{{ bin_dir.path }}/{{ item }}"
+    src: "{{ files_path }}/scripts/{{ item }}"
+  loop: "{{ scripts }}"

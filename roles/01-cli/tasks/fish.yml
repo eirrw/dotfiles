@@ -1,0 +1,63 @@
+- name: install
+  import_tasks: "{{ playbook_dir }}/shared/install.yml"
+  vars:
+    packages:
+      - fish
+
+- name: create fish configuration directories
+  ansible.builtin.file:
+    state: directory
+    path: "{{ config_dir }}/{{ item }}"
+  loop:
+    - fish
+    - fish/completions
+    - fish/conf.d
+    - fish/functions
+
+- name: gather fish configuration files
+  ansible.builtin.find:
+    paths: "{{ files_path }}/fish"
+    recurse: yes
+  register: find
+
+- name: link fish configuration files
+  ansible.builtin.file:
+    state: link
+    src:  "{{ item.path }}"
+    dest: "{{ config_dir }}/fish/{{ item.path | dirname | split('/') | last }}/{{ item.path | basename }}"
+  loop: "{{ find.files }}"
+
+- name: get ls_colors config
+  ansible.builtin.get_url:
+    url: https://raw.githubusercontent.com/trapd00r/LS_COLORS/master/lscolors.csh
+    dest: "{{ config_dir }}/fish/conf.d/ls_colors.fish"
+    mode: '0644'
+
+- name: clone fzf.fish
+  import_tasks: "{{ playbook_dir }}/shared/github.yml"
+  vars:
+    repo: PatrickF1/fzf.fish
+    branch: main
+
+- name: copy fzf.fish
+  ansible.builtin.copy:
+    src: "{{ repo_dir.path }}/{{ item }}"
+    dest: "{{ config_dir}}/fish/{{ item }}"
+  loop:
+    - "conf.d/"
+    - "functions/"
+    - "completions/"
+
+- name: clone z
+  import_tasks: "{{ playbook_dir }}/shared/github.yml"
+  vars:
+    repo: jethrokuan/z
+    branch: master
+
+- name: copy z
+  ansible.builtin.copy:
+    src: "{{ repo_dir.path }}/{{ item }}"
+    dest: "{{ config_dir}}/fish/{{ item }}"
+  loop:
+    - "conf.d/"
+    - "functions/"
