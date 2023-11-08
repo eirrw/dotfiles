@@ -19,11 +19,13 @@ $character
 #right_format = '$cmd_duration$time'
 
 [directory]
+truncate_to_repo = true
+repo_root_style = 'underline white'
 format = '[$read_only]($read_only_style)[$path]($style) '
 fish_style_pwd_dir_length = 1
 
 [character]
-vimcmd_symbol = '[❮](bold red)'
+vimcmd_symbol = '[:❯](bold red)'
 
 [cmd_duration]
 format = '[$duration]($style) '

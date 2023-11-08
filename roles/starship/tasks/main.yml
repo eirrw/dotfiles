@@ -14,5 +14,5 @@
 - name: link config
   ansible.builtin.file:
     state: link
-    src:  "{{ files_path }}/starship.toml"
-    dest: "{{ config_dir }}/starship.toml"
+    src:  "{{ files_path }}/starship"
+    dest: "{{ config_dir }}/starship"
