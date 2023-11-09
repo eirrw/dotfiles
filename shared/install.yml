@@ -1,14 +1,6 @@
-- name: install {{ title | default("packages") }} - arch
-  become: yes
-  community.general.pacman:
-    name: "{{ packages + arch_packages | default([]) }}"
-    state: latest
-  when: ansible_facts.os_family|lower == "archlinux"
-
-- name: install {{ title | default("packages") }} - rhel
+- name: "install {{ packages | join(', ') }}"
   become: yes
   ansible.builtin.dnf:
-    name: "{{ packages + rhel_packages | default([]) }}"
+    name: "{{ packages | default([]) }}"
     exclude: "{{ exclude | default([]) }}"
     state: latest
-  when: ansible_facts.os_family|lower == "redhat"

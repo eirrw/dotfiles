@@ -15,3 +15,6 @@ xorg_utils:
 shared_utils:
   - playerctl
   - ImageMagick
+
+use_xorg: "{{ ansible_env.DOT_XORG is defined and ansible_env.DOT_XORG | bool }}"
+use_wayland: "{{ ansible_env.DOT_WAYLAND is defined and ansible_env.DOT_WAYLAND | bool }}"

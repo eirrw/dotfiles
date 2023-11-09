@@ -4,6 +4,7 @@
     - name: OS check
       ansible.builtin.fail: msg="OS '{{ ansible_facts.os_family }}' is not supported"
       when: ansible_facts.os_family|lower != "redhat"
+      tags: [ always ]
   roles:
     - role: 00-base
     - role: 01-cli

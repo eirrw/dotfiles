@@ -1,3 +1,8 @@
+- name: alert to skipped DE
+  ansible.builtin.debug:
+    msg: "DE is not being setup, one of DOT_XORG or DOT_WAYLAND must be true"
+  when: not use_xorg and not use_wayland
+
 - name: configure Xorg environment
   block:
     - import_tasks: i3.yml
@@ -13,12 +18,12 @@
         packages: "{{ shared_utils + xorg_utils }}"
       tags: [ utils ]
   tags: [ xorg ]
-  when: ansible_facts.ansible_env.DOT_XORG is defined and ansible_facts.ansible_env.DOT_WAYLAND is undefined
+  when: use_xorg
 
 - name: configure Wayland environment
   block: []
   tags: [ wayland ]
-  when: ansible_facts.ansible_env.DOT_XORG is undefined and ansible_facts.ansible_env.DOT_WAYLAND is defined
+  when: use_wayland
 
 - name: install and configure kitty
   block:
@@ -88,5 +93,6 @@
       import_tasks: "{{ playbook_dir }}/shared/install.yml"
       vars:
         packages:
-          - rofi
+          - "{{ 'rofi-wayland' if use_wayland else 'rofi' }}"
   tags: [ rofi ]
+  when: use_xorg or use_wayland
