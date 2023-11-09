@@ -13,6 +13,7 @@
 - name: install base group
   import_tasks: "{{ playbook_dir }}/shared/install.yml"
   vars:
+    title: i3
     packages:
       - "@i3 desktop"
     exclude:

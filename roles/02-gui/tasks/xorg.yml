@@ -1,6 +1,0 @@
-- import_tasks: i3.yml
-  tags: [ i3 ]
-
-- import_tasks: scripts.yml
-  vars:
-    scripts: "{{ scripts + xorg_scripts }}"

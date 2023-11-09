@@ -1,8 +1,24 @@
-- import_tasks: xorg.yml
-  tags: [ xorg ]
+- name: configure Xorg environment
+  block:
+    - import_tasks: i3.yml
+      tags: [ i3 ]
 
-- import_tasks: wayland.yml
+    - import_tasks: scripts.yml
+      vars:
+        scripts: "{{ shared_scripts + xorg_scripts }}"
+      tags: [ scripts ]
+
+    - import_tasks: "{{ playbook_dir }}/shared/install.yml"
+      vars:
+        packages: "{{ shared_utils + xorg_utils }}"
+      tags: [ utils ]
+  tags: [ xorg ]
+  when: ansible_facts.ansible_env.DOT_XORG is defined and ansible_facts.ansible_env.DOT_WAYLAND is undefined
+
+- name: configure Wayland environment
+  block: []
   tags: [ wayland ]
+  when: ansible_facts.ansible_env.DOT_XORG is undefined and ansible_facts.ansible_env.DOT_WAYLAND is defined
 
 - name: install and configure kitty
   block:

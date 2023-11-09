@@ -3,6 +3,15 @@ xorg_scripts:
   - i3exit
   - i3locker
 
-scripts:
+shared_scripts:
   - launcher
   - switcher
+
+xorg_utils:
+  - maim
+  - xdotool
+  - xset
+
+shared_utils:
+  - playerctl
+  - ImageMagick

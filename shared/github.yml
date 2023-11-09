@@ -9,4 +9,19 @@
     repo: https://github.com/{{ repo }}.git
     dest: "{{ repo_dir.path }}"
     single_branch: yes
-    version: "{{ branch }}"
+    version: "{{ branch | default('HEAD') }}"
+
+- name: get latest tag for {{ repo }}
+  block:
+    - ansible.builtin.shell:
+        cmd: "git describe --tags"
+        chdir: "{{ repo_dir.path }}"
+      register: git_tag
+      check_mode: false
+
+    - ansible.builtin.git:
+        repo: https://github.com/{{ repo }}.git
+        dest: "{{ repo_dir.path }}"
+        single_branch: yes
+        version: "{{ git_tag.stdout }}"
+  when: latest is defined and latest

@@ -37,7 +37,7 @@
   import_tasks: "{{ playbook_dir }}/shared/github.yml"
   vars:
     repo: PatrickF1/fzf.fish
-    branch: main
+    latest: True
 
 - name: copy fzf.fish
   ansible.builtin.copy:

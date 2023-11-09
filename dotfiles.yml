@@ -1,49 +1,10 @@
 - name: Setup local environment
   hosts: localhost
+  pre_tasks:
+    - name: OS check
+      ansible.builtin.fail: msg="OS '{{ ansible_facts.os_family }}' is not supported"
+      when: ansible_facts.os_family|lower != "redhat"
   roles:
-    - role: profile
-      tags: [ cli, profile ]
-
-    - role: fish
-      tags: [ cli, fish ]
-
-    - role: starship
-      tags: [ cli, starship ]
-
-    - role: neovim
-      tags: [ cli, neovim ]
-
-    - role: i3
-      tags: [ gui, i3 ]
-
-    - role: py3status
-      tags: [ gui, py3status ]
-
-    - role: rofi
-      tags: [ gui, rofi ]
-
-    - role: kitty
-      tags: [ gui, kitty ]
-
-    - role: gui-scripts
-      tags: [ gui, scripts ]
-
-    - role: utils
-      tags: [ utils ]
-      # cli/gui are set in the role
-
-    - role: fnm
-      tags: [ fnm, never ]
-
-  # deprecated/optional
-    - role: zsh
-      tags: [ zsh, never ]
-
-    - role: nvm
-      tags: [ nvm, never ]
-
-    - role: vim
-      tags: [ vim, never ]
-
-    - role: ohmyposh
-      tags: [ ohmyposh, never ]
+    - role: 00-base
+    - role: 01-cli
+    - role: 02-gui
