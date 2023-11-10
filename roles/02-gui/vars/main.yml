@@ -1,6 +1,5 @@
 xorg_scripts:
   - scrot
-  - i3exit
   - i3locker
 
 wayland_scripts:
@@ -10,6 +9,7 @@ wayland_scripts:
 shared_scripts:
   - launcher
   - switcher
+  - wmexit
 
 xorg_utils:
   - maim

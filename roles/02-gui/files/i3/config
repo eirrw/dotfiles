@@ -24,10 +24,10 @@ bindsym $mod+Escape exec --no-startup-id loginctl lock-session
 set $mode_system System (l) lock, (e) logout, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
     # set up power options
-    bindsym l exec --no-startup-id i3exit lock, mode "default"
-    bindsym e exec --no-startup-id i3exit logout, mode "default"
-    bindsym r exec --no-startup-id i3exit reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
+    bindsym l exec --no-startup-id wmexit lock, mode "default"
+    bindsym e exec --no-startup-id wmexit logout, mode "default"
+    bindsym r exec --no-startup-id wmexit reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id wmexit shutdown, mode "default"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
