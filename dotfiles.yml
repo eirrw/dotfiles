@@ -7,5 +7,8 @@
       tags: [ always ]
   roles:
     - role: 00-base
+      tags: [ base ]
     - role: 01-cli
+      tags: [ cli ]
     - role: 02-gui
+      tags: [ gui ]

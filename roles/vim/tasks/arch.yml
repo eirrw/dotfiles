@@ -1,5 +1,0 @@
-- name: Install - arch
-  community.general.pacman:
-    name:
-      - vim
-    state: present

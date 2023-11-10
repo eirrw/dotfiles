@@ -1,11 +1,87 @@
 - import_tasks: fish.yml
   tags: [ fish ]
 
-- import_tasks: nvim.yml
+- name: install and configure vim
+  block:
+    - name: link vimrc
+      ansible.builtin.file:
+        state: link
+        path: "{{ ansible_env.HOME }}/.vimrc"
+        src: "{{ files_path }}/vimrc"
+
+    - name: install vim
+      import_tasks: "{{ playbook_dir }}/shared/install.yml"
+      vars:
+        packages:
+          vim
+  tags: [ vim, never ]
+
+- name: install and configure nvim
+  block:
+    - name: create neovim config directory
+      ansible.builtin.file:
+        state: directory
+        path: "{{ config_dir }}/nvim"
+      register: neovim_conf
+
+    - name: link neovim config files
+      ansible.builtin.file:
+        state: link
+        name: "{{ neovim_conf.path }}/{{ item }}"
+        src: "{{ files_path }}/nvim/{{ item }}"
+      loop:
+        - after
+        - ftplugin
+        - init.lua
+        - lazy-lock.json
+        - lua
+
+    - name: install
+      import_tasks: "{{ playbook_dir }}/shared/install.yml"
+      vars:
+        packages:
+          - neovim
+
+    - name: setup plugins
+      command: nvim --headless "+Lazy! restore" +qa
   tags: [ nvim ]
 
-- import_tasks: fnm.yml
+- name: install and setup fnm
+  block:
+    - name: download fnm archive
+      ansible.builtin.get_url:
+        url: https://github.com/Schniz/fnm/releases/latest/download/fnm-{{ fnm_arch | trim }}.zip
+        dest: "{{ dot_cache_dir }}/fnm.zip"
+        mode: '0644'
+      when: (fnm_arch)
+      register: result
+
+    - name: extract fnm
+      ansible.builtin.unarchive:
+        src: "{{ result.dest }}"
+        dest: "{{ ansible_env.HOME }}/.local/bin"
+        mode: '0755'
+      when: (fnm_arch) and result.changed
   tags: [ fnm ]
 
-- import_tasks: starship.yml
+- name: install and configure starship
+  block:
+    - name: enable copr repo
+      community.general.copr:
+        name: atim/starship
+        state: enabled
+      when: ansible_facts.os_family|lower == "redhat"
+      become: yes
+
+    - name: install
+      import_tasks: "{{ playbook_dir }}/shared/install.yml"
+      vars:
+        packages:
+          - starship
+
+    - name: link config
+      ansible.builtin.file:
+        state: link
+        src:  "{{ files_path }}/starship"
+        dest: "{{ config_dir }}/starship"
   tags: [ starship ]
