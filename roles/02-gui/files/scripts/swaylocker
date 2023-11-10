@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+set -x
+
+# Lock the screen with `swaylock` using the blured current contents of the screen
+# requires:
+#   sway
+#   swaylock
+#   ImageMagick/convert
+#   grim
+#   jq
+
+# consts
+IMG_PATH=/tmp/lock
+IMG_EXT=".png"
+
+# set up storage arrays
+IMAGES=()
+ARGS=()
+
+# for each output
+while read -r display; do
+    # set image name and store
+    image="${IMG_PATH}${display}${IMG_EXT}"
+    IMAGES+=("${image}")
+    ARGS+=("-i" "${display}:${image}")
+
+    # capture and process image
+    grim -o "$display" "$image"
+    convert "$image" -scale 10% -scale 1000% "$image"
+done < <(swaymsg -t get_outputs | jq -r '.[].name')
+
+# lock with processed images, default colour if failure
+swaylock -ef "${ARGS[@]}" -c A35F77

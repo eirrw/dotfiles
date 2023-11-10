@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+
+set -eEuox pipefail
+
+usage() {
+    echo "scrot: takes screenshots (now on wayland!)"
+    echo ""
+    echo "Screenshots are placed in \${XDG_PICTURES_DIR}/screenshots, named as a datetime stamp"
+    echo ""
+    echo "One of the following options is required"
+    echo "  screen"
+    echo "    takes a screenshot of the entire display"
+    echo ""
+    echo "  select"
+    echo "    takes a screenshot of a drawn selection"
+    echo ""
+    echo "  window"
+    echo "    takes a screenshot of the currently active window"
+}
+
+# set up vars
+FILE_NAME=$(date +%Y%m%d%H%M%S).png
+SCREENSHOTS_DIR=${XDG_PICTURES_DIR:-${HOME}/Pictures}/screenshots
+NOTIFY_TIME=3000
+
+# create directory if needed
+if [[ ! -e ${SCREENSHOTS_DIR} ]]; then
+    mkdir -p "${SCREENSHOTS_DIR}"
+fi
+
+# notify and cleanup if scrot fails
+function handleFailure()
+{
+    rm -f "${SCREENSHOTS_DIR}/${FILE_NAME}"
+    notify-send -t ${NOTIFY_TIME} "scrot" "capture failed"
+}
+trap handleFailure ERR
+
+# handle options
+if [[ 'screen' == "${1-}" ]]; then
+    # screen
+    notify_message="capturing screen"
+    opt="-o$(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name')"
+elif [[ 'select' == "${1-}" ]]; then
+    # select
+    notify_message="capturing selection"
+    opt="-g $(slurp)"
+elif [[ 'window' == "${1-}" ]]; then
+    # window
+    notify_message="capturing window"
+    opt="-g $(swaymsg -t get_tree | jq -j '.. | select(.type?) | select(.focused).rect | "\(.x),\(.y) \(.width)x\(.height)"')"
+else
+    usage
+    exit 0
+fi
+
+# take screenshot
+#scrot=$(maim "${maim_opt}" | base64)
+scrot=$(grim "${opt-}" - | base64)
+
+# save to file and clipboard
+if [[ -n "${scrot}" ]]; then
+    echo -n "$scrot" | base64 -d | tee "${SCREENSHOTS_DIR}/${FILE_NAME}" | wl-copy
+fi
+
+# notify success
+notify-send -t ${NOTIFY_TIME} "scrot" "${notify_message}"

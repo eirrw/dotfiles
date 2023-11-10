@@ -3,27 +3,91 @@
     msg: "DE is not being setup, one of DOT_XORG or DOT_WAYLAND must be true"
   when: not use_xorg and not use_wayland
 
-- name: configure Xorg environment
+- name: DE setup
   block:
-    - import_tasks: i3.yml
-      tags: [ i3 ]
+    - name: configure Xorg environment
+      block:
+        - import_tasks: i3.yml
+          tags: [ i3 ]
 
-    - import_tasks: scripts.yml
-      vars:
-        scripts: "{{ shared_scripts + xorg_scripts }}"
-      tags: [ scripts ]
+        - import_tasks: scripts.yml
+          vars:
+            scripts: "{{ shared_scripts + xorg_scripts }}"
+          tags: [ scripts ]
 
-    - import_tasks: "{{ playbook_dir }}/shared/install.yml"
-      vars:
-        packages: "{{ shared_utils + xorg_utils }}"
-      tags: [ utils ]
-  tags: [ xorg ]
-  when: use_xorg
+        - import_tasks: "{{ playbook_dir }}/shared/install.yml"
+          vars:
+            packages: "{{ shared_utils + xorg_utils }}"
+          tags: [ utils ]
+      tags: [ xorg ]
+      when: use_xorg
 
-- name: configure Wayland environment
-  block: []
-  tags: [ wayland ]
-  when: use_wayland
+    - name: configure Wayland environment
+      block:
+        - import_tasks: sway.yml
+          tags: [ sway ]
+
+        - import_tasks: scripts.yml
+          vars:
+            scripts: "{{ shared_scripts + wayland_scripts }}"
+          tags: [ scripts ]
+
+        - import_tasks: "{{ playbook_dir }}/shared/install.yml"
+          vars:
+            packages: "{{ shared_utils + wayland_utils }}"
+          tags: [ utils ]
+      tags: [ wayland ]
+      when: use_wayland
+
+    - name: install and configure py3status
+      block:
+        - name: create py3status config directory
+          ansible.builtin.file:
+            state: directory
+            name: "{{ config_dir }}/py3status"
+          register: py3_config
+
+        - name: link py3status config
+          ansible.builtin.file:
+            state: link
+            name: "{{ py3_config.path }}/{{ item }}"
+            src: "{{ files_path }}/py3status/{{ item }}"
+          loop:
+            - modules
+            - "{{ ansible_hostname }}.conf"
+
+        - name: install
+          import_tasks: "{{ playbook_dir }}/shared/install.yml"
+          vars:
+            packages:
+              - py3status
+      tags: [ py3status ]
+
+    - name: install and configure rofi
+      block:
+        - name: create rofi config directory
+          ansible.builtin.file:
+            state: directory
+            name: "{{ config_dir }}/rofi"
+          register: rofi_config
+
+        - name: link rofi config
+          ansible.builtin.file:
+            state: link
+            name: "{{ rofi_config.path }}/{{ item }}"
+            src: "{{ files_path }}/rofi/{{ item }}"
+          loop:
+            - launcher.rasi
+            - switcher.rasi
+
+        - name: install
+          import_tasks: "{{ playbook_dir }}/shared/install.yml"
+          vars:
+            packages:
+              - "{{ 'rofi-wayland' if use_wayland else 'rofi' }}"
+      tags: [ rofi ]
+  when: use_xorg or use_wayland
+  tags: [ de ]
 
 - name: install and configure kitty
   block:
@@ -45,54 +109,3 @@
         packages:
           - kitty
   tags: [ kitty ]
-
-- name: install and configure py3status
-  block:
-    - name: create py3status config directory
-      ansible.builtin.file:
-        state: directory
-        name: "{{ config_dir }}/py3status"
-      register: py3_config
-
-    - name: link py3status config
-      ansible.builtin.file:
-        state: link
-        name: "{{ py3_config.path }}/{{ item }}"
-        src: "{{ files_path }}/py3status/{{ item }}"
-      loop:
-        - modules
-        - callisto.conf
-        - europa.conf
-        - r9133vpk.conf
-
-    - name: install
-      import_tasks: "{{ playbook_dir }}/shared/install.yml"
-      vars:
-        packages:
-          - py3status
-  tags: [ py3status ]
-
-- name: install and configure rofi
-  block:
-    - name: create rofi config directory
-      ansible.builtin.file:
-        state: directory
-        name: "{{ config_dir }}/rofi"
-      register: rofi_config
-
-    - name: link rofi config
-      ansible.builtin.file:
-        state: link
-        name: "{{ rofi_config.path }}/{{ item }}"
-        src: "{{ files_path }}/rofi/{{ item }}"
-      loop:
-        - launcher.rasi
-        - switcher.rasi
-
-    - name: install
-      import_tasks: "{{ playbook_dir }}/shared/install.yml"
-      vars:
-        packages:
-          - "{{ 'rofi-wayland' if use_wayland else 'rofi' }}"
-  tags: [ rofi ]
-  when: use_xorg or use_wayland

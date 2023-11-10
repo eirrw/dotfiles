@@ -3,6 +3,10 @@ xorg_scripts:
   - i3exit
   - i3locker
 
+wayland_scripts:
+  - scrot-wl
+  - swaylocker
+
 shared_scripts:
   - launcher
   - switcher
@@ -11,6 +15,8 @@ xorg_utils:
   - maim
   - xdotool
   - xset
+
+wayland_utils: []
 
 shared_utils:
   - playerctl
