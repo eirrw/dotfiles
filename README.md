@@ -1,7 +1,6 @@
 # dotfiles
-Contains a selection of configuration files used across my systems.
-
-
+Setup scripts and configuration files used across my systems. Designed for use on modern versions (37+) of Fedora Linux,
+though the config files themselves should be fairly cross-compatible.
 
 ## Installation
 The dotfiles are managed by an Ansible playbook. Use `./install` to install. The script will soucre the included env
@@ -27,7 +26,7 @@ Featureful [Neovim] configuration using [lazy.nvim].
 Installation of the [fnm] version manager for node.
 
 ### i3 / swaywm
-Sets up a tiling window manager, allowing either Xorg ([i3]) or Wayland ([sway]). Uses [py3status] for a status line and
+Sets up a tiling window manager, either either [i3]  (Xorg) or [Sway]  (Wayland). Uses [py3status] for a status line and
 [rofi] as an app launcher and switcher.
 
 ### kitty
