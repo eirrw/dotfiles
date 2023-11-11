@@ -79,21 +79,12 @@ return {
     },
   },
   {
-    'ThemerCorp/themer.lua',
-    opts = {
-      colorscheme = "gruvbox-material-dark-soft",
-      styles = {
-        comment         = { style = 'italic' },
-        ["function"]    = { style = 'italic' },
-        functionbuiltin = { style = 'italic' },
-        variable        = { style = 'italic' },
-        variableBuiltIn = { style = 'italic' },
-        parameter       = { style = 'italic' },
-      },
-      plugins = {
-        telescope = false,
-      }
-    }
+    'ellisonleao/gruvbox.nvim',
+    config = function(_, opts)
+      require('gruvbox').setup(opts)
+
+      vim.cmd('colorscheme gruvbox')
+    end
   },
   {
     'nvim-lualine/lualine.nvim',
