@@ -3,7 +3,7 @@ return {
   { 'jakewvincent/mkdnflow.nvim', ft = 'md' },
   {
     'nvim-neorg/neorg',
-    version = "*",
+    version = "6.*",
     build = ":Neorg sync-parsers",
     cmd = "Neorg",
     ft = "norg",
@@ -27,7 +27,7 @@ return {
     },
   },
 
-  'mboughaba/i3config.vim',
+--  'mboughaba/i3config.vim',
   'rpdelaney/vim-sourcecfg',
   'fladson/vim-kitty',
 }
