@@ -54,7 +54,7 @@ bindsym $mod+Control+Print exec --no-startup-id scrot window
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec kitty -1
+bindsym $mod+Return exec kitty -1 --instance-group=i3
 
 # kill focused window
 bindsym $mod+Shift+q kill
