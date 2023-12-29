@@ -10,37 +10,6 @@
         - import_tasks: i3.yml
           tags: [ i3 ]
 
-        - import_tasks: scripts.yml
-          vars:
-            scripts: "{{ shared_scripts + xorg_scripts }}"
-          tags: [ scripts ]
-
-        - import_tasks: "{{ playbook_dir }}/shared/install.yml"
-          vars:
-            packages: "{{ shared_utils + xorg_utils }}"
-          tags: [ utils ]
-      tags: [ xorg ]
-      when: use_xorg
-
-    - name: configure Wayland environment
-      block:
-        - import_tasks: sway.yml
-          tags: [ sway ]
-
-        - import_tasks: scripts.yml
-          vars:
-            scripts: "{{ shared_scripts + wayland_scripts }}"
-          tags: [ scripts ]
-
-        - import_tasks: "{{ playbook_dir }}/shared/install.yml"
-          vars:
-            packages: "{{ shared_utils + wayland_utils }}"
-          tags: [ utils ]
-      tags: [ wayland ]
-      when: use_wayland
-
-    - name: install and configure py3status
-      block:
         - name: create py3status config directory
           ansible.builtin.file:
             state: directory
@@ -56,12 +25,46 @@
             - modules
             - "{{ ansible_hostname }}.conf"
 
-        - name: install
-          import_tasks: "{{ playbook_dir }}/shared/install.yml"
+        - import_tasks: "{{ playbook_dir }}/shared/install.yml"
           vars:
-            packages:
-              - py3status
-      tags: [ py3status ]
+            packages: "{{ shared_utils + xorg_utils }}"
+          tags: [ utils ]
+
+        - import_tasks: scripts.yml
+          vars:
+            scripts: "{{ shared_scripts + xorg_scripts }}"
+          tags: [ scripts ]
+      tags: [ xorg ]
+      when: use_xorg
+
+    - name: configure Wayland environment
+      block:
+        - import_tasks: sway.yml
+          tags: [ sway ]
+
+        - name: create waybar config directory
+          ansible.builtin.file:
+            state: directory
+            name: "{{ config_dir }}/waybar"
+          register: wb_config
+
+        - name: link waybar config
+          ansible.builtin.file:
+            state: link
+            name: "{{ wb_config.path }}/config"
+            src: "{{ files_path }}/waybar/{{ ansible_hostname }}"
+
+        - import_tasks: scripts.yml
+          vars:
+            scripts: "{{ shared_scripts + wayland_scripts }}"
+          tags: [ scripts ]
+
+        - import_tasks: "{{ playbook_dir }}/shared/install.yml"
+          vars:
+            packages: "{{ shared_utils + wayland_utils }}"
+          tags: [ utils ]
+      tags: [ wayland ]
+      when: use_wayland
 
     - name: install and configure rofi
       block:
@@ -83,6 +86,7 @@
         - name: install
           import_tasks: "{{ playbook_dir }}/shared/install.yml"
           vars:
+            erase: True
             packages:
               - "{{ 'rofi-wayland' if use_wayland else 'rofi' }}"
       tags: [ rofi ]

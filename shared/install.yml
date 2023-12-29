@@ -3,4 +3,5 @@
   ansible.builtin.dnf:
     name: "{{ packages | default([]) }}"
     exclude: "{{ exclude | default([]) }}"
-    state: latest
+    allowerasing: "{{ erase | default(True) }}"
+    state: "{{ state | default('latest') }}"

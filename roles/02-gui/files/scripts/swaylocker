@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
-set -x
+if [[ $- == *i* ]]
+then
+    # print script if interactive for debugging
+    set -x
+fi
 
 # Lock the screen with `swaylock` using the blured current contents of the screen
 # requires:

@@ -1,0 +1,34 @@
+#! /usr/bin/env bash
+if [[ $- == *i* ]]
+then
+    # print script if interactive for debugging
+    set -x
+fi
+
+UNIT=idlehandler
+TIMER=15m
+
+# end the timer
+if [[ '-d' == "${1-}" ]]; then
+    echo "removing suspend check timer"
+    systemctl --user stop "${UNIT}.timer"
+    exit 0
+fi
+
+# if unplugged, suspend and prepare to hibernate (see logind.conf and sleep.conf)
+if ! systemd-ac-power; then
+    echo "preparing system for hibernation"
+    systemctl suspend-then-hibernate
+    exit 0
+fi
+
+# otherwise check in another 15 minutes
+echo "creating timer for suspend check"
+systemd-run --user --unit="$UNIT" --on-active="$TIMER" "$(realpath -s "$0")"
+
+### Example usage
+#exec swayidle -w \
+#    timeout 900 'swayidle-hibernate' \
+#        resume 'swayidle-hibernate -d' \
+#    before-sleep 'swaylocker' \
+#    lock 'swaylocker' \

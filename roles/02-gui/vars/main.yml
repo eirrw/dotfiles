@@ -1,9 +1,10 @@
 xorg_scripts:
-  - scrot
   - i3locker
+  - scrot
 
 wayland_scripts:
   - scrot-wl
+  - swayidle-hibernate
   - swaylocker
 
 shared_scripts:
@@ -13,14 +14,18 @@ shared_scripts:
 
 xorg_utils:
   - maim
+  - py3status
+  - redshift
   - xdotool
   - xset
 
-wayland_utils: []
+wayland_utils:
+  - gammastep
+  - waybar
 
 shared_utils:
-  - playerctl
   - ImageMagick
+  - playerctl
 
 use_xorg: "{{ ansible_env.DOT_XORG is defined and ansible_env.DOT_XORG | bool }}"
 use_wayland: "{{ ansible_env.DOT_WAYLAND is defined and ansible_env.DOT_WAYLAND | bool }}"

@@ -12,21 +12,6 @@ set $right  l
 # set font
 font pango:Hack Nerd Font Mono 8
 
-# idle settings
-#   10sec - set inhibit_idle on all windows marked 'noidle'
-#   30sec - check if swaylock is running, turn off displays if so
-#   300sec - lock screen
-#   600sec - turn off displays
-exec swayidle -w \
-    timeout 10 'swaymsg -q "[con_mark=noidle] inhibit_idle open"' \
-    timeout 30 'if pgrep -x swaylock; then swaymsg "output * power off"; fi' \
-        resume 'swaymsg "output * power on"' \
-    timeout 300 'swaylocker' \
-    timeout 600 'swaymsg "output * power off"' \
-        resume 'swaymsg "output * power on"' \
-    before-sleep 'swaylocker' \
-    lock 'swaylocker'
-
 # lock the session
 bindsym $mod+Escape exec --no-startup-id loginctl lock-session
 
@@ -67,7 +52,7 @@ bindsym $mod+Control+Print exec --no-startup-id scrot-wl window
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec kitty -1
+bindsym $mod+Return exec kitty -1 --instance-group=sway
 
 # kill focused window
 bindsym $mod+Shift+q kill
