@@ -5,7 +5,8 @@ though the config files themselves should be fairly cross-compatible.
 ## Installation
 The dotfiles are managed by an Ansible playbook. Use `./install` to install. The script will soucre the included env
 file so that the installation evironment is set up as expected, then execute the playbook. A comma-separated list of
-Ansible tags can be passed to the script to limit or otherwise change what is installed.
+Ansible tags can be passed to the script to limit or otherwise change what is installed. Use the environment variables
+`DOT_XORG` or `DOT_WAYLAND` to specify the desktop environment to install.
 
 ### Requirements
 - Fedora Linux
@@ -26,8 +27,8 @@ Featureful [Neovim] configuration using [lazy.nvim].
 Installation of the [fnm] version manager for node.
 
 ### i3 / swaywm
-Sets up a tiling window manager, either either [i3]  (Xorg) or [Sway]  (Wayland). Uses [py3status] for a status line and
-[rofi] as an app launcher and switcher.
+Sets up a tiling window manager, either either [i3]  (Xorg) or [Sway]  (Wayland). Uses one of [py3status] or [Waybar]
+for a status line and [rofi] as an app launcher and switcher, along with a number of custom supporting scripts.
 
 ### kitty
 Configuration for the [Kitty] terminal.
@@ -39,6 +40,7 @@ Configuration for the [Kitty] terminal.
 [sway]: https://swaywm.org/ "Sway"
 [rofi]: https://github.com/davatorium/rofi "rofi"
 [py3status]: https://github.com/ultrabug/py3status "py3status"
+[waybar]: https://github.com/Alexays/Waybar "Waybar"
 [kitty]: https://sw.kovidgoyal.net/kitty/ "Kitty"
 [fish]: https://fishshell.com/ "fish shell"
 [neovim]: https://neovim.io/ "Neovim"
