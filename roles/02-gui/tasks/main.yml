@@ -54,6 +54,12 @@
             name: "{{ wb_config.path }}/config"
             src: "{{ files_path }}/waybar/{{ ansible_hostname }}"
 
+        - name: link waybar style
+          ansible.builtin.file:
+            state: link
+            name: "{{ wb_config.path }}/style.css"
+            src: "{{ files_path }}/waybar/{{ ansible_hostname }}.css"
+
         - import_tasks: scripts.yml
           vars:
             scripts: "{{ shared_scripts + wayland_scripts }}"
