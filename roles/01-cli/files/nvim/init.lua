@@ -36,16 +36,18 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 -- treesitter folding
-opt.foldmethod = 'expr'
-opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+--opt.foldmethod = 'expr'
+--opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 -- opt.foldenable = false
-opt.foldminlines = 8
-opt.foldnestmax = 5
-opt.foldcolumn = 'auto:5'
+--opt.foldminlines = 8
+--opt.foldnestmax = 5
+--opt.foldcolumn = 'auto:5'
 
--- set leader
+-- set leaders
 kset('n', '<Space>', '', { desc = 'unbound leader key' })
 vim.g.mapleader = ' '
+kset('n', ',', '', { desc = 'unbound localleader key' })
+vim.g.maplocalleader = ','
 
 -- copy to system clipboard
 kset('', '<leader>c', '"+y', { desc = 'copy to system clipboard' })

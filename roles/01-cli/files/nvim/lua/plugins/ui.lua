@@ -38,30 +38,21 @@ return {
       },
     },
     config = function(_, opts)
-      local kset = vim.keymap.set
       require("barbar").setup(opts)
 
-      -- barbar
-      local kopts = { silent = true }
+      local kset = vim.keymap.set
+      local kopts = { noremap = true, silent = true }
+
       -- move to previous/next
-      kset('n', '<A-,>', ':BufferPrevious<CR>', vim.tbl_extend("force", kopts, { desc = 'switch to previous buffer' }))
-      kset('n', '<A-.>', ':BufferNext<CR>', vim.tbl_extend("force", kopts, { desc = 'switch to next buffer' }))
+      kset('n', '<A-,>', ':BufferPrevious<CR>', kopts)
+      kset('n', '<A-.>', ':BufferNext<CR>', kopts)
       -- Re-order to previous/next
-      kset('n', '<A-<>', ':BufferMovePrevious<CR>', kopts)
-      kset('n', '<A->>', ' :BufferMoveNext<CR>', kopts)
-      -- Goto buffer in position...
-      kset('n', '<A-1>', ':BufferGoto 1<CR>', kopts)
-      kset('n', '<A-2>', ':BufferGoto 2<CR>', kopts)
-      kset('n', '<A-3>', ':BufferGoto 3<CR>', kopts)
-      kset('n', '<A-4>', ':BufferGoto 4<CR>', kopts)
-      kset('n', '<A-5>', ':BufferGoto 5<CR>', kopts)
-      kset('n', '<A-6>', ':BufferGoto 6<CR>', kopts)
-      kset('n', '<A-7>', ':BufferGoto 7<CR>', kopts)
-      kset('n', '<A-8>', ':BufferGoto 8<CR>', kopts)
-      kset('n', '<A-9>', ':BufferGoto 9<CR>', kopts)
-      kset('n', '<A-0>', ':BufferLast<CR>', kopts)
+      kset('n', '<A-C-,>', ':BufferMovePrevious<CR>', kopts)
+      kset('n', '<A-C-.>', ' :BufferMoveNext<CR>', kopts)
       -- Close buffer
       kset('n', '<A-c>', ':BufferClose<CR>', kopts)
+      -- Pin buffer
+      kset('n', '<A-p>', ':BufferPin<CR.', kopts)
     end
   },
   {
@@ -170,7 +161,9 @@ return {
             previewer = false,
             theme = 'dropdown',
           },
-          find_files = { theme = 'dropdown' },
+          find_files = {
+            find_command = { "rg", "--files", "--follow" },
+          },
           git_files = { theme = 'dropdown' },
           live_grep = { theme = 'dropdown' },
         }
