@@ -71,6 +71,10 @@ return {
   },
   {
     'ellisonleao/gruvbox.nvim',
+    opts = {
+      terminal_colors = true,
+      transparent_mode = true,
+    },
     config = function(_, opts)
       require('gruvbox').setup(opts)
 
@@ -80,6 +84,9 @@ return {
   {
     'nvim-lualine/lualine.nvim',
     opts = {
+      options = {
+        theme = 'gruvbox-material'
+      },
       sections = {
         lualine_x = {
           {
