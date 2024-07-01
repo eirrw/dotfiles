@@ -34,4 +34,4 @@ while read -r display; do
 done < <(swaymsg -t get_outputs | jq -r '.[].name')
 
 # lock with processed images, default colour if failure
-swaylock -def "${ARGS[@]}" -c A35F77
+swaylock -df "${ARGS[@]}" -c A35F77
