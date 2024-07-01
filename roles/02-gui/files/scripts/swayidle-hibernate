@@ -30,5 +30,5 @@ systemd-run --user --unit="$UNIT" --on-active="$TIMER" "$(realpath -s "$0")"
 #exec swayidle -w \
 #    timeout 900 'swayidle-hibernate' \
 #        resume 'swayidle-hibernate -d' \
-#    before-sleep 'swaylocker' \
+#    before-sleep 'loginctl lock-session' \
 #    lock 'swaylocker' \
