@@ -79,7 +79,8 @@
         "full-at": 85, // set in bios
         "states": {
             "warning": 30,
-            "critical": 15
+            "critical": 15,
+            "emergency": 5
         },
         "format": "{capacity}% {icon}",
         "format-full": "", // hide if full
