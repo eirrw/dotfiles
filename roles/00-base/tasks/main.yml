@@ -3,11 +3,14 @@
   vars:
     title: "utilities"
     packages:
+      - bat
       - eza
+      - fd-find
       - fzf
       - git
       - lua
       - ripgrep
+      - trash-cli
   tags: [ utilities ]
 
 - name: setup shell environment
