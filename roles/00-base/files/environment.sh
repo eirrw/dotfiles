@@ -22,7 +22,7 @@ export MANPAGER='nvim +Man!'
 
 # golang
 export GOPATH="${XDG_DATA_HOME}/go"
-export PATH="${PATH}:${GOPATH}"
+export PATH="${PATH}:${GOPATH}/bin"
 export PATH="${PATH}:/usr/local/go/bin/"
 
 # rust
