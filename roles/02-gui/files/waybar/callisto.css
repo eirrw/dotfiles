@@ -87,7 +87,8 @@ button:hover {
 #idle_inhibitor,
 #scratchpad,
 #custom-gpu,
-#custom-bt {
+#custom-bt,
+#systemd-failed-units {
     padding: 0 10px;
     color: #ffffff;
 }
@@ -223,4 +224,8 @@ label:focus {
 
 #custom-bt.speaker {
     padding-left: 5px;
+}
+
+#systemd-failed-units {
+    background-color: #AA0000;
 }
