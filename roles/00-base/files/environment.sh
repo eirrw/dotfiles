@@ -33,3 +33,6 @@ export PATH="${PATH}:${CARGO_HOME}/bin"
 # ssh
 # use with user unit (https://wiki.archlinux.org/title/SSH_keys#Start_ssh-agent_with_systemd_user)
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+
+# flatpak
+export PATH="${PATH}:/var/lib/flatpak/exports/bin"
