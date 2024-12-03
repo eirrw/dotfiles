@@ -5,7 +5,7 @@ case "$1" in
         loginctl lock-session
         ;;
     logout)
-        i3-msg exit
+        swaymsg exit
         ;;
     reboot)
         systemctl reboot
