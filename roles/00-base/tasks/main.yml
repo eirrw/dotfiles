@@ -16,3 +16,9 @@
 - name: setup shell environment
   import_tasks: environment.yml
   tags: [ environment ]
+
+- name: start ssh agent
+  ansible.builtin.systemd:
+    scope: user
+    unit: ssh-agent.service
+    enabled: true
