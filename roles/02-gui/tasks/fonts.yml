@@ -1,0 +1,21 @@
+- name: download {{ font.name }}
+  ansible.builtin.get_url:
+    url: https://github.com/ryanoasis/nerd-fonts/releases/latest/download/{{ font.src }}
+    dest: "{{ dot_cache_dir }}/{{ font.name }}.zip"
+    mode: '0644'
+  register: result
+
+- name: create {{ font.name }} directory
+  become: yes
+  ansible.builtin.file:
+    state: directory
+    path: "/usr/local/share/fonts/{{ font.name }}/"
+  register: font_dir
+
+- name: extract {{ font.name }}
+  become: yes
+  ansible.builtin.unarchive:
+    src: "{{ result.dest }}"
+    dest: "{{ font_dir.path }}"
+    mode: '0644'
+  when: result.changed

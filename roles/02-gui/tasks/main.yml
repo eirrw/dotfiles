@@ -1,6 +1,6 @@
 - name: alert to skipped DE
   ansible.builtin.debug:
-    msg: "DE is not being setup, one of DOT_XORG or DOT_WAYLAND must be true"
+    msg: "DE is not being setup, env var DOT_DESKTOP must be set"
   when: not setup_de
 
 - name: DE setup
@@ -66,6 +66,18 @@
       tags: [ rofi ]
   when: setup_de
   tags: [ de ]
+
+- name: download and install fonts
+  include_tasks: 
+    file: fonts.yml
+    apply:
+      tags: [ fonts ]
+  loop:
+    - { name: hack-nerd-font, src: Hack.zip }
+    - { name: firacode-nerd-font, src: FiraCode.zip }
+  loop_control:
+    loop_var: font
+  tags: [ fonts ]
 
 - name: install and configure kitty
   block:

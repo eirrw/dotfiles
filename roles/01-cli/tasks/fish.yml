@@ -26,6 +26,8 @@
     src:  "{{ item.path }}"
     dest: "{{ config_dir }}/fish/{{ item.path | dirname | split('/') | last }}/{{ item.path | basename }}"
   loop: "{{ find.files }}"
+  loop_control:
+    label: "{{ item.path | dirname | split('/') | last }}/{{ item.path | basename }}"
 
 - name: get ls_colors config
   ansible.builtin.get_url:
