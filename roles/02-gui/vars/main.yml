@@ -13,3 +13,8 @@ de_utils:
   - waybar
 
 setup_de: "{{ ansible_env.DOT_DESKTOP is defined and ansible_env.DOT_DESKTOP | bool }}"
+
+fonts:
+  - { name: hack-nerd-font, src: Hack.zip }
+  - { name: firacode-nerd-font, src: FiraCode.zip }
+  - { name: jetbrainsmono-nerd-font, src: JetBrainsMono.zip }

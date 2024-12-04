@@ -1,4 +1,4 @@
-- name: download {{ font.name }}
+- name: download {{ font.src }}
   ansible.builtin.get_url:
     url: https://github.com/ryanoasis/nerd-fonts/releases/latest/download/{{ font.src }}
     dest: "{{ dot_cache_dir }}/{{ font.name }}.zip"

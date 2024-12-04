@@ -72,9 +72,7 @@
     file: fonts.yml
     apply:
       tags: [ fonts ]
-  loop:
-    - { name: hack-nerd-font, src: Hack.zip }
-    - { name: firacode-nerd-font, src: FiraCode.zip }
+  loop: "{{ fonts }}"
   loop_control:
     loop_var: font
   tags: [ fonts ]
