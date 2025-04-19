@@ -2,7 +2,7 @@ return {
   {
     'neovim/nvim-lspconfig',
     dependencies = {
-      { "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
+      { "folke/neoconf.nvim", cmd = "Neoconf", opt = {} },
       { "folke/neodev.nvim", opts = {} },
       "mason.nvim",
       "williamboman/mason-lspconfig.nvim",
@@ -27,7 +27,6 @@ return {
             }
           }
         },
-        --pyright = {},
       },
       on_attach = function(client, bufnr)
         local bufopts = { noremap = true, silent = true, buffer = bufnr }
