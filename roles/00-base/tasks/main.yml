@@ -22,3 +22,4 @@
     scope: user
     unit: ssh-agent.service
     enabled: true
+  when: inventory_hostname == 'localhost'

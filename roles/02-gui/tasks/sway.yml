@@ -4,14 +4,14 @@
     name: "{{ config_dir }}/sway"
   register: sway_config
 
-- name: link sway config
-  ansible.builtin.file:
-    state: link
-    name: "{{ sway_config.path }}/{{ item }}"
+- name: setup sway config
+  import_tasks: "{{ playbook_dir }}/shared/copy.yml"
+  vars:
+    dest: "{{ sway_config.path }}/{{ item }}"
     src: "{{ files_path }}/sway/{{ item }}"
-  loop:
-    - config
-    - "{{ ansible_hostname }}"
+    loop:
+      - config
+      - "{{ ansible_hostname }}"
 
 - name: install base group
   import_tasks: "{{ playbook_dir }}/shared/install.yml"

@@ -5,11 +5,9 @@
     path: "/etc/profile.d"
   register: profiled
 
-- name: link profile files
+- name: setup profile files
+  import_tasks: "{{ playbook_dir }}/shared/copy.yml"
+  vars:
+    dest: "{{ profiled.path }}/environment.sh"
+    src: "{{ files_path }}/environment.sh"
   become: yes
-  ansible.builtin.file:
-    state: link
-    name: "{{ profiled.path }}/{{ item }}"
-    src: "{{ files_path }}/{{ item }}"
-  loop:
-    - environment.sh

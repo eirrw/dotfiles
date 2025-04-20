@@ -1,21 +1,6 @@
 - import_tasks: fish.yml
   tags: [ fish ]
 
-- name: install and configure vim
-  block:
-    - name: link vimrc
-      ansible.builtin.file:
-        state: link
-        path: "{{ ansible_env.HOME }}/.vimrc"
-        src: "{{ files_path }}/vimrc"
-
-    - name: install vim
-      import_tasks: "{{ playbook_dir }}/shared/install.yml"
-      vars:
-        packages:
-          vim
-  tags: [ vim, never ]
-
 - name: install and configure nvim
   block:
     - name: install

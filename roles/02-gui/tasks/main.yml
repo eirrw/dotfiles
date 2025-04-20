@@ -16,16 +16,16 @@
             name: "{{ config_dir }}/waybar"
           register: wb_config
 
-        - name: link waybar config
-          ansible.builtin.file:
-            state: link
-            name: "{{ wb_config.path }}/config"
+        - name: setup waybar config
+          import_tasks: "{{ playbook_dir }}/shared/copy.yml"
+          vars:
+            dest: "{{ wb_config.path }}/config"
             src: "{{ files_path }}/waybar/{{ ansible_hostname }}"
 
-        - name: link waybar style
-          ansible.builtin.file:
-            state: link
-            name: "{{ wb_config.path }}/style.css"
+        - name: setup waybar style
+          import_tasks: "{{ playbook_dir }}/shared/copy.yml"
+          vars:
+            dest: "{{ wb_config.path }}/style.css"
             src: "{{ files_path }}/waybar/{{ ansible_hostname }}.css"
 
         - import_tasks: scripts.yml
@@ -48,14 +48,14 @@
             name: "{{ config_dir }}/rofi"
           register: rofi_config
 
-        - name: link rofi config
-          ansible.builtin.file:
-            state: link
-            name: "{{ rofi_config.path }}/{{ item }}"
+        - name: setup rofi config
+          import_tasks: "{{ playbook_dir }}/shared/copy.yml"
+          vars:
+            dest: "{{ rofi_config.path }}/{{ item }}"
             src: "{{ files_path }}/rofi/{{ item }}"
-          loop:
-            - launcher.rasi
-            - switcher.rasi
+            loop:
+              - launcher.rasi
+              - switcher.rasi
 
         - name: install
           import_tasks: "{{ playbook_dir }}/shared/install.yml"
@@ -85,10 +85,10 @@
         path: "{{ config_dir }}/kitty"
       register: kitty_conf
 
-    - name: link kitty config
-      ansible.builtin.file:
-        state: link
-        name: "{{ kitty_conf.path }}/kitty.conf"
+    - name: setup kitty config
+      import_tasks: "{{ playbook_dir }}/shared/copy.yml"
+      vars:
+        dest: "{{ kitty_conf.path }}/kitty.conf"
         src: "{{ files_path }}/kitty/kitty.conf"
 
     - name: install kitty
