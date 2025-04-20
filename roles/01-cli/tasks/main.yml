@@ -18,29 +18,28 @@
 
 - name: install and configure nvim
   block:
-    - name: create neovim config directory
-      ansible.builtin.file:
-        state: directory
-        path: "{{ config_dir }}/nvim"
-      register: neovim_conf
-
-    - name: link neovim config files
-      ansible.builtin.file:
-        state: link
-        name: "{{ neovim_conf.path }}/{{ item }}"
-        src: "{{ files_path }}/nvim/{{ item }}"
-      loop:
-        - after
-        - ftplugin
-        - init.lua
-        - lazy-lock.json
-        - lua
-
     - name: install
       import_tasks: "{{ playbook_dir }}/shared/install.yml"
       vars:
         packages:
           - neovim
+
+    - name: create neovim config directory
+      ansible.builtin.file:
+        state: directory
+        path: "{{ nvim_conf_dir }}"
+
+    - name: setup neovim config files
+      import_tasks: "{{ playbook_dir }}/shared/copy.yml"
+      vars:
+        src: "{{ files_path }}/nvim/{{ item }}"
+        dest: "{{ nvim_conf_dir }}/{{ item | trim('/')}}"
+        loop:
+          - after/
+          - ftplugin/
+          - init.lua
+          - lazy-lock.json
+          - lua/
 
     - name: setup plugins
       command: nvim --headless "+Lazy! restore" +qa
@@ -79,9 +78,9 @@
         packages:
           - starship
 
-    - name: link config
-      ansible.builtin.file:
-        state: link
-        src:  "{{ files_path }}/starship"
+    - name: setup starship config
+      import_tasks: "{{ playbook_dir }}/shared/copy.yml"
+      vars:
+        src:  "{{ files_path }}/starship/"
         dest: "{{ config_dir }}/starship"
   tags: [ starship ]

@@ -1,0 +1,31 @@
+- name: "link file"
+  become: no
+  ansible.builtin.file:
+    state: link
+    src: "{{ src }}"
+    dest: "{{ dest }}"
+  when: inventory_hostname == 'localhost' and loop is not defined
+
+- name: "copy file"
+  become: no
+  ansible.builtin.copy:
+    src: "{{ src }}"
+    dest: "{{ dest }}"
+  when: inventory_hostname != 'localhost' and loop is not defined
+
+- name: "link files"
+  become: no
+  ansible.builtin.file:
+    state: link
+    src: "{{ src }}"
+    dest: "{{ dest }}"
+  loop: "{{ loop }}"
+  when: inventory_hostname == 'localhost' and loop is defined
+
+- name: "copy files"
+  become: no
+  ansible.builtin.copy:
+    src: "{{ src }}"
+    dest: "{{ dest }}"
+  loop: "{{ loop }}"
+  when: inventory_hostname != 'localhost' and loop is defined

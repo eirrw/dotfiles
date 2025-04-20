@@ -2,3 +2,6 @@ fnm_arch: >-
   {% if ansible_architecture == 'x86_64' %}linux
   {% elif ansible_architecture == 'armv7l' %}arm32
   {% else %}{% endif %}
+
+fish_conf_dir: "{{ config_dir }}/fish"
+nvim_conf_dir: "{{ config_dir }}/nvim"

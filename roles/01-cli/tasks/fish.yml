@@ -7,59 +7,64 @@
 - name: create fish configuration directories
   ansible.builtin.file:
     state: directory
-    path: "{{ config_dir }}/{{ item }}"
+    path: "{{ item }}"
   loop:
-    - fish
-    - fish/completions
-    - fish/conf.d
-    - fish/functions
+    - "{{ fish_conf_dir }}"
+    - "{{ fish_conf_dir }}/completions"
+    - "{{ fish_conf_dir }}/conf.d"
+    - "{{ fish_conf_dir }}/functions"
 
 - name: gather fish configuration files
-  ansible.builtin.find:
-    paths: "{{ files_path }}/fish"
-    recurse: yes
-  register: find
+  ansible.builtin.set_fact:
+    files: "{{ files|default([]) + [ (item | dirname | split('/') | last) + '/' + (item | basename) ] }}"
+  loop: >-
+      {{ query('ansible.builtin.fileglob', files_path + '/fish/completions/*.fish')
+      + query('ansible.builtin.fileglob', files_path + '/fish/conf.d/*.fish')
+      + query('ansible.builtin.fileglob', files_path + '/fish/functions/*.fish') }}
 
-- name: link fish configuration files
-  ansible.builtin.file:
-    state: link
-    src:  "{{ item.path }}"
-    dest: "{{ config_dir }}/fish/{{ item.path | dirname | split('/') | last }}/{{ item.path | basename }}"
-  loop: "{{ find.files }}"
-  loop_control:
-    label: "{{ item.path | dirname | split('/') | last }}/{{ item.path | basename }}"
+- name: setup fish configuration files
+  import_tasks: "{{ playbook_dir }}/shared/copy.yml"
+  vars:
+    src: "{{ files_path }}/fish/{{ item }}"
+    dest: "{{ fish_conf_dir }}/{{ item }}"
+    loop: "{{ files }}"
 
 - name: get ls_colors config
   ansible.builtin.get_url:
     url: https://raw.githubusercontent.com/trapd00r/LS_COLORS/master/lscolors.csh
-    dest: "{{ config_dir }}/fish/conf.d/ls_colors.fish"
+    dest: "{{ fish_conf_dir }}/conf.d/ls_colors.fish"
     mode: '0644'
 
-- name: clone fzf.fish
-  import_tasks: "{{ playbook_dir }}/shared/github.yml"
+- name: download fisher
+  ansible.builtin.get_url:
+    url: https://raw.githubusercontent.com/jorgebucaran/fisher/refs/tags/4.4.5/functions/fisher.fish
+    dest: "{{ dot_cache_dir }}/fisher.fish"
+  register: fisher
+
+- name: install fisher
+  ansible.builtin.command:
+    argv:
+      - fish
+      - --command
+      - source {{ fisher.dest }} && fisher install jorgebucaran/fisher
+    creates: "{{ fish_conf_dir }}/functions/fisher.fish"
+
+- name: install fish plugins
+  ansible.builtin.command:
+    argv:
+      - fish
+      - --command
+      - "fisher install {{ plugins | join(' ') }}"
   vars:
-    repo: PatrickF1/fzf.fish
-    latest: True
+    plugins:
+      - PatrickF1/fzf.fish
+      - jethrokuan/z
 
-- name: copy fzf.fish
-  ansible.builtin.copy:
-    src: "{{ repo_dir.path }}/{{ item }}"
-    dest: "{{ config_dir}}/fish/{{ item }}"
-  loop:
-    - "conf.d/"
-    - "functions/"
-    - "completions/"
-
-- name: clone z
-  import_tasks: "{{ playbook_dir }}/shared/github.yml"
-  vars:
-    repo: jethrokuan/z
-    branch: master
-
-- name: copy z
-  ansible.builtin.copy:
-    src: "{{ repo_dir.path }}/{{ item }}"
-    dest: "{{ config_dir}}/fish/{{ item }}"
-  loop:
-    - "conf.d/"
-    - "functions/"
+- name: fish as primary shell
+  ansible.builtin.blockinfile:
+    path: "$HOME/.bash_profile"
+    block: |
+      if [ -n "${SHLVL}" ] && [ "${SHLVL}" -eq 1 ] && [ -z "${TOOLBOX_PATH}" ]; then
+        exec fish
+      fi
+    insertafter: EOF

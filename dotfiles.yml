@@ -1,5 +1,5 @@
 - name: Setup local environment
-  hosts: localhost
+  hosts: all
   pre_tasks:
     - name: OS check
       ansible.builtin.fail: msg="OS '{{ ansible_facts.os_family }}' is not supported"
