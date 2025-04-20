@@ -23,3 +23,8 @@
     unit: ssh-agent.service
     enabled: true
   when: inventory_hostname == 'localhost'
+
+- name: create cache dir
+  ansible.builtin.file:
+    state: directory
+    path: "{{ dot_cache_dir }}"

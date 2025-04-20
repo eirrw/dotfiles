@@ -45,6 +45,7 @@
         src: "{{ result.dest }}"
         dest: "{{ ansible_env.HOME }}/.local/bin"
         mode: '0755'
+        remote_src: yes
       when: (fnm_arch) and result.changed
   tags: [ fnm ]
 
