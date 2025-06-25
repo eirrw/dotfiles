@@ -1,6 +1,13 @@
 - import_tasks: fish.yml
   tags: [ fish ]
 
+- name: create required directories
+  ansible.builtin.file:
+    state: directory
+    path: "{{ item }}"
+  loop:
+    - "{{ ansible_env.HOME }}/.local/bin"
+
 - name: install and configure nvim
   block:
     - name: install

@@ -12,7 +12,7 @@ de_utils:
   - playerctl
   - waybar
 
-setup_de: "{{ ansible_env.DOT_DESKTOP is defined and ansible_env.DOT_DESKTOP | bool }}"
+setup_de: false
 
 fonts:
   - { name: hack-nerd-font, src: Hack.zip }

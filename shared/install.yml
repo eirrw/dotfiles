@@ -1,6 +1,7 @@
 - name: "install {{ packages | join(', ') }}"
   become: yes
-  ansible.builtin.dnf:
+  ansible.builtin.dnf5:
+    auto_install_module_deps: true
     name: "{{ packages | default([]) }}"
     exclude: "{{ exclude | default([]) }}"
     allowerasing: "{{ erase | default(True) }}"

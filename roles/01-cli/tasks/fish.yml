@@ -64,7 +64,7 @@
   ansible.builtin.blockinfile:
     path: "$HOME/.bash_profile"
     block: |
-      if [ -n "${SHLVL}" ] && [ "${SHLVL}" -eq 1 ] && [ -z "${TOOLBOX_PATH}" ]; then
+      if [[ $- == *i* ]] && [ -n "${SHLVL}" ] && [ "${SHLVL}" -eq 1 ] && [ -z "${TOOLBOX_PATH}" ]; then
         exec fish
       fi
     insertafter: EOF

@@ -9,6 +9,7 @@
   ansible.builtin.copy:
     src: "{{ src }}"
     dest: "{{ dest }}"
+    mode: preserve
   when: inventory_hostname != 'localhost' and loop is not defined
 
 - name: "link files"
@@ -23,5 +24,6 @@
   ansible.builtin.copy:
     src: "{{ src }}"
     dest: "{{ dest }}"
+    mode: preserve
   loop: "{{ loop }}"
   when: inventory_hostname != 'localhost' and loop is defined

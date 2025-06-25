@@ -7,11 +7,11 @@
 - name: setup sway config
   import_tasks: "{{ playbook_dir }}/shared/copy.yml"
   vars:
-    dest: "{{ sway_config.path }}/{{ item }}"
     src: "{{ files_path }}/sway/{{ item }}"
+    dest: "{{ sway_config.path }}/{{ item | trim('/')}}"
     loop:
       - config
-      - "{{ ansible_hostname }}"
+      - "{{ ansible_hostname }}/"
 
 - name: install base group
   import_tasks: "{{ playbook_dir }}/shared/install.yml"

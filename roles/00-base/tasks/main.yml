@@ -4,7 +4,7 @@
     title: "utilities"
     packages:
       - bat
-      - eza
+      #      - eza
       - fd-find
       - fzf
       - git
