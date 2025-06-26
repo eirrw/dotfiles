@@ -44,7 +44,6 @@
         url: https://github.com/Schniz/fnm/releases/latest/download/fnm-{{ fnm_arch | trim }}.zip
         dest: "{{ dot_cache_dir }}/fnm.zip"
         mode: '0644'
-      when: (fnm_arch)
       register: result
 
     - name: extract fnm
@@ -53,8 +52,60 @@
         dest: "{{ ansible_env.HOME }}/.local/bin"
         mode: '0755'
         remote_src: yes
-      when: (fnm_arch) and result.changed
+      register: result
+
+    - name: setup fnm completions
+      ansible.builtin.shell:
+        cmd: "{{ bin|quote }} completions --shell fish > {{ dest|quote }}"
+      vars:
+        bin: "{{ ansible_env.HOME }}/.local/bin/fnm"
+        dest: "{{ fish_conf_dir }}/completions/fnm.fish"
+      when: result.changed
   tags: [ fnm ]
+  when: (fnm_arch)
+
+- name: install and configure eza
+  # eza is no longer in the fedora official repos so we need to do it manually
+  block:
+    - name: get latest release information
+      ansible.builtin.uri:
+        url: https://api.github.com/repos/eza-community/eza/releases/latest
+      register: api
+
+    - name: download prebuilt eza binary
+      ansible.builtin.get_url:
+        url: "{{ api.json | community.general.json_query('assets[?name==`eza_x86_64-unknown-linux-gnu.tar.gz`].browser_download_url | [0]') }}"
+        dest: "{{ dot_cache_dir }}/eza.tar.gz"
+        mode: '0644'
+      register: result
+   
+    - name: extract eza binary
+      ansible.builtin.unarchive:
+        src: "{{ result.dest }}"
+        dest: "{{ ansible_env.HOME }}/.local/bin"
+        mode: '0755'
+        remote_src: yes
+
+    - name: download eza completions
+      ansible.builtin.get_url:
+        url: "{{ api.json | community.general.json_query(query) }}"
+        dest: "{{ dot_cache_dir }}/eza_completions.tar.gz"
+        mode: '0644'
+      vars:
+        query: "assets[?starts_with(name,'completions')].browser_download_url | [0]"
+      register: result
+
+    - name: extract eza completions
+      ansible.builtin.unarchive:
+        src: "{{ result.dest }}"
+        dest: "{{ fish_conf_dir }}/completions"
+        include: "./target/completions-{{ version }}/eza.fish"
+        extra_opts: ['--strip-components', 3]
+        remote_src: yes
+      vars:
+        version: "{{ api.json | community.general.json_query('tag_name') | trim('v') }}"
+
+  tags: [ eza ]
 
 - name: install and configure starship
   block:
