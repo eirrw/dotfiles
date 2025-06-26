@@ -12,28 +12,6 @@ window#waybar {
     transition-duration: .5s;
 }
 
-window#waybar.hidden {
-    opacity: 0.2;
-}
-
-/*
-window#waybar.empty {
-    background-color: transparent;
-}
-window#waybar.solo {
-    background-color: #FFFFFF;
-}
-*/
-
-window#waybar.termite {
-    background-color: #3F3F3F;
-}
-
-window#waybar.chromium {
-    background-color: #000000;
-    border: none;
-}
-
 button {
     /* Use box-shadow instead of border so the text isn't offset */
     box-shadow: inset 0 -3px transparent;
@@ -76,18 +54,15 @@ button:hover {
 #battery,
 #cpu,
 #memory,
-#disk,
 #temperature,
 #backlight,
 #network,
-#pulseaudio,
 #wireplumber,
 #custom-media,
 #tray,
 #mode,
 #idle_inhibitor,
-#scratchpad,
-#mpd {
+#scratchpad {
     padding: 0 10px;
     color: #ffffff;
 }
@@ -100,11 +75,6 @@ button:hover {
 /* If workspaces is the leftmost module, omit left margin */
 .modules-left > widget:first-child > #workspaces {
     margin-left: 0;
-}
-
-/* If workspaces is the rightmost module, omit right margin */
-.modules-right > widget:last-child > #workspaces {
-    margin-right: 0;
 }
 
 #clock {
@@ -161,10 +131,6 @@ label:focus {
     background-color: #9b59b6;
 }
 
-#disk {
-    background-color: #964B00;
-}
-
 #backlight {
     background-color: #90b1b1;
 }
@@ -177,23 +143,13 @@ label:focus {
     background-color: #f53c3c;
 }
 
-#pulseaudio {
-    background-color: #f1c40f;
-    color: #000000;
-}
-
-#pulseaudio.muted {
-    background-color: #90b1b1;
-    color: #2a5c45;
-}
-
 #wireplumber {
-    background-color: #fff0f5;
-    color: #000000;
+    background-color: #64727D;
 }
 
 #wireplumber.muted {
-    background-color: #f53c3c;
+    background-color: #ecf0f1;
+    color: #2d3436;
 }
 
 #custom-media {
@@ -239,23 +195,6 @@ label:focus {
 #idle_inhibitor.activated {
     background-color: #ecf0f1;
     color: #2d3436;
-}
-
-#mpd {
-    background-color: #66cc99;
-    color: #2a5c45;
-}
-
-#mpd.disconnected {
-    background-color: #f53c3c;
-}
-
-#mpd.stopped {
-    background-color: #90b1b1;
-}
-
-#mpd.paused {
-    background-color: #51a37a;
 }
 
 #language {
