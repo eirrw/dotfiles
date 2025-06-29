@@ -88,11 +88,11 @@
 
     - name: download eza completions
       ansible.builtin.get_url:
-        url: "{{ api.json | community.general.json_query(query) }}"
+        url: "{{ api.json | community.general.json_query(jq) }}"
         dest: "{{ dot_cache_dir }}/eza_completions.tar.gz"
         mode: '0644'
       vars:
-        query: "assets[?starts_with(name,'completions')].browser_download_url | [0]"
+        jq: "assets[?starts_with(name,'completions')].browser_download_url | [0]"
       register: result
 
     - name: extract eza completions
