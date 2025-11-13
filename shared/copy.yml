@@ -3,27 +3,27 @@
     state: link
     src: "{{ src }}"
     dest: "{{ dest }}"
-  when: inventory_hostname == 'localhost' and loop is not defined
+  when: inventory_hostname == 'localhost' and items is not defined
 
 - name: "copy file"
   ansible.builtin.copy:
     src: "{{ src }}"
     dest: "{{ dest }}"
     mode: preserve
-  when: inventory_hostname != 'localhost' and loop is not defined
+  when: inventory_hostname != 'localhost' and items is not defined
 
 - name: "link files"
   ansible.builtin.file:
     state: link
     src: "{{ src }}"
     dest: "{{ dest }}"
-  loop: "{{ loop }}"
-  when: inventory_hostname == 'localhost' and loop is defined
+  loop: "{{ items }}"
+  when: inventory_hostname == 'localhost' and items is defined
 
 - name: "copy files"
   ansible.builtin.copy:
     src: "{{ src }}"
     dest: "{{ dest }}"
     mode: preserve
-  loop: "{{ loop }}"
-  when: inventory_hostname != 'localhost' and loop is defined
+  loop: "{{ items }}"
+  when: inventory_hostname != 'localhost' and items is defined

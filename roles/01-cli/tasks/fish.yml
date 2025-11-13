@@ -27,7 +27,7 @@
   vars:
     src: "{{ files_path }}/fish/{{ item }}"
     dest: "{{ fish_conf_dir }}/{{ item }}"
-    loop: "{{ files }}"
+    items: "{{ files }}"
 
 - name: get ls_colors config
   ansible.builtin.get_url:

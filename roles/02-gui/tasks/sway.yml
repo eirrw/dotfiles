@@ -9,7 +9,7 @@
   vars:
     src: "{{ files_path }}/sway/{{ item }}"
     dest: "{{ sway_config.path }}/{{ item | trim('/')}}"
-    loop:
+    items:
       - config
       - "{{ ansible_hostname }}/"
 

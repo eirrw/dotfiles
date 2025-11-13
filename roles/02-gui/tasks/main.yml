@@ -53,7 +53,7 @@
           vars:
             dest: "{{ rofi_config.path }}/{{ item }}"
             src: "{{ files_path }}/rofi/{{ item }}"
-            loop:
+            items:
               - launcher.rasi
               - switcher.rasi
 

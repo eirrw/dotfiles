@@ -9,4 +9,4 @@
   vars:
     src: "{{ files_path }}/scripts/{{ item }}"
     dest: "{{ bin_dir.path }}/{{ item }}"
-    loop: "{{ scripts }}"
+    items: "{{ scripts }}"
