@@ -37,12 +37,12 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 -- treesitter folding
---opt.foldmethod = 'expr'
---opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
--- opt.foldenable = false
---opt.foldminlines = 8
---opt.foldnestmax = 5
---opt.foldcolumn = 'auto:5'
+opt.foldmethod = 'expr'
+opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+opt.foldenable = false
+opt.foldminlines = 8
+opt.foldnestmax = 5
+opt.foldcolumn = 'auto:5'
 
 -- set leaders
 vim.g.mapleader = ' '
