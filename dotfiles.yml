@@ -1,4 +1,4 @@
-- name: Setup local environment
+- name: Setup base environment
   hosts: all
   pre_tasks:
     - name: OS check
@@ -10,5 +10,9 @@
       tags: [ base ]
     - role: 01-cli
       tags: [ cli ]
+
+- name: Setup GUI environment
+  hosts: workstation
+  roles:
     - role: 02-gui
       tags: [ gui ]
