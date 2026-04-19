@@ -8,7 +8,7 @@
     - name: configure desktop environment
       block:
         - import_tasks: sway.yml
-          tags: [ sway ]
+          tags: [sway]
 
         - name: create waybar config directory
           ansible.builtin.file:
@@ -31,13 +31,13 @@
         - import_tasks: scripts.yml
           vars:
             scripts: "{{ de_scripts }}"
-          tags: [ scripts ]
+          tags: [scripts]
 
         - import_tasks: "{{ playbook_dir }}/shared/install.yml"
           vars:
             packages: "{{ de_utils }}"
-          tags: [ utils ]
-      tags: [ wayland ]
+          tags: [utils]
+      tags: [wayland]
       when: setup_de
 
     - name: install and configure rofi
@@ -63,19 +63,19 @@
             erase: True
             packages:
               - rofi-wayland
-      tags: [ rofi ]
+      tags: [rofi]
   when: setup_de
-  tags: [ de ]
+  tags: [de]
 
 - name: download and install fonts
-  include_tasks: 
+  include_tasks:
     file: fonts.yml
     apply:
-      tags: [ fonts ]
+      tags: [fonts]
   loop: "{{ fonts }}"
   loop_control:
     loop_var: font
-  tags: [ fonts ]
+  tags: [fonts]
 
 - name: install and configure kitty
   block:
@@ -91,9 +91,38 @@
         dest: "{{ kitty_conf.path }}/kitty.conf"
         src: "{{ files_path }}/kitty/kitty.conf"
 
-    - name: install kitty
+    - name: uninstall distro kitty
       import_tasks: "{{ playbook_dir }}/shared/install.yml"
       vars:
         packages:
           - kitty
-  tags: [ kitty ]
+        state: absent
+
+    - name: download kitty installer
+      ansible.builtin.get_url:
+        url: https://sw.kovidgoyal.net/kitty/installer.sh
+        dest: "{{ dot_cache_dir }}/kitty-install.sh"
+        mode: "0755"
+      register: result
+
+    - name: install upstream kitty
+      ansible.builtin.shell:
+        cmd: "{{ dot_cache_dir }}/kitty-install.sh launch=n dest=$XDG_DATA_HOME"
+        creates: "{{ kitty_dir }}"
+
+    - name: "link kitty binaries"
+      ansible.builtin.file:
+        state: link
+        src: "{{ kitty_dir}}/bin/{{ item }}"
+        dest: "{{ local_bin_dir }}/{{ item }}"
+      loop:
+        - kitty
+        - kitten
+
+    - name: "link kitty desktop file"
+      ansible.builtin.file:
+        state: link
+        src: "{{ kitty_dir }}/share/applications/kitty.desktop"
+        dest: "{{ ansible_env.XDG_DATA_HOME }}/applications/kitty.desktop"
+
+  tags: [kitty]

@@ -1,5 +1,5 @@
-- name: "install {{ packages | join(', ') }}"
-  become: yes
+- name: "{{ (state == 'absent') | ternary('uninstall', 'install') }} {{ packages | join(', ') }}"
+  become: true
   ansible.builtin.dnf5:
     auto_install_module_deps: true
     name: "{{ packages | default([]) }}"

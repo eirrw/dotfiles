@@ -1,12 +1,6 @@
-- name: create local bin
-  ansible.builtin.file:
-    state: directory
-    path: "{{ ansible_env.HOME }}/.local/bin"
-  register: bin_dir
-
 - name: setup scripts
   import_tasks: "{{ playbook_dir }}/shared/copy.yml"
   vars:
     src: "{{ files_path }}/scripts/{{ item }}"
-    dest: "{{ bin_dir.path }}/{{ item }}"
+    dest: "{{ local_bin_dir }}/{{ item }}"
     items: "{{ scripts }}"

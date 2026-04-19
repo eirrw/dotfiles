@@ -1,5 +1,5 @@
 - import_tasks: fish.yml
-  tags: [ fish ]
+  tags: [fish]
 
 - name: create required directories
   ansible.builtin.file:
@@ -35,7 +35,7 @@
 
     - name: setup plugins
       command: nvim --headless "+Lazy! restore" +qa
-  tags: [ nvim ]
+  tags: [nvim]
 
 - name: install and configure starship
   block:
@@ -44,7 +44,7 @@
         name: atim/starship
         state: enabled
       when: ansible_facts.os_family|lower == "redhat"
-      become: yes
+      become: true
 
     - name: install
       import_tasks: "{{ playbook_dir }}/shared/install.yml"
@@ -55,9 +55,9 @@
     - name: setup starship config
       import_tasks: "{{ playbook_dir }}/shared/copy.yml"
       vars:
-        src:  "{{ files_path }}/starship/"
+        src: "{{ files_path }}/starship/"
         dest: "{{ config_dir }}/starship"
-  tags: [ starship ]
+  tags: [starship]
 
 - name: setup homebrew
   block:
@@ -73,9 +73,9 @@
             state: directory
             owner: "{{ ansible_env.USER }}"
             group: "{{ ansible_env.USER }}"
-            mode: '0755'
+            mode: "0755"
             path: "{{ homebrew_prefix }}"
-          become: yes
+          become: true
 
         - name: create homebrew directories
           ansible.builtin.file:
@@ -143,7 +143,7 @@
 
     - name: update homebrew
       ansible.builtin.command:
-        argv: 
+        argv:
           - "{{ homebrew_prefix }}/bin/brew"
           - update
           - --force
@@ -151,6 +151,6 @@
 
     - name: install homebrew applications
       community.general.homebrew:
-        name: [ eza, fnm ]
+        name: [eza, fnm]
         state: present
-  tags: [ homebrew ]
+  tags: [homebrew]

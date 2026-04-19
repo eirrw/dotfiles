@@ -4,18 +4,17 @@
     title: "utilities"
     packages:
       - bat
-      #      - eza
       - fd-find
       - fzf
       - git
       - lua
       - ripgrep
       - trash-cli
-  tags: [ utilities ]
+  tags: [utilities]
 
 - name: setup shell environment
   import_tasks: environment.yml
-  tags: [ environment ]
+  tags: [environment]
 
 - name: start ssh agent
   ansible.builtin.systemd:
@@ -28,3 +27,9 @@
   ansible.builtin.file:
     state: directory
     path: "{{ dot_cache_dir }}"
+
+- name: create local bin
+  ansible.builtin.file:
+    state: directory
+    path: "{{ local_bin_dir }}"
+  register: bin_dir
