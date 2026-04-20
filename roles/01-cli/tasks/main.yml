@@ -16,25 +16,31 @@
         packages:
           - neovim
 
-    - name: create neovim config directory
-      ansible.builtin.file:
-        state: directory
+    - name: check neovim config directory
+      ansible.builtin.stat:
         path: "{{ nvim_conf_dir }}"
+      register: nv
+
+    - name: check lazyvim status
+      ansible.builtin.stat:
+        path: "{{ nvim_conf_dir }}/lazyvim.json"
+      register: lv
+
+    - name: backup old neovim config directory
+      ansible.builtin.command:
+        cmd: "mv {{ nvim_conf_dir }} {{ nvim_conf_dir }}.bak/"
+        creates: "{{ nvim_conf_dir }}.bak"
+        removes: "{{ nvim_conf_dir }}"
+      when: "(nv.stat.islnk is defined and nv.stat.islnk == False) or (lv.stat.exists == False)"
 
     - name: setup neovim config files
       import_tasks: "{{ playbook_dir }}/shared/copy.yml"
       vars:
-        src: "{{ files_path }}/nvim/{{ item }}"
-        dest: "{{ nvim_conf_dir }}/{{ item | trim('/')}}"
-        items:
-          - after/
-          - ftplugin/
-          - init.lua
-          - lazy-lock.json
-          - lua/
+        src: "{{ files_path }}/nvim"
+        dest: "{{ nvim_conf_dir }}"
 
     - name: setup plugins
-      command: nvim --headless "+Lazy! restore" +qa
+      command: nvim --headless -c qa
   tags: [nvim]
 
 - name: install and configure starship
