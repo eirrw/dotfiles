@@ -40,7 +40,7 @@
         dest: "{{ nvim_conf_dir }}"
 
     - name: setup plugins
-      command: nvim --headless -c qa
+      command: nvim --headless "+Lazy! restore" -c qa
   tags: [nvim]
 
 - name: install and configure starship
