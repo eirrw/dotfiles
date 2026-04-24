@@ -1,6 +1,6 @@
 - name: alert to skipped DE
   ansible.builtin.debug:
-    msg: "DE is not being setup, env var DOT_DESKTOP must be set"
+    msg: "Set 'setup_de' to 'true to enable DE setup"
   when: not setup_de
 
 - name: DE setup
