@@ -4,6 +4,8 @@ de_scripts:
   - swayidle-hibernate
   - swaylocker
   - switcher
+  - volume-tracker
+  - volume-notifier
   - wmexit
 
 de_utils:

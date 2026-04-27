@@ -43,6 +43,9 @@ bindsym XF86AudioStop exec --no-startup-id playerctl stop
 bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 
+# enable volume notifications
+exec --no-startup-id ~/.local/bin/volume-notifier
+
 # Use maim to make screenshots
 bindsym $mod+Print exec --no-startup-id scrot-wl screen
 bindsym $mod+Shift+Print exec --no-startup-id scrot-wl select

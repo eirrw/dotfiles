@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# volume-notifier
+#
+# utilize wireplumber scripting to watch for changes to the volume level and
+#   mute state of the output sink, then notify of the change using dunstify
+#   to display a progress bar
+
+filter='.[] | select(.default == true)'
+msgTag='volTag'
+args=(-a "volume-notifier" -u low -h string:x-dunst-stack-tag:$msgTag -t 2000)
+
+while read -r line; do
+    mute=$(jq -r '.volume.mute' <<<"$line")
+    volume=$(jq -r '.volume.level' <<<"$line")
+    if [[ $volume == 0 || "$mute" == "true" ]]; then
+        # Show the sound muted notification
+        dunstify "${args[@]}" -i audio-volume-muted "Volume muted"
+    else
+        # Show the volume notification
+        dunstify "${args[@]}" -i audio-volume-high -h int:value:"$volume" "Volume: ${volume}%"
+    fi
+done < <(wpexec ~/Downloads/volume-tracker.lua | jq --unbuffered -cr "$filter")
