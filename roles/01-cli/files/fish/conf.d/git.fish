@@ -1,10 +1,12 @@
+abbr cdg "cd (git rev-parse --show-toplevel)"
+
 # ported from eirrw/zsh-git
-abbr g 'git'
+abbr g git
 
 abbr ga 'git add'
 abbr gaa 'git add --all'
 abbr gai 'git add --interactive'
-abbr galias 'git_list_aliases'
+abbr galias __git_print_alias
 # Amend the most recent local commit:
 abbr gam 'git commit --amend -m' # Only change commit message (optionally 'git add' files)
 abbr gama 'git commit --amend -am' # Add all modified files and change commit message
@@ -23,7 +25,7 @@ abbr gbl 'git blame'
 #      = gbll README.md 10 10
 #      = gbll README.md 10,10
 #      = git blame README.md -L 10,10
-abbr gbll 'git_blame_line'
+abbr gbll git_blame_line
 abbr gbls 'git branch --list | cat'
 abbr gbs 'git bisect'
 abbr gbsb 'git bisect bad'
@@ -42,13 +44,13 @@ abbr gcf 'git config'
 abbr gcfl 'git config --list'
 abbr gcfls 'git config --list | cat'
 abbr gcl 'git clone --recurse-submodules'
-abbr gclcd 'git_clone_and_cd'
+abbr gclcd git_clone_and_cd
 abbr gcm 'git commit -m'
 abbr gcmg 'git commit --gpg-sign -m'
 abbr gcms 'git commit --signoff -m'
 # Count the number of commits on a branch:
-abbr gcnt 'git_count'
-abbr gcnta 'git_count_all'
+abbr gcnt git_count
+abbr gcnta git_count_all
 abbr gco 'git checkout'
 abbr gcob 'git checkout -b'
 abbr gcobb 'git checkout -' # "checkout branch before"
@@ -56,14 +58,14 @@ abbr gcobb 'git checkout -' # "checkout branch before"
 # Usage: gcoc [<number of commits after HEAD>]
 #   E.g. gcoc = gcoc 1   => checks out direct child
 #               gcoc 2   => checks out grandchild
-abbr gcoc 'git_checkout_child'
+abbr gcoc git_checkout_child
 abbr gcod 'git checkout develop'
 abbr gcom 'git checkout $(__git_main_branch)'
 # Check out a parent commit:
 # Usage: gcop [<number of commits before HEAD>]
 #   E.g. gcop = gcop 1   => checks out direct parent
 #               gcop 2   => checks out grandparent
-abbr gcop 'git_checkout_parent'
+abbr gcop git_checkout_parent
 abbr gcp 'git cherry-pick'
 abbr gcpa 'git cherry-pick --abort'
 abbr gcpc 'git cherry-pick --continue'
@@ -93,7 +95,7 @@ abbr gignored 'git ls-files -v | grep ^S'
 abbr gl 'glog --name-status'
 # View the full change history of a single file:
 # Usage: glf <file> [<from line>] [<to line>]
-abbr glf 'git_log_file'
+abbr glf git_log_file
 # Fancy 'git log --graph':
 abbr glg 'glog --graph'
 # Fancy 'git log --graph --oneline':
@@ -104,7 +106,7 @@ abbr glgs 'glog --graph --stat'
 abbr glo 'git log --date=format:"%d/%m/%y" --pretty=format:"%C(yellow)%h%Creset   %C(white)%ad%Creset   %C(bold)%s    %C(bold green)%D%Creset"'
 # Locate all commits in which a specific line of code (string) was first introduced:
 # Usage: gloc <Line-of-Code> [<file>]
-abbr gloc 'git_locate_string'
+abbr gloc git_locate_string
 # Regular 'git log' in style:
 abbr glr 'glog --reverse --name-status'
 abbr gls 'git ls-files'
@@ -162,8 +164,8 @@ abbr gs 'git status'
 abbr gsh 'git show --date=format:"%A %B %d %Y at %H:%M" --pretty=format:"%C(yellow)%H%Creset%x09%C(bold green)%D%Creset%n%<|(40)%C(white)%ad%x09%an%Creset%n%n    %C(bold)%s%Creset%n%w(0,4,4)%+b%n"'
 # Show a specified file from stash x (defaults to lastest stash):
 # Usage: gshsf <file> [<stash number>]
-abbr gshsf 'git_show_stash_file'
-abbr gss '__git_status_short' # Usage: gss [<number of commits>]
+abbr gshsf git_show_stash_file
+abbr gss __git_status_short # Usage: gss [<number of commits>]
 abbr gst 'git stash'
 abbr gsta 'git stash apply'
 abbr gstd 'git stash drop'
