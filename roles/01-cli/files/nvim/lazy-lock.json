@@ -7,6 +7,7 @@
   "conform.nvim": { "branch": "master", "commit": "e969e302bced7ffb9a0a0323629f31feb0ca35a6" },
   "flash.nvim": { "branch": "main", "commit": "fcea7ff883235d9024dc41e638f164a450c14ca2" },
   "friendly-snippets": { "branch": "main", "commit": "6cd7280adead7f586db6fccbd15d2cac7e2188b9" },
+  "git-conflict.nvim": { "branch": "main", "commit": "4bbfdd92d547d2862a75b4e80afaf30e73f7bbb4" },
   "gitsigns.nvim": { "branch": "main", "commit": "9f3c6dd7868bcc116e9c1c1929ce063b978fa519" },
   "grug-far.nvim": { "branch": "main", "commit": "9370422e5cdd55321c0b8c4880082c5fd4e52e99" },
   "gruvbox.nvim": { "branch": "main", "commit": "561126520034a1dac2f78ab063db025d12555998" },
