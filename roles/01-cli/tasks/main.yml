@@ -33,10 +33,19 @@
         removes: "{{ nvim_conf_dir }}"
       when: "(nv.stat.islnk is defined and nv.stat.islnk == False) or (lv.stat.exists == False)"
 
+    - name: remove old state files
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: absent
+      loop:
+        - "{{ ansible_env.HOME }}/.local/share/nvim"
+        - "{{ ansible_env.HOME }}/.local/state/nvim"
+        - "{{ cache_dir }}/nvim"
+
     - name: setup neovim config files
       import_tasks: "{{ playbook_dir }}/shared/copy.yml"
       vars:
-        src: "{{ files_path }}/nvim"
+        src: "{{ files_path }}/nvim/"
         dest: "{{ nvim_conf_dir }}"
 
     - name: setup plugins
