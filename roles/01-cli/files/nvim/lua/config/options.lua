@@ -18,3 +18,5 @@ opt.dir = "/tmp" -- swapfiles in /tmp
 opt.list = true -- show hidden characters
 opt.shiftwidth = 4 -- size of indent
 opt.tabstop = 4 -- spaces per tab
+
+opt.shell = "fish"

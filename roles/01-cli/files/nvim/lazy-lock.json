@@ -36,5 +36,7 @@
   "trouble.nvim": { "branch": "main", "commit": "bd67efe408d4816e25e8491cc5ad4088e708a69a" },
   "ts-comments.nvim": { "branch": "main", "commit": "123a9fb12e7229342f807ec9e6de478b1102b041" },
   "venv-selector.nvim": { "branch": "main", "commit": "bcb2f58533c59b01565285eba49693f00bc460f5" },
+  "vim-kitty": { "branch": "main", "commit": "cd72f2d9cfee8d6aba5a180a5ac3ca265b5d3a46" },
+  "vim-sourcecfg": { "branch": "main", "commit": "c6724d53fad1d167e781432c30675b9a858c47df" },
   "which-key.nvim": { "branch": "main", "commit": "3aab2147e74890957785941f0c1ad87d0a44c15a" }
 }
