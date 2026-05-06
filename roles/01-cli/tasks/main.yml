@@ -71,5 +71,5 @@
         dest: "{{ config_dir }}/starship"
   tags: [starship]
 
-- import-tasks: homebrew.yml
+- import_tasks: homebrew.yml
   tags: [homebrew]
