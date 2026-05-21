@@ -1,0 +1,55 @@
+- name: check kitty version
+  ansible.builtin.get_url:
+    url: https://sw.kovidgoyal.net/kitty/current-version.txt
+    dest: "{{ dot_cache_dir }}/kitty.version"
+  register: kitty_version
+  tags: [kitty]
+
+- name: install and configure kitty
+  block:
+    - name: create kitty config dir
+      ansible.builtin.file:
+        state: directory
+        path: "{{ config_dir }}/kitty"
+      register: kitty_conf
+
+    - name: setup kitty config
+      import_tasks: "{{ playbook_dir }}/shared/copy.yml"
+      vars:
+        dest: "{{ kitty_conf.path }}/kitty.conf"
+        src: "{{ files_path }}/kitty/kitty.conf"
+
+    - name: uninstall distro kitty
+      import_tasks: "{{ playbook_dir }}/shared/install.yml"
+      vars:
+        packages:
+          - kitty
+        state: absent
+
+    - name: download kitty installer
+      ansible.builtin.get_url:
+        url: https://sw.kovidgoyal.net/kitty/installer.sh
+        dest: "{{ dot_cache_dir }}/kitty-install.sh"
+        mode: "0755"
+      register: result
+
+    - name: install upstream kitty
+      ansible.builtin.shell:
+        cmd: "{{ dot_cache_dir }}/kitty-install.sh launch=n dest=$XDG_DATA_HOME"
+
+    - name: "link kitty binaries"
+      ansible.builtin.file:
+        state: link
+        src: "{{ kitty_dir}}/bin/{{ item }}"
+        dest: "{{ local_bin_dir }}/{{ item }}"
+      loop:
+        - kitty
+        - kitten
+
+    - name: "link kitty desktop file"
+      ansible.builtin.file:
+        state: link
+        src: "{{ kitty_dir }}/share/applications/kitty.desktop"
+        dest: "{{ ansible_env.XDG_DATA_HOME }}/applications/kitty.desktop"
+  when: "{{ kitty_version.changed }}"
+  tags: [kitty]
