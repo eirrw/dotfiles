@@ -1,52 +1,16 @@
-- import_tasks: fish.yml
-  tags: [fish]
-
 - name: create required directories
   ansible.builtin.file:
     state: directory
     path: "{{ item }}"
   loop:
     - "{{ ansible_env.HOME }}/.local/bin"
+    - "{{ ansible_env.HOME }}/.local/share"
+    - "{{ ansible_env.HOME }}/.local/share/applications"
 
-- name: install and configure nvim
-  block:
-    - name: install
-      import_tasks: "{{ playbook_dir }}/shared/install.yml"
-      vars:
-        packages:
-          - neovim
+- import_tasks: fish.yml
+  tags: [fish]
 
-    - name: check neovim config directory
-      ansible.builtin.stat:
-        path: "{{ nvim_conf_dir }}"
-      register: nv
-
-    - name: check lazyvim status
-      ansible.builtin.stat:
-        path: "{{ nvim_conf_dir }}/lazyvim.json"
-      register: lv
-
-    - name: backup old neovim config directory
-      ansible.builtin.command:
-        cmd: "mv {{ nvim_conf_dir }} {{ nvim_conf_dir }}.bak/"
-        creates: "{{ nvim_conf_dir }}.bak"
-        removes: "{{ nvim_conf_dir }}"
-      when: "(nv.stat.islnk is defined and nv.stat.islnk == False) or (lv.stat.exists == False)"
-
-    - name: remove old state files
-      ansible.builtin.file:
-        path: "{{ item }}"
-        state: absent
-      loop:
-        - "{{ ansible_env.HOME }}/.local/share/nvim"
-        - "{{ ansible_env.HOME }}/.local/state/nvim"
-        - "{{ cache_dir }}/nvim"
-
-    - name: setup neovim config files
-      import_tasks: "{{ playbook_dir }}/shared/copy.yml"
-      vars:
-        src: "{{ files_path }}/nvim/"
-        dest: "{{ nvim_conf_dir }}"
+- import_tasks: nvim.yml
   tags: [nvim]
 
 - name: install and configure starship

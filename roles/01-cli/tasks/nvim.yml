@@ -1,0 +1,55 @@
+- name: lazyvim install check
+  ansible.builtin.stat:
+    path: "{{ nvim_conf_dir }}/lazyvim.json"
+  register: lazyvim
+  tags: [nvim]
+
+- name: prep for nvim install
+  block:
+    - name: backup old neovim config directory
+      ansible.builtin.command:
+        cmd: "mv {{ nvim_conf_dir }} {{ nvim_conf_dir }}.bak/"
+        creates: "{{ nvim_conf_dir }}.bak"
+        removes: "{{ nvim_conf_dir }}"
+
+    - name: remove old state files
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: absent
+      loop:
+        - "{{ ansible_env.HOME }}/.local/share/nvim"
+        - "{{ ansible_env.HOME }}/.local/state/nvim"
+        - "{{ cache_dir }}/nvim"
+  when: not lazyvim.stat.exists
+  tags: [nvim]
+
+- name: install and configure nvim
+  block:
+    - name: install
+      import_tasks: "{{ playbook_dir }}/shared/install.yml"
+      vars:
+        packages:
+          - neovim
+
+    - name: create base nvim config
+      ansible.builtin.file:
+        path: "{{ nvim_conf_dir }}"
+        state: directory
+
+    - name: create nvim config subdirs
+      ansible.builtin.file:
+        path: "{{ nvim_conf_dir }}/{{ item.path }}"
+        state: directory
+      with_community.general.filetree: nvim/
+      when: item.state == 'directory'
+
+    - name: link nvim config files
+      ansible.builtin.file:
+        src: "{{ item.src }}"
+        dest: "{{ nvim_conf_dir }}/{{ item.path }}"
+        state: link
+        follow: false
+      with_community.general.filetree: nvim/
+      when: item.state == 'file'
+
+  tags: [nvim]
