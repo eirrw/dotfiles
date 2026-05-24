@@ -51,5 +51,5 @@
         state: link
         src: "{{ kitty_dir }}/share/applications/kitty.desktop"
         dest: "{{ ansible_env.XDG_DATA_HOME }}/applications/kitty.desktop"
-  when: "{{ kitty_version.changed }}"
+  when: kitty_version.changed
   tags: [kitty]
