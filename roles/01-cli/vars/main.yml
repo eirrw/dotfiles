@@ -6,6 +6,9 @@ fnm_arch: >-
 fish_conf_dir: "{{ config_dir }}/fish"
 nvim_conf_dir: "{{ config_dir }}/nvim"
 
+fish_conf_items: "{{ query('community.general.filetree', 'fish/') }}"
+nvim_conf_items: "{{ query('community.general.filetree', 'nvim/') }}"
+
 homebrew_prefix: /home/linuxbrew/.linuxbrew/
 homebrew_mkdirs:
   - bin

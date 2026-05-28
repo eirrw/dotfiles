@@ -4,36 +4,32 @@
     packages:
       - fish
 
+- name: create base fish conf dir
+  ansible.builtin.file:
+    state: directory
+    path: "{{ fish_conf_dir }}"
+
 - name: create fish configuration directories
   ansible.builtin.file:
     state: directory
-    path: "{{ item }}"
-  loop:
-    - "{{ fish_conf_dir }}"
-    - "{{ fish_conf_dir }}/completions"
-    - "{{ fish_conf_dir }}/conf.d"
-    - "{{ fish_conf_dir }}/functions"
-
-- name: gather fish configuration files
-  ansible.builtin.set_fact:
-    files: "{{ files|default([]) + [ (item | dirname | split('/') | last) + '/' + (item | basename) ] }}"
-  loop: >-
-      {{ query('ansible.builtin.fileglob', files_path + '/fish/completions/*.fish')
-      + query('ansible.builtin.fileglob', files_path + '/fish/conf.d/*.fish')
-      + query('ansible.builtin.fileglob', files_path + '/fish/functions/*.fish') }}
+    path: "{{ fish_conf_dir }}/{{ item.path }}"
+  loop: "{{ fish_conf_items }}"
+  when: item.state == 'directory'
+  loop_control:
+    label: "{{ item.path }}"
 
 - name: setup fish configuration files
   import_tasks: "{{ playbook_dir }}/shared/copy.yml"
   vars:
-    src: "{{ files_path }}/fish/{{ item }}"
-    dest: "{{ fish_conf_dir }}/{{ item }}"
-    items: "{{ files }}"
+    src: "{{ item.src }}"
+    dest: "{{ fish_conf_dir }}/{{ item.path }}"
+    items: "{{ fish_conf_items | selectattr('state', 'eq', 'file') }}"
 
 - name: get ls_colors config
   ansible.builtin.get_url:
     url: https://raw.githubusercontent.com/trapd00r/LS_COLORS/master/lscolors.csh
     dest: "{{ fish_conf_dir }}/conf.d/ls_colors.fish"
-    mode: '0644'
+    mode: "0644"
 
 - name: download fisher
   ansible.builtin.get_url:

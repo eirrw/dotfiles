@@ -40,16 +40,16 @@
       ansible.builtin.file:
         path: "{{ nvim_conf_dir }}/{{ item.path }}"
         state: directory
-      with_community.general.filetree: nvim/
+      loop: "{{ nvim_conf_items }}"
       when: item.state == 'directory'
+      loop_control:
+        label: "{{ item.path }}"
 
     - name: link nvim config files
-      ansible.builtin.file:
+      import_tasks: "{{ playbook_dir }}/shared/copy.yml"
+      vars:
         src: "{{ item.src }}"
         dest: "{{ nvim_conf_dir }}/{{ item.path }}"
-        state: link
-        follow: false
-      with_community.general.filetree: nvim/
-      when: item.state == 'file'
+        items: "{{ nvim_conf_items | selectattr('state', 'eq', 'file') }}"
 
   tags: [nvim]
