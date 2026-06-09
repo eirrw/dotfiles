@@ -2,8 +2,14 @@
   ansible.builtin.get_url:
     url: https://sw.kovidgoyal.net/kitty/current-version.txt
     dest: "{{ dot_cache_dir }}/kitty.version"
-  register: kitty_version
+  register: kitty_new_version
   tags: [kitty]
+
+- name: get current version
+  ansible.builtin.command:
+    cmd: "kitty --version"
+  register: kitty_cur_version
+  ignore_errors: true
 
 - name: install and configure kitty
   block:
@@ -25,6 +31,7 @@
         packages:
           - kitty
         state: absent
+      ignore_errors: true
 
     - name: download kitty installer
       ansible.builtin.get_url:
@@ -51,5 +58,5 @@
         state: link
         src: "{{ kitty_dir }}/share/applications/kitty.desktop"
         dest: "{{ ansible_env.XDG_DATA_HOME }}/applications/kitty.desktop"
-  when: kitty_version.changed
+  when: lookup('ansible.builtin.file', kitty_new_version.dest) != (kitty_cur_version.stdout | regex_search('[0-9]+\.[0-9]+\.[0-9]+'))
   tags: [kitty]
