@@ -13,26 +13,11 @@
 - import_tasks: nvim.yml
   tags: [nvim]
 
-- name: install and configure starship
-  block:
-    - name: enable copr repo
-      community.general.copr:
-        name: atim/starship
-        state: enabled
-      when: ansible_facts.os_family|lower == "redhat"
-      become: true
-
-    - name: install
-      import_tasks: "{{ playbook_dir }}/shared/install.yml"
-      vars:
-        packages:
-          - starship
-
-    - name: setup starship config
-      import_tasks: "{{ playbook_dir }}/shared/copy.yml"
-      vars:
-        src: "{{ files_path }}/starship/"
-        dest: "{{ config_dir }}/starship"
+- name: setup starship config
+  import_tasks: "{{ playbook_dir }}/shared/copy.yml"
+  vars:
+    src: "{{ files_path }}/starship/"
+    dest: "{{ config_dir }}/starship"
   tags: [starship]
 
 - import_tasks: homebrew.yml

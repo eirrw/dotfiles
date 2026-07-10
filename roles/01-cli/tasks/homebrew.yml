@@ -88,5 +88,5 @@
 
 - name: install homebrew applications
   community.general.homebrew:
-    name: [eza, fnm]
+    name: [eza, fnm, starship]
     state: present
