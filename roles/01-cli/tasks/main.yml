@@ -3,9 +3,9 @@
     state: directory
     path: "{{ item }}"
   loop:
-    - "{{ ansible_env.HOME }}/.local/bin"
-    - "{{ ansible_env.HOME }}/.local/share"
-    - "{{ ansible_env.HOME }}/.local/share/applications"
+    - "{{ local_bin_dir }}"
+    - "{{ data_dir }}"
+    - "{{ data_dir }}/applications"
 
 - import_tasks: fish.yml
   tags: [fish]

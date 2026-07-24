@@ -17,8 +17,8 @@
         path: "{{ item }}"
         state: absent
       loop:
-        - "{{ ansible_env.HOME }}/.local/share/nvim"
-        - "{{ ansible_env.HOME }}/.local/state/nvim"
+        - "{{ data_dir }}/nvim"
+        - "{{ data_dir }}/nvim"
         - "{{ cache_dir }}/nvim"
   when: not lazyvim.stat.exists
   tags: [nvim]

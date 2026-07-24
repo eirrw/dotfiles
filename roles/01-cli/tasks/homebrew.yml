@@ -8,8 +8,8 @@
     - name: create homebrew prefix
       ansible.builtin.file:
         state: directory
-        owner: "{{ ansible_env.USER }}"
-        group: "{{ ansible_env.USER }}"
+        owner: "{{ ansible_facts.env.USER }}"
+        group: "{{ ansible_facts.env.USER }}"
         mode: "0755"
         path: "{{ homebrew_prefix }}"
       become: true
