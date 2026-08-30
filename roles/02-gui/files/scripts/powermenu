@@ -1,0 +1,145 @@
+#!/usr/bin/env bash
+
+## Author : Eir Wilson
+## Github : @eirrw
+#
+## Original Author : Aditya Shakya (adi1090x)
+## Github : @adi1090x
+#
+## Rofi   : Power Menu
+
+# CMDs
+uptime="$(uptime -p | sed -e 's/up //g')"
+host=$(hostname)
+
+# Options
+yes='󰄬 Yes'
+no='󰅖 No'
+lock='󰌾 Lock'
+suspend='󰤄 Suspend'
+logout='󰍃 Logout'
+reboot='󰜉 Reboot'
+shutdown='󰐥 Shutdown'
+update_reboot='󰜉 Update &amp; Reboot (SU)'
+update_shutdown='󰐥 Update &amp; Shutdown (SU)'
+
+# Shortcuts
+sc_yes='y'
+sc_no='n'
+sc_lock='l'
+sc_suspend='s'
+sc_logout='e'
+sc_reboot='r'
+sc_shutdown='x'
+sc_update_reboot='Control+r'
+sc_update_shutdown='Control+x'
+
+# Pass variables to rofi dmenu
+run_rofi() {
+    args=(
+        -dmenu                             # operate in 'dmenu' mode
+        -markup-rows                       # parse pango for each option row
+        -sync                              # read all input before rendering (prevent popping on dynamic list lenght)
+        -p "$host"                         # hostname as prompt
+        -mesg "Uptime: $uptime"            # system uptime as message
+        -theme powermenu.rasi              # load theme from default dir (~/.config/rofi)
+        -kb-select-1 "$sc_lock"            # set keybinds for options
+        -kb-select-2 "$sc_suspend"         #
+        -kb-select-3 "$sc_logout"          #
+        -kb-select-4 "$sc_reboot"          #
+        -kb-select-5 "$sc_shutdown"        #
+        -kb-select-6 "$sc_update_reboot"   #
+        -kb-select-7 "$sc_update_shutdown" #
+        #-log ~/rofi.log                    # enable logging
+    )
+
+    build_rofi_list | rofi "${args[@]}"
+}
+
+# Ask for confirmation
+confirm_exit() {
+    args=(
+        -dmenu                 # operate in 'dmenu' mode
+        -sync                  # read all input before rendering (prevent popping on dynamic list lenght)
+        -p 'Confirmation'      # Title
+        -mesg 'Are you Sure?'  # Message
+        -theme powermenu.rasi  # load theme
+        -kb-select-1 "$sc_yes" # set keybinds for options
+        -kb-select-2 "$sc_no"  #
+    )
+
+    echo -e "$yes\n$no" | env CONFIRM=true rofi "${args[@]}"
+}
+
+# format a rofi option
+build_display_string() {
+    # using indirection, get the option name and shortcut for the passed option
+    dp="$1"
+    sc="sc_$1"
+
+    # output the formatted option
+    echo "${!dp}\0display\x1f${!dp} <span weight='light' size='small'><i>(${!sc})</i></span>"
+}
+
+# Create the list of options for rofi
+# TODO: better checking for update status
+build_rofi_list() {
+    echo -e $(build_display_string lock)
+    echo -e $(build_display_string suspend)
+    echo -e $(build_display_string logout)
+    echo -e $(build_display_string reboot)
+    echo -e $(build_display_string shutdown)
+    if [[ -e /usr/lib/sysimage/libdnf5/offline/offline-transaction-state.toml ]]; then
+        echo -e $(build_display_string update_reboot)
+        echo -e $(build_display_string update_shutdown)
+    fi
+}
+
+# Execute Command
+run_cmd() {
+    selected="$(confirm_exit)"
+    if [[ "$selected" == "$yes" ]]; then
+        if [[ $1 == '--shutdown' ]]; then
+            systemctl poweroff
+        elif [[ $1 == '--update_shutdown' ]]; then
+            pkexec dnf -y offline reboot --poweroff
+        elif [[ $1 == '--reboot' ]]; then
+            systemctl reboot
+        elif [[ $1 == '--upgrade_reboot' ]]; then
+            pkexec dnf -y offline reboot
+        elif [[ $1 == '--suspend' ]]; then
+            playerctl -a pause
+            systemctl suspend
+        elif [[ $1 == '--logout' ]]; then
+            swaymsg exit
+        fi
+    else
+        exit 0
+    fi
+}
+
+# Actions
+chosen="$(run_rofi)"
+case ${chosen} in
+$shutdown)
+    run_cmd --shutdown
+    ;;
+$update_shutdown)
+    run_cmd --update_shutdown
+    ;;
+$reboot)
+    run_cmd --reboot
+    ;;
+$update_reboot)
+    run_cmd --update_reboot
+    ;;
+$lock)
+    loginctl lock-session
+    ;;
+$suspend)
+    run_cmd --suspend
+    ;;
+$logout)
+    run_cmd --logout
+    ;;
+esac

@@ -1,0 +1,187 @@
+/**
+ *
+ * Author : Eir Wilson
+ * Github : @eirrw
+ *
+ * Original Author : Aditya Shakya (adi1090x)
+ * Github : @adi1090x
+ * 
+ * Rofi Theme File
+ * Rofi Version: 2.0.0
+ **/
+
+/*****----- Configuration -----*****/
+configuration {
+    show-icons:                 false;
+}
+
+/*****----- Global Properties -----*****/
+@import "shared/colours.rasi"
+@import "shared/fonts.rasi"
+
+/*****----- Main Window -----*****/
+window {
+    /* properties for window widget */
+    transparency:                "real";
+    location:                    center;
+    anchor:                      center;
+    fullscreen:                  false;
+    width:                       25em;
+    x-offset:                    0;
+    y-offset:                    0;
+
+    /* properties for all widgets */
+    enabled:                     true;
+    margin:                      0px;
+    padding:                     0px;
+    border:                      0px solid;
+    border-radius:               1em;
+    border-color:                @selected;
+    cursor:                      "default";
+    background-color:            @background;
+}
+
+/*****----- Main Box -----*****/
+mainbox {
+    enabled:                     true;
+    spacing:                     0.5em;
+    margin:                      0;
+    padding:                     1em;
+    border:                      0px solid;
+    border-radius:               0;
+    border-color:                @selected;
+    background-color:            transparent;
+    children:                    [ "inputbar", "message", "listview" ];
+}
+
+/*****----- Inputbar -----*****/
+inputbar {
+    enabled:                     true;
+    spacing:                     0.5em;
+    margin:                      0;
+    padding:                     0;
+    border:                      0;
+    border-radius:               0;
+    border-color:                @selected;
+    background-color:            transparent;
+    text-color:                  @foreground;
+    children:                    [ "textbox-prompt-colon", "prompt"];
+}
+
+textbox-prompt-colon {
+    enabled:                     true;
+    expand:                      false;
+    str:                         "";
+    padding:                     0.5em 0.75em;
+    border-radius:               0.5em;
+    background-color:            @urgent;
+    text-color:                  @background;
+}
+prompt {
+    enabled:                     true;
+    padding:                     0.5em;
+    border-radius:               0.5em;
+    background-color:            @active;
+    text-color:                  @background;
+}
+
+/*****----- Message -----*****/
+message {
+    enabled:                     true;
+    margin:                      0;
+    padding:                     0.5em;
+    border:                      0em solid;
+    border-radius:               0.5em;
+    border-color:                @selected;
+    background-color:            @background-alt;
+    text-color:                  @foreground;
+}
+textbox {
+    background-color:            inherit;
+    text-color:                  inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
+    placeholder-color:           @foreground;
+    blink:                       true;
+    markup:                      true;
+}
+error-message {
+    padding:                     0.5em;
+    border:                      0px solid;
+    border-radius:               0em;
+    border-color:                @selected;
+    background-color:            @background;
+    text-color:                  @foreground;
+}
+
+/*****----- Listview -----*****/
+listview {
+    enabled:                     true;
+    columns:                     1;
+    lines:                       7;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   false;
+    layout:                      vertical;
+    reverse:                     false;
+    fixed-height:                false;
+    fixed-columns:               true;
+    
+    spacing:                     0.25em;
+    margin:                      0em;
+    padding:                     0em;
+    border:                      0em solid;
+    border-radius:               0em;
+    border-color:                @selected;
+    background-color:            transparent;
+    text-color:                  @foreground;
+    cursor:                      "default";
+}
+
+/*****----- Elements -----*****/
+element {
+    enabled:                     true;
+    spacing:                     0em;
+    margin:                      0em;
+    padding:                     0.5em;
+    border:                      0em solid;
+    border-radius:               0.5em;
+    border-color:                @selected;
+    background-color:            transparent;
+    text-color:                  @foreground;
+    cursor:                      pointer;
+}
+element-text {
+    background-color:            transparent;
+    text-color:                  inherit;
+    cursor:                      inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
+}
+element selected.normal {
+    background-color:            var(selected);
+    text-color:                  var(background);
+}
+
+// overrides for the confirm window
+@media ( enabled: env( CONFIRM, false) ) {
+    window {
+        location: center;
+        anchor: center;
+        fullscreen: false;
+        width: 15em;
+    }
+    mainbox {
+        children: [ "message", "listview" ];
+    }
+    listview {
+        columns: 2;
+        lines: 1;
+    }
+    element-text {
+        horizontal-align: 0.5;
+    }
+    textbox {
+        horizontal-align: 0.5;
+    }
+}

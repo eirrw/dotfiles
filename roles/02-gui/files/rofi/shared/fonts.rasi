@@ -1,0 +1,9 @@
+/* fonts */
+* {
+    font: "Hack Nerd Font Mono 10";
+}
+@media ( min-height: 1081px ) {
+    * {
+        font: "Hack Nerd Font Mono 12";
+    }
+}

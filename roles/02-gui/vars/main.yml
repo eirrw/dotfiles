@@ -1,5 +1,6 @@
 de_scripts:
   - launcher
+  - powermenu
   - scrot-wl
   - swayidle-hibernate
   - swaylocker
