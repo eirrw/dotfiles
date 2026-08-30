@@ -47,8 +47,6 @@ bindsym $mod+Return exec kitty -1 --instance-group=sway
 # kill focused window
 bindsym $mod+Shift+q kill
 
-# start rofi (a program launcher)
-
 # change focus
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
