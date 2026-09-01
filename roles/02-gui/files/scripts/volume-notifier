@@ -19,4 +19,4 @@ while read -r line; do
         # Show the volume notification
         dunstify "${args[@]}" -i audio-volume-high -h int:value:"$volume" "Volume: ${volume}%"
     fi
-done < <(wpexec ~/Downloads/volume-tracker.lua | jq --unbuffered -cr "$filter")
+done < <(wpexec volume-tracker | jq --unbuffered -cr "$filter")

@@ -1,4 +1,5 @@
 #!/usr/bin/wpexec
+# vim: ft=lua
 -- Live update of sinks' volume level, muteness in i3bar friendly format.
 --
 log = Log.open_topic("s-linking")
