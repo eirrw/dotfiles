@@ -2,9 +2,9 @@
 
 set -euo pipefail
 
-CONFIG="${XDG_CONFIG_HOME:-${HOME}/.config}/rofi/launcher.rasi"
-
 rofi \
     -show drun \
-    -config "${CONFIG}" \
-    -dpi 1
+    -config "launcher.rasi" \
+    -dpi 1 \
+    -run-command "fish -c '{cmd}'" \
+    -run-list-command "functions"
