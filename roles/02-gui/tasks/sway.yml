@@ -13,8 +13,25 @@
       - config
       - "{{ ansible_hostname }}/"
 
-- name: install base group
+- name: install base groups
   import_tasks: "{{ playbook_dir }}/shared/install.yml"
   vars:
     packages:
       - "@swaywm"
+      - "@swaywm-extended"
+
+- name: create autostart directory
+  ansible.builtin.file:
+    state: directory
+    name: "{{ config_dir }}/autostart"
+  register: autostart
+
+- name: set polkit to autostart
+  ansible.builtin.copy:
+    src: "/etc/xdg/autostart/lxqt-policykit-agent.desktop"
+    dest: "{{ autostart.path }}/lxqt-policykit-agent.desktop"
+
+- name: allow polkit to start on sway
+  ansible.builtin.replace:
+    path: "{{ autostart.path }}/lxqt-policykit-agent.desktop"
+    regexp: '^OnlyShowIn=\S+$'
