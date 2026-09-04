@@ -86,8 +86,8 @@ mainbox {
     spacing:                     0.5em;
     margin:                      0;
     padding:                     1em;
-    border:                      0em solid;
-    border-radius:               0 0 0 0;
+    border:                      0.1em solid;
+    border-radius:               0.5em;
     border-color:                @border-colour;
     background-color:            transparent;
     children:                    [ "inputbar", "mode-switcher", "message", "listview" ];
